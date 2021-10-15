@@ -6,6 +6,7 @@ A tool which is uses to remove Windows Defender in Windows 8.x, Windows 10 (ever
 Here's why you do the Windows Defender Removal:
 
 *to use Avast!, Avira , AVG, Norton and another Antivirus/malware engine.
+
 *Optimize your HDD performance.
 
 ATTENTION! 
