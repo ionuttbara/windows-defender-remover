@@ -1,5 +1,3 @@
-# windows-defender-remover
-A tool which is uses to remove Windows Defender in Windows 8.x, Windows 10 (every version) and Windows 11.
 
 <!-- WHAT IS THE PROGRAM? -->
 ## What is this program?
