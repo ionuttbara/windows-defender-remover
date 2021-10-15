@@ -2,7 +2,7 @@
 A tool which is uses to remove Windows Defender in Windows 8.x, Windows 10 (every version) and Windows 11.
 
 <!-- WHAT IS THE PROGRAM? -->
-## What is this program.
+## What is this program?
 A tool which is uses to remove Windows Defender in Windows 8.x, Windows 10 (every version) and Windows 11.
 
 Here's why you do the Windows Defender Removal:
