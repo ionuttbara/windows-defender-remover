@@ -2,8 +2,11 @@ pushd "%CD%"
 CD /D "%~dp0"
 echo off 
 
+::import some registry
+PowerRun.exe Regedit.exe /S def.reg
 reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Security and Maintenance" /f
-::start using Fidelity to remove packages
+
+::start using Melody to remove packages
 
 fidelity /o /c Microsoft-Windows-SecurityCenter /r
 fidelity /o /c Windows-Defender /r
@@ -12,8 +15,7 @@ fidelity /o /c Microsoft-Windows-SecureStartup /r
 fidelity /o /c Microsoft-Windows-Killbits /r
 fidelity /o /c Microsoft-Windows-SenseClient /r
 
-:: start using Fidelity for removing services
-
+:: start using Melody for removing services
 
 sc delete SgrmBroker
 sc delete SgrmAgent
@@ -26,27 +28,20 @@ sc delete wscsvc
 sc delete Sense
 sc delete WinDefend
 
-::import some registry
-
-
-PowerRun.exe Regedit.exe /S def.reg
-Regedit /S def.reg
-
 ::tweaking boot, disable elam and VBS with LSA
 bcdedit /set {current} disableelamdrivers yes
-bcdedit /set nointegritychecks on
-bcdedit /set hypervisorlaunchtype off
-bcdedit /set useplatformclock No
-bcdedit /set {current} bootmenupolicy Legacy
-bcdedit /set tpmbootentropy ForceDisable
-bcdedit /create {0cb3b571-2f2e-4343-a879-d86a476d7215} /d
-bcdedit /set {bootmgr} bootsequence {0cb3b571-2f2e-4343-a879-d86a476d7215}
-bcdedit /set {0cb3b571-2f2e-4343-a879-d86a476d7215} loadoptions DISABLE-LSA-ISO,,DISABLE-VBS
-bcdedit /set {current} bootstatuspolicy ignoreallfailures
-
 
 ::removing Crusters
 
+takeown /f "C:\Windows\System32\SecurityAndMaintenance_Error.png"
+cacls "C:\Windows\System32\SecurityAndMaintenance_Error.png" /E /P %username%:F
+del /F /Q "C:\Windows\System32\SecurityAndMaintenance_Error.png"
+takeown /f "C:\Windows\System32\SecurityAndMaintenance_Alert.png"
+cacls "C:\Windows\System32\SecurityAndMaintenance_Alert.png" /E /P %username%:F
+del /F /Q "C:\Windows\System32\SecurityAndMaintenance_Alert.png"
+takeown /f "C:\Windows\System32\SecurityAndMaintenance.png"
+cacls "C:\Windows\System32\SecurityAndMaintenance.png" /E /P %username%:F
+del /F /Q "C:\Windows\System32\SecurityAndMaintenance.png"
 takeown /f C:\Windows\System32\SecurityHealthSystray.exe
 cacls "C:\Windows\System32\SecurityHealthSystray.exe" /E /P %username%:F
 del /F /Q "C:\Windows\System32\SecurityHealthSystray.exe"
@@ -56,9 +51,6 @@ del /F /Q "C:\Windows\System32\SecurityHealthService.exe"
 takeown /f C:\Windows\System32\SecurityHealthHost.exe
 cacls "C:\Windows\System32\SecurityHealthHost.exe" /E /P %username%:F
 del /F /Q "C:\Windows\System32\SecurityHealthHost.exe"
-takeown /f C:\Windows\System32\drivers\Ndu.sys
-cacls "C:\Windows\System32\drivers\Ndu.sys" /E /P %username%:F
-del /F /Q "C:\Windows\System32\drivers\Ndu.sys"
 takeown /f C:\Windows\System32\drivers\SgrmAgent.sys
 cacls "C:\Windows\System32\drivers\SgrmAgent.sys" /E /P %username%:F
 del /F /Q "C:\Windows\System32\drivers\SgrmAgent.sys"
@@ -128,6 +120,5 @@ del /F /Q "C:\Windows\System32\SecurityHealthProxyStub.dll"
 takeown /f "C:\Windows\System32\DWWIN.EXE"
 cacls "C:\Windows\System32\DWWIN.EXE" /E /P %username%:F
 del /F /Q "C:\Windows\System32\DWWIN.EXE"
-
 
 shutdown /r /f /t 0

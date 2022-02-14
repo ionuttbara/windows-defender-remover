@@ -1,180 +1,49 @@
 Windows Registry Editor Version 5.00
 
-::0 Service Remover
+;1 Remove Scan with Defender Context Menu...
 
-[-HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SecurityHealthService]
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender]
 
-::1 Defender Loggers
+[-HKEY_CLASSES_ROOT\Folder\shell\WindowsDefender]
+
+[-HKEY_CLASSES_ROOT\DesktopBackground\Shell\WindowsSecurity]
+
+[-HKEY_CLASSES_ROOT\Folder\shell\WindowsDefender\Command]
+
+
+;2 Defender Loggers
 
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\WMI\Autologger\DefenderAuditLogger]
 "Start"=dword:00000000
-"Status"=dword:00000000
 "Enabled"=dword:00000000
 "EnableLevel"=dword:00000000
 "EnableProperty"=dword:00000000
+
+[-HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger]
 
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger]
 "Start"=dword:00000000
-"Status"=dword:00000000
-
-
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger]
-"Start"=dword:00000000
-"Status"=dword:00000000
 "Enabled"=dword:00000000
 "EnableLevel"=dword:00000000
 "EnableProperty"=dword:00000000
+â
 
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger\{099614a5-5dd7-4788-8bc9-e29f43db28fc}]
-"Start"=dword:00000000
-"Status"=dword:00000000
-"Enabled"=dword:00000000
-"EnableLevel"=dword:00000000
-"EnableProperty"=dword:00000000
-
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger\{1edeee53-0afe-4609-b846-d8c0b2075b1f}]
-"Start"=dword:00000000
-"Status"=dword:00000000
-"Enabled"=dword:00000000
-"EnableLevel"=dword:00000000
-"EnableProperty"=dword:00000000
-
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger\{1edeee53-0afe-4609-b846-d8c0b2075b1f}\Filters]
-"Start"=dword:00000000
-"Status"=dword:00000000
-"Enabled"=dword:00000000
-"EnableLevel"=dword:00000000
-"EnableProperty"=dword:00000000
-
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger\{54849625-5478-4994-a5ba-3e3b0328c30d}]
-"Enabled"=dword:00000000
-"EnableLevel"=dword:00000000
-"Status"=dword:00000000
-"EnableProperty"=dword:00000000
-
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger\{54849625-5478-4994-a5ba-3e3b0328c30d}\Filters]
-"Start"=dword:00000000
-"Status"=dword:00000000
-"Enabled"=dword:00000000
-"EnableLevel"=dword:00000000
-"EnableProperty"=dword:00000000
-
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger\{85a62a0d-7e17-485f-9d4f-749a287193a6}]
-"Enabled"=dword:00000000
-"EnableLevel"=dword:00000000
-"Status"=dword:00000000
-"EnableProperty"=dword:00000000
-
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger\{8c416c79-d49b-4f01-a467-e56d3aa8234c}]
-"Start"=dword:00000000
-"Status"=dword:00000000
-"Enabled"=dword:00000000
-"EnableLevel"=dword:00000000
-"EnableProperty"=dword:00000000
-
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger\{a68ca8b7-004f-d7b6-a698-07e2de0f1f5d}]
-"Enabled"=dword:00000000
-"EnableLevel"=dword:00000000
-"Status"=dword:00000000
-"EnableProperty"=dword:00000000
-
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger\{a68ca8b7-004f-d7b6-a698-07e2de0f1f5d}\Filters]
-"Start"=dword:00000000
-"Status"=dword:00000000
-"Enabled"=dword:00000000
-"EnableLevel"=dword:00000000
-"EnableProperty"=dword:00000000
-
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger\{c688cf83-9945-5ff6-0e1e-1ff1f8a2ec9a}]
-"Enabled"=dword:00000000
-"Status"=dword:00000000
-"EnableProperty"=dword:00000000
-
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger\{E02A841C-75A3-4FA7-AFC8-AE09CF9B7F23}]
-"Enabled"=dword:00000000
-"EnableLevel"=dword:00000000
-"Status"=dword:00000000
-"EnableProperty"=dword:00000000
-
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger\{E02A841C-75A3-4FA7-AFC8-AE09CF9B7F23}\Filters]
-"Enabled"=dword:00000000
-"Start"=dword:00000000
-"Status"=dword:00000000
-"Enabled"=dword:00000000
-"EnableLevel"=dword:00000000
-"EnableProperty"=dword:00000000
-
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger\{ef1cc15b-46c1-414e-bb95-e76b077bd51e}]
-"Enabled"=dword:00000000
-"EnableLevel"=dword:00000000
-"Status"=dword:00000000
-"EnableProperty"=dword:00000000
-
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger\{ef1cc15b-46c1-414e-bb95-e76b077bd51e}\Filters]
-"Start"=dword:00000000
-"Status"=dword:00000000
-"Enabled"=dword:00000000
-"EnableLevel"=dword:00000000
-"EnableProperty"=dword:00000000
-
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger\{f4e1897c-bb5d-5668-f1d8-040f4d8dd344}]
-"Start"=dword:00000000
-"Status"=dword:00000000
-"Enabled"=dword:00000000
-"EnableLevel"=dword:00000000
-"EnableProperty"=dword:00000000
-
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger\{fae10392-f0af-4ac0-b8ff-9f4d920c3cdf}]
-"Start"=dword:00000000
-"Status"=dword:00000000
-"Enabled"=dword:00000000
-"EnableLevel"=dword:00000000
-"EnableProperty"=dword:00000000
-
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger\{fae10392-f0af-4ac0-b8ff-9f4d920c3cdf}\Filters]
-"Start"=dword:00000000
-"Status"=dword:00000000
-"Enabled"=dword:00000000
-"EnableLevel"=dword:00000000
-"EnableProperty"=dword:00000000
-
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger\{fc65ddd8-d6ef-4962-83d5-6e5cfe9ce148}]
-"Enabled"=dword:00000000
-"EnableLevel"=dword:00000000
-"Status"=dword:00000000
-"EnableProperty"=dword:00000000
-
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger\{fc65ddd8-d6ef-4962-83d5-6e5cfe9ce148}\Filters]
-
-"Start"=dword:00000000
-"Status"=dword:00000000
-"Enabled"=dword:00000000
-"EnableLevel"=dword:00000000
-"EnableProperty"=dword:00000000
+;2 Security Center
 
 
-::2 Security Center
+[-HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wscsvc]
 
+[-HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\webthreatdefusersvc]
 
 [-HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SecurityHealthService]
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Security Center\Monitoring]
+
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Security Center]
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Security Center]
 "FirewallDisableNotify"=dword:00000001
 "UpdatesDisableNotify"=dword:00000001
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Security Center\Provider]
 
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Security Center\ProvidersMigration]
-
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Security Center\Svc]
-
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wscsvc]
-"Start"=dword:00000004
-
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\webthreatdefusersvc]
-"Start"=dword:00000004
-
-::3 Device Guard (VBS, Exploit)
+;3 Device Guard (VBS, Exploit)
 
 
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceGuard]
@@ -183,7 +52,6 @@ Windows Registry Editor Version 5.00
 "EnableVirtualizationBasedSecurity"=dword:00000000
 "RequirePlatformSecurityFeatures"=dword:00000000
 "Locked"=dword:00000000
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios]
 
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\CredentialGuard]
 "Enabled"=dword:00000000
@@ -191,57 +59,19 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity]
 "Enabled"=dword:00000000
 
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity]
-"Enabled"=dword:00000000
-::4 Silent Apps not installed
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager]
-"SilentInstalledAppsEnabled"=dword:00000000
-::5 Mitigation Options
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\kernel]
-"MitigationAuditOptions"=hex:00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
-  00,00,00,00,00,00,00,00
-"MitigationOptions"=hex:00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,00,\
-  00,00,00,00,00,00
-
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity]
-"Enabled"=dword:00000000
-
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SecurityHealthService]
-"Start"=dword:00000004
-
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wscsvc]
-
-"Start"=dword:00000004
-::6 Defender
+;4 More Settings
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Windows Defender Exploit Guard\Controlled Folder Access]
 "EnableControlledFolderAccess"=dword:00000000
 
-;3.1.2.2 Disable Network Protection
-
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Windows Defender Exploit Guard\Network Protection]
 "EnableNetworkProtection"=-
 
-;3.1.2.3 Disable Telemetry Services and remove application
-
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender]
-"ProductAppDataPath"=-
-"ProductIcon"=-
-"ProductLocalizedName"=-
-"RemediationExe"=-
-"ProductType"=-
-"InstallLocation"=-
-"ManagedDefenderProductType"=-
-"OOBEInstallTime"=-
-"ProductStatus"=-
-"InstallTime"=-
-
-[-HKEY_CLASSES_ROOT\DesktopBackground\Shell\WindowsDefender]
-
-
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications]
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications]
+"DisableEnhancedNotifications"=dword:00000001
+"DisableNotifications"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Reporting]
 "DisableEnhancedNotifications"=dword:00000001
 
 [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run]
@@ -253,25 +83,8 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run]
 "WindowsDefender"=-
 
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications]
-"DisableNotifications"=dword:00000001
-
-
-[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run]
-"Windows Defender"=-
-
-
-[-HKEY_CLASSES_ROOT\DesktopBackground\Shell\WindowsDefender]
-
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet]
 "DisableBlockAtFirstSeen"=dword:00000001
-
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger]
-"Start"=dword:00000000
-"Status"=dword:00000000
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications]
-"DisableNotifications"=dword:00000001
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Features]
 "TamperProtection"=dword:00000000
@@ -295,31 +108,6 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\MpEngine]
 "MpEnablePus"=dword:00000000
 
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager]
-"DisableScanningNetworkFiles"=dword:00000001
-
-[-HKEY_CLASSES_ROOT\DesktopBackground\Shell\WindowsDefender]
-
-[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run]
-"Windows Defender"=-
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run]
-"Windows Defender"=-
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run]
-"WindowsDefender"=-
-
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Security Health]
-[-HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SecurityHealthService]
-
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Device Control]
-
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Exclusions]
-
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\NIS]
-
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\UX Configuration]
-
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Device performance and health]
 "UILockdown"=dword:00000001
 
@@ -329,142 +117,22 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Firewall and network protection]
 "UILockdown"=dword:00000001
 
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\MpEngine]
-"MpEnablePus"=dword:00000000
-
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager]
 "DisableScanningNetworkFiles"=dword:00000001
 
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet]
-"DisableBlockAtFirstSeen"=dword:00000001
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection]
-
-"DisableRealtimeMonitoring"=dword:00000001
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Features]
-
-"TamperProtection"=dword:00000000
-"MpPlatformKillbitsFromEngine"=hex:00,00,00,00,00,00,00,00
-"TamperProtectionSource"=dword:00000000
-"MpCapability"=hex:00,00,00,00,00,00,00,00
-
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Security Health]
-
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Device Control]
-
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Exclusions]
-
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\NIS]
-
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\UX Configuration]
-
-
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Reporting]
-
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Scan]
-
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Signature Updates]
-
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Reporting]
-
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender Security Center]
-
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Threats]
-
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Windows Defender Exploit Guard]
-
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\WCOS]
-
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Remediation]
-
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Quarantine]
-
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\MpEngine]
-
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Miscellaneous Configuration]
-
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Advanced Threat Protection]
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Security Center\Monitoring]
 [HKEY_CURRENT_USER\Software\Microsoft\Windows Security Health\State]
 "Disabled"=dword:00000001
 
-
-;3.2 Disable Smart Screen and Notifications
-
-
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows NT\MitigationOptions]
 "MitigationOptions_FontBocking"=-
-
-
-
-;3.2.1 Disable Smart Screen for Apps and Files
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System]
 "EnableSmartScreen"=dword:00000000
 "ShellSmartScreenLevel"=-
 
-;3.2.2 Disable Smart Screen for Microsoft Edge
-
 [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer]
 "SmartScreenEnabled"="Off"
-
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Reporting]
-"DisableEnhancedNotifications"=dword:00000001
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications]
-"DisableNotifications"=dword:00000001
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System]
 "EnableSmartScreen"=dword:00000000
 
-
-
-
-;3.3 Remove Scan with Defender Context Menu...
-
-
-[-HKEY_CLASSES_ROOT\Folder\shell\WindowsDefender]
-
-[-HKEY_CLASSES_ROOT\DesktopBackground\Shell\WindowsSecurity]
-
-[-HKEY_CLASSES_ROOT\Folder\shell\WindowsDefender\Command]
-
-
-:: 7 Windows Error Reporting
-[HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting]
-"LoggingDisabled"=dword:00000001
-
-[HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\Windows Error Reporting]
-"Disabled"=dword:00000001
-
-[HKEY_CURRENT_USER\Software\Microsoft\Windows\Windows Error Reporting]
-"Disabled"=dword:00000001
-
-
-;4.1 Disable Error Reporting for All Users
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PCHealth\ErrorReporting]
-"DoReport"=dword:00000000
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Windows Error Reporting]
-"Disabled"=dword:00000001
-"EnableZip"=dword:00000000
-"ErrorPort"=-
-"ServiceTimeout"=dword:00000000
-"OobeCompleted"=dword:00000000
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Windows Error Reporting\Assert Filtering Policy]
-"ReportAndContinue"=dword:00000000
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Windows Error Reporting\BrokerUp]
-"WWAJSE"=dword:00000000
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Windows Error Reporting\Consent]
-"DefaultConsent"=dword:00000000
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting]
-"Disabled"=dword:00000001
-
-
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Windows Error Reporting\RuntimeExceptionHelperModules]
