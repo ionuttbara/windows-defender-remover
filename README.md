@@ -1,6 +1,6 @@
 
-<!-- WHAT IS THE PROGRAM? -->
-## What is this program?
+<!-- WHAT IS A DEFENDER REMOVER? -->
+## What is a defender remover?
 A tool which is uses to remove Windows Defender in Windows 8.x, Windows 10 (every version) and Windows 11.
 
 Here's why you do the Windows Defender Removal:
