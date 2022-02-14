@@ -1,16 +1,3 @@
+[![N|Solid](https://www.google.ro/url?sa=i&url=https%3A%2F%2Fkuhika.com%2Fhow-to-remove-scan-folder-in-windows-defender-antivirus-configuration%2F&psig=AOvVaw3HUei-QVM0qKsjAAWikrJ6&ust=1644951349687000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCNCa7rbv__UCFQAAAAAdAAAAABAF)]
 
-<!-- WHAT IS A DEFENDER REMOVER? -->
-## What is a defender remover?
-A tool which is uses to remove Windows Defender in Windows 8.x, Windows 10 (every version) and Windows 11.
-
-Here's why you do the Windows Defender Removal:
-
-*to use Avast!, Avira , AVG, Norton and another Antivirus/malware engine.
-
-*Optimize your HDD performance.
-
-ATTENTION! 
-*This functionality breaks Windows Updates. If you want Windows Updates, please download the SDK / Source Code and remove "fidelity.exe" from the program.
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
+[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
