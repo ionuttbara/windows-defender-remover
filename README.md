@@ -1,3 +1,3 @@
-[![N|Solid](https://www.google.ro/url?sa=i&url=https%3A%2F%2Fkuhika.com%2Fhow-to-remove-scan-folder-in-windows-defender-antivirus-configuration%2F&psig=AOvVaw3HUei-QVM0qKsjAAWikrJ6&ust=1644951349687000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCNCa7rbv__UCFQAAAAAdAAAAABAF)]
+[![N|Solid](https://kuhika.com/wp-content/uploads/2022/01/How-to-Remove-Scan-Folder-in-Windows-Defender-%E2%80%93-Antivirus.jpg)]
 
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
