@@ -19,6 +19,7 @@ Melody Windows Defender (Remover/Disabler)  is helping you to remove/disable Win
  - Windows 7 (Service Pack 1), Windows 8.x , Windows 10 (all versions)
 - 2MB disk space
 - A system restore point before appling (if don't like the effect of the app).
+- If the antivirus says the file is a virus, because i've include "PowerRun.exe" To force remove the services, and unregister Windows Defender and Widnows Defender Security Center from the PC. It's false positive.
 
 
 
