@@ -20,4 +20,7 @@ melody /o /c Microsoft-OneCore-VirtualizationBasedSecurity /r
 
 ::tweaking boot, disable elam and VBS with LSA
 bcdedit /set {current} disableelamdrivers yes
+
+::Disable Windows Defender Exploit Thing
+PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& {Start-Process PowerShell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -File ""%~dp0.\exploit_removal.ps1""' -Verb RunAs}"
 shutdown /r /f /t 0

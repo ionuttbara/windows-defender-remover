@@ -3,6 +3,7 @@ CD /D "%~dp0"
 CLS
 @echo off
 title Windows Defender Remover
+PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& {Start-Process PowerShell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -File ""%~dp0.\exploit_removal.ps1""' -Verb RunAs}"
 :choice
 @echo off
 echo Are you want to remove Windows Defender?
