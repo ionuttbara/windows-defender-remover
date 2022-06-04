@@ -3,7 +3,7 @@
 
 ![Defender](https://kuhika.com/wp-content/uploads/2022/01/How-to-Remove-Scan-Folder-in-Windows-Defender-%E2%80%93-Antivirus.jpg)
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
-[![ci-tests](https://github.com/dragonflydb/dragonfly/actions/workflows/ci.yml/badge.svg)]
+![ci-tests](https://github.com/dragonflydb/dragonfly/actions/workflows/ci.yml/badge.svg)
 
 Melody Windows Defender (Remover/Disabler)  is helping you to remove/disable Windows Defender.
 
