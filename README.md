@@ -3,6 +3,7 @@
 
 ![Defender](https://kuhika.com/wp-content/uploads/2022/01/How-to-Remove-Scan-Folder-in-Windows-Defender-%E2%80%93-Antivirus.jpg)
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
+[![ci-tests](https://github.com/dragonflydb/dragonfly/actions/workflows/ci.yml/badge.svg)]
 
 Melody Windows Defender (Remover/Disabler)  is helping you to remove/disable Windows Defender.
 
@@ -17,9 +18,8 @@ Melody Windows Defender (Remover/Disabler)  is helping you to remove/disable Win
 ## System Requiments
 
  - Windows 7 (Service Pack 1), Windows 8.x , Windows 10 (all versions)
-- 2MB disk space
 - A system restore point before appling (if don't like the effect of the app).
-- If the antivirus says the file is a virus, because i've include "PowerRun.exe" To force remove the services, and unregister Windows Defender and Widnows Defender Security Center from the PC. It's false positive.
+- If the antivirus says the file is a virus, because i've include "PowerRun.exe" (PowerRun by Sordum) To force remove the services, and unregister Windows Defender and Widnows Defender Security Center from the PC. It's false positive.
 
 ## How to use the script?
 
