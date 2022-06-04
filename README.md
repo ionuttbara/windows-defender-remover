@@ -23,8 +23,13 @@ Melody Windows Defender (Remover/Disabler)  is helping you to remove/disable Win
 
 
 
-## Apply application script
+## How to use the script?
 
-Just run the app. After successful application, the PC will reboot.
+Just run the app. It show an terminal window with 3 options.
+The options are to remove, disable and enable Windows Defender by pressing 3 different buttons.
+1. Pressing "Y" , Windows Defender will be REMOVED. This means , a system restore point is recommended.
+2. Pressing "N", Windows Defender will be DISABLED. To restore that, re-apply the script and press "E". (It doesn't need creation of Restore Point from Windows System Restore Settings).
+
+![DefenderRemoverDisablerWindow] (https://i.imgur.com/2BvT5QJ.png)
 If you apply only the registry provided, you must reboot manually.
 
