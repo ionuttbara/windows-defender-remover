@@ -1,8 +1,6 @@
 
 # Windows Defender Remover / Windows Defender Disabler
-
-![Defender](https://kuhika.com/wp-content/uploads/2022/01/How-to-Remove-Scan-Folder-in-Windows-Defender-%E2%80%93-Antivirus.jpg)
-
+![logo of the application](https://user-images.githubusercontent.com/76656855/174484372-75292819-c33f-472e-8250-753519455ad1.png)
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 ![ci-tests](https://github.com/dragonflydb/dragonfly/actions/workflows/ci.yml/badge.svg)
 
