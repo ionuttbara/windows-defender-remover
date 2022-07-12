@@ -1,0 +1,78 @@
+Windows Registry Editor Version 5.00
+
+
+[-HKEY_CURRENT_USER\Software\Microsoft\Windows Security Health]
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows Security Health\State]
+"Disabled"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Security Health\Platform]
+"Registered"=dword:00000000
+
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Security Health]
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Security Health\Health Advisor]
+"UIReportingDisabled"=dword:00000001
+"WarningThreshold"=-
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Security Health\Health Advisor\Battery]
+"UIReportingDisabled"=dword:00000001
+"WarningThreshold"=-
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Security Health\Health Advisor\Device Driver]
+"UIReportingDisabled"=dword:00000001
+"WarningThreshold"=-
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Security Health\Health Advisor\Reliability]
+"UIReportingDisabled"=dword:00000001
+"WarningThreshold"=-
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Security Health\Health Advisor\Status Codes]
+"UIReportingDisabled"=dword:00000001
+"WarningThreshold"=-
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Security Health\Health Advisor\Storage Health]
+"UIReportingDisabled"=dword:00000001
+"WarningThreshold"=-
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Security Health\Health Advisor\Storage Health Metrics]
+"UIReportingDisabled"=dword:00000001
+"WarningThreshold"=-
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Security Health\Health Advisor\Time Service]
+"UIReportingDisabled"=dword:00000001
+"WarningThreshold"=-
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Security Health\Health Advisor\Update Monitor]
+"DiagnosticInterval"=-
+"MaxDaysOnOSVersion"=-
+"UIReportingDisabled"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer]
+"TurnOffSPIAnimations"=dword:00000001
+"NoWelcomeScreen"=dword:00000001
+"EnforceShellExtensionSecurity"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\Security\AntiTheftMode]
+"value"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\Security\ClearTPMIfNotReady]
+"value"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\Security\PreventAutomaticDeviceEncryptionForAzureADJoinedDevices]
+"value"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\Security\RecoveryEnvironmentAuthentication]
+"value"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\Security\RequireDeviceEncryption]
+"value"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\Security\RequireProvisioningPackageSignature]
+"value"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\Security\RequireRetrieveHealthCertificateOnBoot]
+"value"=dword:00000000
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows Security Health\State]
+"Disabled"=dword:00000001
