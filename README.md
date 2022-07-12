@@ -20,7 +20,7 @@ Melody Windows Defender (Remover/Disabler)  is helping you to remove/disable Win
  - Windows 10 , version 1703 or newer 
  __ATTENTION!__ This version of Script works at Windows 8.x and Windows 10 1507/1511/1607, but after applying you can't open UWP Apps.  
  __Last version of Defender Script for Windows 7, 8.x and 10 (1507/1607/1511) is 4.5. (search for version 4.5 in Release Section).__  
-__A system restore point before appling (if don't like the effect of the app__  
+__A system restore point before appling (if don't like the effect of the app).__
 - If the antivirus says the file is a virus, because i've include "PowerRun.exe" (PowerRun by Sordum) To force remove the services, and unregister Windows Defender and Widnows Defender Security Center from the PC. It's false positive.
 
 ## How to use the script?
