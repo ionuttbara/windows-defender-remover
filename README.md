@@ -4,11 +4,9 @@
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 ![ci-tests](https://github.com/dragonflydb/dragonfly/actions/workflows/ci.yml/badge.svg)
 
-Melody Windows Defender (Remover/Disabler)  is helping you to remove/disable Windows Defender.  
-
+Windows Defender (Remover/Disabler)  Script is helping you to remove/disable Windows Defender.  
 - Removes Windows Defender from Windows System.
-- Removes Windows Security App for Windows 10 (10586+) and Windows 11 Insider Builds.  
-- If you want to use Windows Security App or Windows Update , you can use the provided registry file to disable Windows Defender.  
+- Removes Windows Security App for Windows 10  and Windows 11 Insider Builds.  
 
 ## Features
 
