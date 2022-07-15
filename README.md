@@ -20,7 +20,7 @@ Windows Defender (Remover/Disabler)  Script is helping you to remove/disable Win
  __Last version of Defender Script for Windows 7, 8.x and 10 (1507/1607/1511) is 4.5. (search for version 4.5 in Release Section).__  
 __A system restore point before appling (if don't like the effect of the app).__
 - If the antivirus says the file is a virus, because i've include "PowerRun.exe" (PowerRun by Sordum) To force remove the services, and unregister Windows Defender and Widnows Defender Security Center from the PC. It's false positive.
-
+ Also, for better effects application , please disable first System Tampon Protection.
 ## How to use the script?
 
 Just run the app. It show an terminal window with 3 options.
