@@ -23,7 +23,7 @@ regedit.exe /s "registry\Virtualization.reg"
 regedit.exe /s "registry\Windows Security Center.reg"
 PowerRun regedit.exe /s "registry\Antivirus.reg"
 PowerRun regedit.exe /s "registry\Exploit Guard.reg"
-PowerRun regedit.exe /s "registry\Runtime IDs.reg"
+PowerRun regedit.exe /s "registry\Rumtime IDs.reg"
 PowerRun regedit.exe /s "registry\Security Health.reg"
 PowerRun regedit.exe /s "registry\Smartscreen.reg"
 PowerRun regedit.exe /s "registry\Virtualization.reg"
@@ -40,13 +40,6 @@ melody /o /c Microsoft-Windows-Killbits /r
 melody /o /c Microsoft-Windows-SenseClient /r
 melody /o /c Microsoft-Windows-DeviceGuard /r
 melody /o /c Microsoft-OneCore-VirtualizationBasedSecurity /r
-melody /o /c Containers /r
-melody /o /c Microsoft-OneCore-Containers /r
-melody /o /c Microsoft-OneCore-UtilityVM-Containers /r
-melody /o /c Microsoft-UtilityVM-Containers /r
-melody /o /c Microsoft-Windows-OneCore-Containers-Client-Opt-Package /r
-melody /o /c HyperV-Compute-Host-Containers /r
-melody /o /c HyperV-Feature-Containers /r
 melody /o /c HyperV-Feature-ApplicationGuard /r
 melody /o /c HyperV-HypervisorPlatform /r
 melody /o /c HyperV-Networking-Containers /r
