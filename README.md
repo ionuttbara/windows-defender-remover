@@ -7,7 +7,7 @@
 ## What is the app do?
 This application is removing Windows Defender and including Microsoft's Security Components from the Windows OS. 
 
-## System Requiments
+## System Requirements
 Windows 7,8.x ,10 and 11  (all versions)
 A system restore point is recommended before you apply the script (if you expect problems , you can write details in Issues Section).
 
