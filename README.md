@@ -20,3 +20,11 @@ The options are to remove, disable and enable Windows Defender by pressing 3 dif
 3. Pressing "E", Windows Defender will be ENABLED.
 ![DefenderRemoverDisablerWindow](https://i.imgur.com/2BvT5QJ.png)  
 After Applying the script with desired option, the device will reboot automaticly.
+
+## Why this downloaded app/script is taked as virus?
+The app is false positive. Some Security Apps it take this app as a virus because the inclusion of PowerRun. For correct utilisation , disable your antivirus protection and Windows Security Tamper Protection  ONLY this app is take as a virus.
+
+## Components License 
+IoBit Unlocker is created by IoBit Tehnologies Inc.
+PowerRun is created by Sordum.
+OneClickFirewall is created by WinAero.
