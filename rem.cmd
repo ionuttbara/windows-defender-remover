@@ -7,7 +7,6 @@ FOR /d %%f IN ("C:\Windows\WinSxS\FileMaps\x86_windows-defender*.manifest") DO d
 FOR /d %%f IN ("C:\Windows\WinSxS\FileMaps\wow64_windows-defender*.manifest") DO del "%%f"
 FOR /d %%f IN ("C:\Windows\WinSxS\FileMaps\amd64_windows-defender*.manifest") DO del "%%f"
 powershell "Get-AppxPackage *SecHealth* | Reset-AppxPackage"
-
 :: Removing Services
 sc delete SgrmBroker
 sc delete SgrmAgent
