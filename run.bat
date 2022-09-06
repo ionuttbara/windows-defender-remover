@@ -31,7 +31,6 @@ PowerRun.exe regedit.exe /s "disabler\SmartScreen.reg"
 regedit.exe /s "disabler\Virtualization.reg"
 PowerRun.exe regedit.exe /s "disabler\Virtualization.reg"
 shutdown /r /f /t 0
-
 :enabledef
 regedit.exe /s "disabler\Antivirus_e.reg"
 PowerRun.exe regedit.exe /s "disabler\Antivirus_e.reg"
