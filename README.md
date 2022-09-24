@@ -22,10 +22,9 @@ The options are to remove, disable and enable Windows Defender by pressing 3 dif
 After Applying the script with desired option, the device will reboot automaticly.
 
 ## Why this downloaded app/script is taked as virus?
-The app is false positive. Some Security Apps it take this app as a virus because the inclusion of Melody API and IoBit Unlocker. (i will apply soon. For correct utilisation , disable your antivirus protection and Windows Security Tamper Protection  ONLY this app is take as a virus.
-In Version 11 , I will replace Melody API with DISM and IoBit Unlocker with TakeOwn.
+The app is false positive. Some Security Apps it take this app as a virus because the inclusion of IoBit Unlocker. (i will apply soon. For correct utilisation , disable your antivirus protection and Windows Security Tamper Protection  ONLY whem the app is taken as a virus.
 
-## Components License 
+# Components License 
 IoBit Unlocker is created by IoBit Tehnologies Inc.  
 PowerRun is created by Sordum.  
 OneClickFirewall is created by WinAero.  
