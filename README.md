@@ -26,7 +26,7 @@ Before to start the script, an automatic system restore point is created. If som
 The app is false positive. Some Security Apps it take this app as a virus because the inclusion of IoBit Unlocker, or the way of the .exe creation.
 Also , you can download the (*.zip) version.  
 
-## 📃 Instructions for the (*,zip) version of the Defender Remover  
+## 📃 Instructions for the (*.zip) version of the Defender Remover  
 1️⃣. Download lastest version of the Script from __Releases__ section.  
 2️⃣. Extract into an location.  
 3️⃣. Open run,bat and choose the menu.  
