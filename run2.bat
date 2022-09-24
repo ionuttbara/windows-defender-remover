@@ -1,46 +1,184 @@
 :: Starting script
+echo off
 pushd "%CD%"
 CD /D "%~dp0"
-echo off
-CLS
-title Windows Defender Remover Script Version 10.0
+title [0 percent] Defender Remover , version 11 
 
-:: Firewall Context Menu
-OneClickFirewall-1.0.0.2.exe /S
+:: Package Remover
+for /f "tokens=8 delims=\" %%i in ('reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages" ^| findstr "Windows-Defender-Nis-Group-Package" ^| findstr "~"') do (set "defender_package=%%i")
+if defined defender_package (
+		echo Removing %defender_package%...
+		reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages\%defender_package%" /v Visibility /t REG_DWORD /d 1 /f
+		reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages\%defender_package%\Owners" /va /f
+		dism /online /Remove-Package /PackageName:%defender_package% /NoRestart
+	) else (
+		echo The package cannot be found.
+	)
+for /f "tokens=8 delims=\" %%i in ('reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages" ^| findstr "Windows-Defender-Management-Powershell-Group-Package" ^| findstr "~"') do (set "defender_package=%%i")
+if defined defender_package (
+		echo Removing %defender_package%...
+		reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages\%defender_package%" /v Visibility /t REG_DWORD /d 1 /f
+		reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages\%defender_package%\Owners" /va /f
+		dism /online /Remove-Package /PackageName:%defender_package% /NoRestart
+	) else (
+		echo The package cannot be found.
+	)
+for /f "tokens=8 delims=\" %%i in ('reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages" ^| findstr "Windows-Defender-Management-MDM-Group-Package" ^| findstr "~"') do (set "defender_package=%%i")
+if defined defender_package (
+		echo Removing %defender_package%...
+		reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages\%defender_package%" /v Visibility /t REG_DWORD /d 1 /f
+		reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages\%defender_package%\Owners" /va /f
+		dism /online /Remove-Package /PackageName:%defender_package% /NoRestart
+	) else (
+		echo The package cannot be found.
+	)
 
-:: Exploit Protection
-PowerShell "".\exploit_removal.ps1""
+for /f "tokens=8 delims=\" %%i in ('reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages" ^| findstr "Windows-Defender-Management-Group-Package" ^| findstr "~"') do (set "defender_package=%%i")
+if defined defender_package (
+		echo Removing %defender_package%...
+		reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages\%defender_package%" /v Visibility /t REG_DWORD /d 1 /f
+		reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages\%defender_package%\Owners" /va /f
+		dism /online /Remove-Package /PackageName:%defender_package% /NoRestart
+	) else (
+		echo The package cannot be found.
+	)
 
-:: Registry Remove of Windows Defender 
-regedit.exe /s "remover\Antivirus.reg"
-PowerRun regedit.exe /s "remover\Antivirus.reg"
-regedit.exe /s "remover\Defender Anti-Phishing.reg"
-PowerRun regedit.exe /s "remover\Defender Anti-Phishing.reg"
-regedit.exe /s "remover\Exploit Guard.reg"
-PowerRun regedit.exe /s "remover\Exploit Guard.reg"
-regedit.exe /s "remover\Firewall Contextual Menu Implementation.reg"
-regedit.exe /s "remover\Rumtime IDs.reg"
-PowerRun regedit.exe /s "remover\Rumtime IDs.reg"
-regedit.exe /s "remover\Security Health.reg"
-PowerRun regedit.exe /s "remover\Security Health.reg"
-regedit.exe /s "disabler\Smartscreen.reg"
-PowerRun regedit.exe /s "disabler\Smartscreen.reg"
-regedit.exe /s "disabler\Virtualization.reg"
-PowerRun regedit.exe /s "disabler\Virtualization.reg"
-regedit.exe /s "remover\Windows Security Center.reg"
-PowerRun regedit.exe /s "remover\Windows Security Center.reg"
+title [25 percent] Defender Remover , version 11 
+for /f "tokens=8 delims=\" %%i in ('reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages" ^| findstr "Windows-Defender-Group-Policy-Package" ^| findstr "~"') do (set "defender_package=%%i")
+if defined defender_package (
+		echo Removing %defender_package%...
+		reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages\%defender_package%" /v Visibility /t REG_DWORD /d 1 /f
+		reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages\%defender_package%\Owners" /va /f
+		dism /online /Remove-Package /PackageName:%defender_package% /NoRestart
+	) else (
+		echo The package cannot be found.
+	)
 
-::Remove all the packages with Melody API
+for /f "tokens=8 delims=\" %%i in ('reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages" ^| findstr "Windows-Defender-Core-Group-Package" ^| findstr "~"') do (set "defender_package=%%i")
+if defined defender_package (
+		echo Removing %defender_package%...
+		reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages\%defender_package%" /v Visibility /t REG_DWORD /d 1 /f
+		reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages\%defender_package%\Owners" /va /f
+		dism /online /Remove-Package /PackageName:%defender_package% /NoRestart
+	) else (
+		echo The package cannot be found.
+	)
 
-melody /o /c Microsoft-Windows-SecurityCenter /r
-melody /o /c Windows-Defender /r
-melody /o /c Microsoft-Windows-HVSI /r
-melody /o /c Microsoft-Windows-SecureStartup /r
-melody /o /c Microsoft-Windows-Killbits /r
-melody /o /c Microsoft-Windows-SenseClient /r
-melody /o /c Microsoft-Windows-DeviceGuard /r
-melody /o /c Microsoft-OneCore-VirtualizationBasedSecurity /r
-bcdedit.exe /set disableelamdrivers yes
-PowerRun cmd.exe /c "Remover.bat"
-PowerRun cmd.exe /c rem.cmd
-timeout 4
+for /f "tokens=8 delims=\" %%i in ('reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages" ^| findstr "Windows-Defender-Client-Package" ^| findstr "~"') do (set "defender_package=%%i")
+if defined defender_package (
+		echo Removing %defender_package%...
+		reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages\%defender_package%" /v Visibility /t REG_DWORD /d 1 /f
+		reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages\%defender_package%\Owners" /va /f
+		dism /online /Remove-Package /PackageName:%defender_package% /NoRestart
+	) else (
+		echo The package cannot be found.
+	)
+for /f "tokens=8 delims=\" %%i in ('reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages" ^| findstr "Windows-Defender-ApplicationGuard-Inbox-WOW64-Package" ^| findstr "~"') do (set "defender_package=%%i")
+if defined defender_package (
+		echo Removing %defender_package%...
+		reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages\%defender_package%" /v Visibility /t REG_DWORD /d 1 /f
+		reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages\%defender_package%\Owners" /va /f
+		dism /online /Remove-Package /PackageName:%defender_package% /NoRestart
+	) else (
+		echo The package cannot be found.
+	)
+
+for /f "tokens=8 delims=\" %%i in ('reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages" ^| findstr "Windows-Defender-ApplicationGuard-Inbox-Package" ^| findstr "~"') do (set "defender_package=%%i")
+if defined defender_package (
+		echo Removing %defender_package%...
+		reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages\%defender_package%" /v Visibility /t REG_DWORD /d 1 /f
+		reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages\%defender_package%\Owners" /va /f
+		dism /online /Remove-Package /PackageName:%defender_package% /NoRestart
+	) else (
+		echo The package cannot be found.
+	)
+for /f "tokens=8 delims=\" %%i in ('reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages" ^| findstr "Windows-Defender-AppLayer-Group-Package" ^| findstr "~"') do (set "defender_package=%%i")
+if defined defender_package (
+		echo Removing %defender_package%...
+		reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages\%defender_package%" /v Visibility /t REG_DWORD /d 1 /f
+		reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages\%defender_package%\Owners" /va /f
+		dism /online /Remove-Package /PackageName:%defender_package% /NoRestart
+	) else (
+		echo The package cannot be found.
+	)
+
+
+for /f "tokens=8 delims=\" %%i in ('reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages" ^| findstr "Windows-Defender-AM-Default-Definitions-Package" ^| findstr "~"') do (set "defender_package=%%i")
+if defined defender_package (
+		echo Removing %defender_package%...
+		reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages\%defender_package%" /v Visibility /t REG_DWORD /d 1 /f
+		reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages\%defender_package%\Owners" /va /f
+		dism /online /Remove-Package /PackageName:%defender_package% /NoRestart
+	) else (
+		echo The package cannot be found.
+	)
+
+for /f "tokens=8 delims=\" %%i in ('reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages" ^| findstr "Microsoft-OneCore-VirtualizationBasedSecurity-Package" ^| findstr "~"') do (set "defender_package=%%i")
+if defined defender_package (
+		echo Removing %defender_package%...
+		reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages\%defender_package%" /v Visibility /t REG_DWORD /d 1 /f
+		reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages\%defender_package%\Owners" /va /f
+		dism /online /Remove-Package /PackageName:%defender_package% /NoRestart
+	) else (
+		echo The package cannot be found.
+	)
+
+title [50 percent] Defender Remover , version 11 
+
+for /f "tokens=8 delims=\" %%i in ('reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages" ^| findstr "Microsoft-Windows-DeviceGuard-GPEXT-Package" ^| findstr "~"') do (set "defender_package=%%i")
+if defined defender_package (
+		echo Removing %defender_package%...
+		reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages\%defender_package%" /v Visibility /t REG_DWORD /d 1 /f
+		reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages\%defender_package%\Owners" /va /f
+		dism /online /Remove-Package /PackageName:%defender_package% /NoRestart
+	) else (
+		echo The package cannot be found.
+	)
+
+for /f "tokens=8 delims=\" %%i in ('reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages" ^| findstr "Microsoft-Windows-SecurityCenter" ^| findstr "~"') do (set "defender_package=%%i")
+if defined defender_package (
+		echo Removing %defender_package%...
+		reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages\%defender_package%" /v Visibility /t REG_DWORD /d 1 /f
+		reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages\%defender_package%\Owners" /va /f
+		dism /online /Remove-Package /PackageName:%defender_package% /NoRestart
+	) else (
+		echo The package cannot be found.
+	)
+for /f "tokens=8 delims=\" %%i in ('reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages" ^| findstr "Microsoft-Windows-SenseClient-Package" ^| findstr "~"') do (set "defender_package=%%i")
+if defined defender_package (
+		echo Removing %defender_package%...
+		reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages\%defender_package%" /v Visibility /t REG_DWORD /d 1 /f
+		reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages\%defender_package%\Owners" /va /f
+		dism /online /Remove-Package /PackageName:%defender_package% /NoRestart
+	) else (
+		echo The package cannot be found.
+	)
+
+title [60 percent] Defender Remover , version 11 
+:: Removing from WinSxS
+FOR /d %%f IN ("C:\Windows\WinSxS\amd64_security-octagon*") DO rmdir  "%%f" /s /q
+FOR /d %%f IN ("C:\Windows\WinSxS\x86_windows-defender*") DO rmdir  "%%f" /s /q
+FOR /d %%f IN ("C:\Windows\WinSxS\wow64_windows-defender*") DO rmdir  "%%f" /s /q
+FOR /d %%f IN ("C:\Windows\WinSxS\amd64_windows-defender*") DO rmdir  "%%f" /s /q
+FOR /d %%f IN ("C:\Windows\WinSxS\FileMaps\x86_windows-defender*.manifest") DO del "%%f"
+FOR /d %%f IN ("C:\Windows\WinSxS\FileMaps\wow64_windows-defender*.manifest") DO del "%%f"
+FOR /d %%f IN ("C:\Windows\WinSxS\FileMaps\amd64_windows-defender*.manifest") DO del "%%f"
+
+title [80 percent] Defender Remover , version 11 
+:: Removing Windows Security Application 
+FOR /d %%f IN ("C:\Program Files\WindowsApps\Microsoft.SecHealthUI*") DO rmdir  "%%f" /s /q
+powershell "Get-AppxPackage *SecHealth* | Reset-AppxPackage"
+
+:: Removing Services
+sc delete SgrmBroker
+sc delete SgrmAgent
+sc delete SecurityHealthService
+sc delete WdBoot
+sc delete WdFiltrer
+sc delete WdNisSvc
+sc delete WdNisDrv
+sc delete wscsvc
+sc delete Sense
+sc delete WinDefend
+sc delete MsSecCore
+shutdown /r /f /t 0
