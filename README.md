@@ -32,6 +32,9 @@ Also , you can download the (*.zip) version.
 3️⃣. Open run,bat and choose the menu.  
 4️⃣. Like the (*.exe) version, wait until the device reboots.  
 
+# Frequent questions
+-add questions here-
+
 # 📄🗝 Components License 
  🔓 IoBit Unlocker is created by IoBit Tehnologies Inc.  
  🧳 PowerRun is created by Sordum.  
