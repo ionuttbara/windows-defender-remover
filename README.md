@@ -5,7 +5,7 @@
 ![ci-tests](https://github.com/dragonflydb/dragonfly/actions/workflows/ci.yml/badge.svg)
 
 ## ❓️ What is the app do?
-This application is removing / disables Windows Defender , including the Windows Security App, Windows Virtualization-Based Security (VBS) , Windows Smart-Screen, Windows Security Services , Windows Web-Threat Service and Windowa File Virtualization (UAC).
+This application is removing / disables Windows Defender , including the Windows Security App, Windows Virtualization-Based Security (VBS) , Windows Smart-Screen, Windows Security Services , Windows Web-Threat Service and Windowa File Virtualization (UAC) and Microsoft Defender App Guard.
 
 ## 🖍 System Requirements
 Windows 7,8.x ,10 and 11  (all versions)
