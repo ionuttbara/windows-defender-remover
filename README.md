@@ -25,6 +25,7 @@ Before to start the script, an automatic system restore point is created. If som
 ## 🛑 Why this downloaded app/script is taked as virus?
 The app is false positive. Some Security Apps it take this app as a virus because the inclusion of IoBit Unlocker, or the way of the .exe creation.
 Also , you can download the (*.zip) version.  
+The Antiviruses which this script as a virus : MalwareBytes and BitDefender (as Heuristic), maybe the way which was created the exe file.
 
 ## 📃 Instructions for the (*.zip) version of the Defender Remover  
 1️⃣. Download lastest version of the Script from __Releases__ section.  
