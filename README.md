@@ -17,7 +17,8 @@ Dwnload the application script from Release Section. Opening with admin rights a
 The options are to remove, disable and enable Windows Defender by pressing 3 different buttons.  
 1️⃣. Pressing "Y", Windows Defender will be REMOVED.  
 2️⃣. Pressing "N", Windows Defender will be DISABLED.  
-3️⃣. Pressing "E", Windows Defender will be ENABLED.  
+3️⃣. Pressing "E", Windows Defender will be ENABLED. 
+4️⃣. Pressing "R" to create a System Restore Point. After creating the app will exit and re-launch the script to apply selected modifications.
 ![DefenderRemoverDisablerWindow](https://i.imgur.com/2BvT5QJ.png)  
 After Applying the script with desired option, the device will reboot automaticly.  
 Before to start the script, an automatic system restore point is created. If something fails, can be restored easily.  
