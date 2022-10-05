@@ -34,8 +34,8 @@ The Antiviruses which this script as a virus : MalwareBytes and BitDefender (as 
 4️⃣. Like the (*.exe) version, wait until the device reboots.  
 
 # Frequent questions
-1️⃣. How to use the package remover without downloading the executable from release?
-__RESPONSE:__ Run the desired ".bat" file from cmd with PowerRun (by dragging to the executable). You must to reboot to take effect of the removal.
+1️⃣. How to use the package remover without downloading the executable from release?  
+__RESPONSE:__ Run the desired ".bat" file from cmd with PowerRun (by dragging to the executable). You must to reboot to take effect of the removal.  
 
 # 📄🗝 Components License 
  🔓 IoBit Unlocker is created by IoBit Tehnologies Inc.  
