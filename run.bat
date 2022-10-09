@@ -51,7 +51,7 @@ PowerShell "".\exploit_removal.ps1""
 bcdedit.exe /set disableelamdrivers yes
 :: Firewall Context Menu
 OneClickFirewall-1.0.0.2.exe /S
-call cmd /c PowerRun run2.bat %reboot%
+PowerRun run2.bat %reboot%
 PowerRun cmd.exe /c "Remover.bat"
 :norebootwait
 timeout 2
