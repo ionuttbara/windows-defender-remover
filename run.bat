@@ -5,7 +5,9 @@ CLS
 title Windows Defender Remover Script, version 11
 set checkc=%1
 set reboot=%2
-if /I [%checkc%] NEQ [] goto :checkc
+if /I [%checkc%] NEQ [] ( 
+set c=%checkc%
+goto :checkc )
 :prompt
 echo Welcome to Defender Remover. There are the options.
 echo If you press Y, we will remove Windows Defender and connected Windows Security Components.
@@ -15,6 +17,7 @@ echo The PC will reboot after the selected action is finalised.
 
 set /P c=Select one of the option to continue. 
 :checkc
+::if only /noreboot is specified set reboot var to %c%
 if /I "%c%" EQU "/NOREBOOT" set reboot=%c%
 if /I "%c%" EQU "Y" goto :removedef
 if /I "%c%" EQU "N" goto :tweaksdef
@@ -22,9 +25,8 @@ if /I "%c%" EQU "E" goto :enabledef
 if /I "%c%" EQU "/Y" goto :removedef
 if /I "%c%" EQU "/N" goto :tweaksdef
 if /I "%c%" EQU "/E" goto :enabledef
-:checkwrong
-if /I ["%c%"] EQU [""] goto :prompt
-if /I ["%c%"] NQU [""] goto :prompt
+goto :prompt
+
 
 :removedef
 :: Registry Remove of Windows Defender 
