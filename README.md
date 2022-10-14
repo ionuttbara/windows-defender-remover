@@ -40,5 +40,4 @@ __RESPONSE:__ Run the desired ".bat" file from cmd with PowerRun (by dragging to
 
 # 📄🗝 Components License 
  🔓 IoBit Unlocker is created by IoBit Tehnologies Inc.  
- 🧳 PowerRun is created by Sordum.  
- 🔥 OneClickFirewall is created by WinAero.  
+ 🧳 PowerRun is created by Sordum.    
