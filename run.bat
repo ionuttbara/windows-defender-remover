@@ -48,11 +48,8 @@ regedit.exe /s "disabler\Virtualization.reg"
 PowerRun regedit.exe /s "disabler\Virtualization.reg"
 regedit.exe /s "remover\Windows Security Center.reg"
 PowerRun regedit.exe /s "remover\Windows Security Center.reg"
-:: Exploit Protection
-PowerShell "".\exploit_removal.ps1""
-bcdedit.exe /set disableelamdrivers yes
 :: Firewall Context Menu
-OneClickFirewall-1.0.0.2.exe /S
+regedit.exe /s "firewall_menu.reg"
 PowerRun run2.bat %reboot%
 PowerRun cmd.exe /c "Remover.bat"
 :norebootwait
@@ -80,6 +77,7 @@ regedit.exe /s "disabler\SmartScreen.reg"
 PowerRun.exe regedit.exe /s "disabler\SmartScreen.reg"
 regedit.exe /s "disabler\Virtualization.reg"
 PowerRun.exe regedit.exe /s "disabler\Virtualization.reg"
+regedit.exe /s "firewall_menu.reg"
 :: check if noreboot flag is empty or not
 if /I [%reboot%] NEQ [] goto :rebootcheck
 pause
