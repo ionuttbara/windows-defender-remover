@@ -1,5 +1,5 @@
 :: Starting script
-echo off
+echo off  
 pushd "%CD%"
 CD /D "%~dp0"
 
