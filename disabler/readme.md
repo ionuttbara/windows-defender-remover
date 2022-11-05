@@ -8,3 +8,5 @@ The components which you can Enable/Disable are:
   - Windows Security Center
   - Windows Smart Screen Filters (including MS Store , File and Edge Filters)
   - Windows Virtualization Layer (Windows UAC and Windows Virtualization-Based Security)
+
+If you want to apply in all reg files download them or download the executable from releases section.
