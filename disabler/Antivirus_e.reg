@@ -1,0 +1,45 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Features]
+"TamperProtection"=dword:00000005
+
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender]
+
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\Defender]
+
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Microsoft Antimalware]
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CI\Policy]
+"VerifiedAndReputablePolicyState"=-
+
+; Disable Defender Services (per-System)
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WinDefend]
+"Start"=dword:00000002
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\MsSecCore]
+"Start"=dword:00000002
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wscsvc]
+"Start"=dword:00000002
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdNisDrv]
+"Start"=dword:00000002
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdNisSvc]
+"Start"=dword:00000002
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdFiltrer]
+"Start"=dword:00000002
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdBoot]
+"Start"=dword:00000002
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SecurityHealthService]
+"Start"=dword:00000002
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SgrmAgent]
+"Start"=dword:00000002
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SgrmBroker]
+"Start"=dword:00000002
