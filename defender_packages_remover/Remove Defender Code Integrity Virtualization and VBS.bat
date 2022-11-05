@@ -1,6 +1,6 @@
 :: Starting script
 echo off
-pushd "%CD%"
+pushd "%CD%" 
 CD /D "%~dp0"
 title [0 percent] Defender Remover , version 11
 
