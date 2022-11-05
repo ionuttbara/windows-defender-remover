@@ -2,7 +2,7 @@
 echo off
 pushd "%CD%"
 CD /D "%~dp0"
-title [0 percent] Defender Remover , version 11
+title [0 percent] Defender Remover , version 11 
 
 for /f "tokens=8 delims=\" %%i in ('reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\Packages" ^| findstr "Microsoft-Windows-SecurityCenter" ^| findstr "~~") do (set "defender_package=%%i")
 if defined defender_package (
