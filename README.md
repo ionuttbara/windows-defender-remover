@@ -63,6 +63,7 @@ Defender.Remover.12.exe d or D (without backslash)
 ```
 
 __REMOVE DEFENDER WITH ARGUMENTS__  
+ATTENTION! AFTER APPLYING THE PART, YOUR DEVICE WILL REBOOT AUTOMATICLY.
 ```
 Defender.Remover.12.exe /R
 ```
