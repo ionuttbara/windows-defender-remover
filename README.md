@@ -34,10 +34,49 @@ The Antiviruses which this script as a virus : MalwareBytes and BitDefender (as 
 3️⃣. Open run,bat and choose the menu.  
 4️⃣. Like the (*.exe) version, wait until the device reboots.  
 
+## 📃 Automation of the script
+Starting with version  12, you can disable, remove or enable Windows Defender with arguments.  
+__ENABLE DEFENDER WITH ARGUMENTS__
+```
+Defender.Remover.12.exe /e
+```
+OR
+```
+Defender.Remover.12.exe /E
+```
+OR
+```
+Defender.Remover.12.exe e or E (without backslash)  
+```
+
+__DISABLE DEFENDER WITH ARGUMENTS__  
+```
+Defender.Remover.12.exe /D
+```
+OR
+```
+Defender.Remover.12.exe /d
+```
+OR
+```
+Defender.Remover.12.exe d or D (without backslash)  
+```
+
+__REMOVE DEFENDER WITH ARGUMENTS__  
+```
+Defender.Remover.12.exe /R
+```
+OR
+```
+Defender.Remover.12.exe /r
+```
+OR
+```
+Defender.Remover.12.exe R or r (without backslash)  
+```
 # Frequent questions
 1️⃣. How to use the package remover without downloading the executable from release?  
 __RESPONSE:__ Run the desired ".bat" file from cmd with PowerRun (by dragging to the executable). You must to reboot to take effect of the removal.  
 
 # 📄🗝 Components License 
- 🔓 IoBit Unlocker is created by IoBit Tehnologies Inc.  
- 🧳 PowerRun is created by Sordum.    
+ 🧳 PowerRun is created by Sordum. 
