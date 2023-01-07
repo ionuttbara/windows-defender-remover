@@ -14,6 +14,12 @@ A system restore point is recommended before you apply the script (if you expect
 ## 📃 Instructions of the (*.exe) Version
 
 Dwnload the application script from Release Section. Opening with admin rights and a window is showing the options.
+# GUI (>Version 13)
+Starting with Version 13, the app will move into GUI with Selection of application of Tweaks. Also this will keep the arguments section.
+![image](https://user-images.githubusercontent.com/76656855/211152792-01e5a233-3c71-41fa-a81b-5a7f2be1f3dd.png)
+
+
+# Terminal GUI (<Version 13)
 The options are to remove, disable and enable Windows Defender by pressing 3 different buttons.  
 1️⃣. Pressing "Y", Windows Defender will be REMOVED.  
 2️⃣. Pressing "N", Windows Defender will be DISABLED.  
@@ -79,5 +85,7 @@ Defender.Remover.12.exe R or r (without backslash)
 1️⃣. How to use the package remover without downloading the executable from release?  
 __RESPONSE:__ Run the desired ".bat" file from cmd with PowerRun (by dragging to the executable). You must to reboot to take effect of the removal.  
 
+2️⃣. Why i used .NET 4.7.2 to realize the GUI of the Defender Remover?
+__RESPONSE:__ I've using .NET 4.7.2 to realize the GUI because i want the app to be light.
 # 📄🗝 Components License 
  🧳 PowerRun is created by Sordum. 
