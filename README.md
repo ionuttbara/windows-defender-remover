@@ -17,7 +17,14 @@ Dwnload the application script from Release Section. Opening with admin rights a
 Starting with Version 13, the app will move into GUI with Selection of application of Tweaks. Also this will keep the arguments section.
 ![image](https://user-images.githubusercontent.com/76656855/211152792-01e5a233-3c71-41fa-a81b-5a7f2be1f3dd.png)
 
+# KNOWN ISSUES SECTION!
+## Version 12 (preview) - Remover
+<li> Removing Defender it will make Bitlocker uniexisted (if you use bitlocker, that will be removed).
+<li> The content from C:\Program Files (x64),(x86),(Arm)\Windows Defender are not removing after applying the remover script.
+<li> Sometimes after applying the Remover, the pc will not reboot (explorer.exe stops).
 
+# Source Code (version 0.99)
+This section of source code includes the GUI of Defender Remover, Registry and Commands which must be USED separately if you want.
 # Terminal GUI (<Version 13)
 The options are to remove, disable and enable Windows Defender by pressing 3 different buttons.  
 1️⃣. Pressing "Y", Windows Defender will be REMOVED.  
