@@ -1,0 +1,23 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System]
+"EnableLUA"=dword:00000000
+"ConsentPromptBehaviorAdmin"=dword:00000000
+"ConsentPromptBehaviorUser"=dword:00000003
+"EnableVirtualization"=dword:00000000
+"FilterAdministratorToken"=dword:00000001
+"EnableUIADesktopToggle"=dword:00000000
+"ValidateAdminCodeSignatures"=dword:00000000
+"EnableFullTrustStartupTasks"=dword:00000000
+"EnableInstallerDetection"=dword:00000000
+"EnableSecureUIAPaths"=dword:00000000
+"EnableUIADesktopToggle"=dword:00000000
+"EnableInstallerDetection"=dword:00000000
+"ValidateAdminCodeSignatures"=dword:00000000
+"DSCAutomationHostEnabled"=dword:00000000
+"EnableCursorSuppression"=dword:00000000
+"dontdisplaylastusername"=dword:00000000
+"shutdownwithoutlogon"=dword:00000001
+"undockwithoutlogon"=dword:00000001
+"PromptOnSecureDesktop"=dword:00000000
+"DelayedDesktopSwitchTimemout"=dword:00000000
