@@ -26,15 +26,13 @@ The options are to remove, disable and enable Windows Defender by pressing 3 dif
 
 
 # KNOWN ISSUES SECTION!
-## Version 12 (preview) - Remover
-<li> Removing Defender it will make Bitlocker uniexisted (if you use bitlocker, that will be removed).
-<li> The content from C:\Program Files (x64),(x86),(Arm)\Windows Defender are not removing after applying the remover script.
-<li> Sometimes after applying the Remover, the pc will not reboot (explorer.exe stops).
- 
+## Version 12 Remover
+At the moment is no known issues! 🚩
+
 # Source Code (version 0.99)
 This section of source code includes the GUI of Defender Remover, Registry and Commands which must be USED separately if you want.
  
-![DefenderRemoverDisablerWindow](https://i.imgur.com/2BvT5QJ.png)  
+![terminal_gui](https://user-images.githubusercontent.com/76656855/217674225-554e2c4c-da51-498f-9e62-533f311196c6.png)
 After Applying the script with desired option, the device will reboot automaticly.  
 Before to start the script, an automatic system restore point is created. If something fails, can be restored easily.  
 
