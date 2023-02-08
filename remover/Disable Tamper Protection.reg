@@ -1,0 +1,9 @@
+Windows Registry Editor Version 5.00
+
+; Remove Defender's Tamper Protection
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Features]
+"MpPlatformKillbitsFromEngine"=hex:00,00,00,00,00,00,00,00
+"TamperProtectionSource"=dword:00000000
+"MpCapability"=hex:00,00,00,00,00,00,00,00
+"TamperProtection"=dword:00000000

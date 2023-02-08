@@ -1,0 +1,23 @@
+Windows Registry Editor Version 5.00
+
+; Remove Defender and Windows Security Services
+
+[-HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\MsSecCore]
+
+[-HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wscsvc]
+
+[-HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdNisDrv]
+
+[-HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdNisSvc]
+
+[-HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdFiltrer]
+
+[-HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdBoot]
+
+[-HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SecurityHealthService]
+
+[-HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SgrmAgent]
+
+[-HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SgrmBroker]
+
+[-HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WinDefend]

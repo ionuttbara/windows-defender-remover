@@ -1,0 +1,12 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\RestrictedServices\Static\System]
+"WebThreatDefSvc_Allow_In"=-
+"WebThreatDefSvc_Allow_Out"=-
+"WebThreatDefSvc_Block_In"=-
+"WebThreatDefSvc_Block_Out"=-
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\RestrictedServices\Configurable\System]
+"{2A5FE97D-01A4-4A9C-8241-BB3755B65EE0}"=-
+"72e33e44-dc4c-40c5-a688-a77b6e988c69"=-
+"b23879b5-1ef3-45b7-8933-554a4303d2f3"=-
