@@ -88,6 +88,31 @@ OR
 ```
 Defender.Remover.12.exe R or r (without backslash)  
 ```
+# Disable and/or Remove Windows Defender Application Guard Policies (deeper)
+If you have some problems when open an app (extreme rare) and it will saying "The App it can not run because of Device Guard" or "Windows Defender Application Guard Blocked this app" you must remove 4 files (with same name , from 4 different locations).
+
+The location of the apps are:
+
+a. In EFI Partition
+```
+<EFI System Partition>\Microsoft\Boot\WiSiPolicy.p7b
+```
+b. In Code Integrity Location
+
+```
+<OS Volume>\Windows\System32\CodeIntegrity\WiSiPolicy.p7b
+```
+
+c. In Windows Folder
+
+```
+C:\Windows\Boot\EFI\wisipolicy.p7b
+```
+d. In WinSxS Folder
+
+This model is not added into script because the implementation of the removal the file from EFI partition it is impossible (for me) to implement.
+
+1. Go to "C:\Windows\WinSxS" and Search for __winsipolicy.p7b__
 # Frequent questions
 1️⃣. How to use the package remover without downloading the executable from release?  
 __RESPONSE:__ Run the desired ".bat" file from cmd with PowerRun (by dragging to the executable). You must to reboot to take effect of the removal.  
