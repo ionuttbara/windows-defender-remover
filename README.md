@@ -91,7 +91,7 @@ Defender.Remover.12.exe R or r (without backslash)
 # Disable and/or Remove Windows Defender Application Guard Policies (deeper)
 If you have some problems when open an app (extreme rare) and it will saying "The App it can not run because of Device Guard" or "Windows Defender Application Guard Blocked this app" you must remove 4 files (with same name , from 4 different locations).
 
-The location of the apps are:
+The location of the file are:
 
 a. In EFI Partition
 ```
