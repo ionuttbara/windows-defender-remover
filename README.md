@@ -119,5 +119,9 @@ __RESPONSE:__ Run the desired ".bat" file from cmd with PowerRun (by dragging to
 
 2️⃣. Why i used .NET 4.7.2 to realize the GUI of the Defender Remover?
 __RESPONSE:__ I've using .NET 4.7.2 to realize the GUI because i want the app to be lighter in size.
+ 
+3️⃣. What are ideal conditions of Applying the remover version of the script?
+__RESPONSE:__ The "ideal" conditions of Applying the Remnover Version of the script, is needed an Clean Installation of Windows. Why I recommend that? Because the "Windows Intelligence Update" will be not installed when the defender package is not exist.
+
 # 📄🗝 Components License 
  🧳 PowerRun is created by Sordum. 
