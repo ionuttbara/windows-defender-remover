@@ -118,6 +118,6 @@ This model is not added into script because the implementation of the removal th
 __RESPONSE:__ Run the desired ".bat" file from cmd with PowerRun (by dragging to the executable). You must to reboot to take effect of the removal.  
 
 2️⃣. Why i used .NET 4.7.2 to realize the GUI of the Defender Remover?
-__RESPONSE:__ I've using .NET 4.7.2 to realize the GUI because i want the app to be light.
+__RESPONSE:__ I've using .NET 4.7.2 to realize the GUI because i want the app to be lighter in size.
 # 📄🗝 Components License 
  🧳 PowerRun is created by Sordum. 
