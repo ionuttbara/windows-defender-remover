@@ -24,6 +24,15 @@ The options are to remove, disable and enable Windows Defender by pressing 3 dif
 3️⃣. Pressing "E", Windows Defender will be ENABLED.   
 4️⃣. Pressing "R" to create a System Restore Point. After creating the app will exit and re-launch the script to apply selected modifications.  
 
+# Remove Windows Defender from an ISO Image of Windows (needed an Windows 8/10/11 ISO Image) (>Version 13)
+Prequments
+1️⃣. Extract from ISO or download or extract an valid install.wim from Windows 8 or newer Windows versions.  
+2️⃣. After selecting the .wim file, you can press ```"Y"```, ```"N"```, ```"E"``` by following section.  
+3️⃣. After the settings was applied, you can save changes into ```install.wim``` or into ```ISO Image Disc```.  
+4️⃣. Or you can do into single command 
+``` 
+Defender.Remover installwimmount (option to disable/enable/remove defender from .wim image) export_iso
+```
 
 # KNOWN ISSUES SECTION!
 ## Version 12 Remover
