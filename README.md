@@ -133,4 +133,4 @@ __RESPONSE:__ I've using .NET 4.7.2 to realize the GUI because i want the app to
 __RESPONSE:__ The "ideal" conditions of Applying the Remnover Version of the script, is needed an Clean Installation of Windows. Why I recommend that? Because the "Windows Intelligence Update" will be not installed when the defender package is not exist.
 
 # 📄🗝 Components License 
- 🧳 PowerRun is created by Sordum. 
+ 🧳 PowerRun is created by Sordum. PowerRun is used for applying some settings as SYSTEM User.
