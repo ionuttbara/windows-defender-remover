@@ -1,9 +1,8 @@
 # ❌️ Defender Remover / Defender Disabler 
 ![logo of the application](https://user-images.githubusercontent.com/76656855/174484372-75292819-c33f-472e-8250-753519455ad1.png)
 
-
 ## ❓️ What is the app do?
-This application is removing / disables Windows Defender , including the Windows Security App, Windows Virtualization-Based Security (VBS) , Windows Smart-Screen, Windows Security Services , Windows Web-Threat Service and Windows File Virtualization (UAC) and Microsoft Defender App Guard.
+This application is removing / disables Windows Defender , including the Windows Security App, Windows Virtualization-Based Security (VBS) , Windows SmartScreen, Windows Security Services , Windows Web-Threat Service and Windows File Virtualization (UAC) and Microsoft Defender App Guard.
 
 ## 🖍 System Requirements
 Windows 7,8.x ,10 and 11  (all versions)
@@ -33,12 +32,10 @@ The options are to remove, disable and enable Windows Defender by pressing 3 dif
 Defender.Remover installwimmount (option to disable/enable/remove defender from .wim image) export_iso
 ```
 
-# KNOWN ISSUES SECTION!
-## Version 12 Remover
-At the moment is no known issues! 🚩
-
-# Source Code (version 0.99)
-This section of source code includes the GUI of Defender Remover, Registry and Commands which must be USED separately if you want.
+# Disabling / Removing Defender for a install.wim/install.esd file
+Needs and Windows ISO Image mounted or from a CD/DVD drive or from USB Flash Drive. (The letter of drive is detected automaticly by the script)
+__!Attention__ It takes 8 - 16 GB of space in C:\ (it creates a folder named MountedDefenderRemover in C:\ and mounts Windows Image in that folder)
+__!Attention__ If the disc image contains install.esd source file, the script will convert into .wim file before to take the disabler/remover process.
  
 ![terminal_gui](https://user-images.githubusercontent.com/76656855/217674225-554e2c4c-da51-498f-9e62-533f311196c6.png)
 After Applying the script with desired option, the device will reboot automaticly.  
@@ -59,42 +56,54 @@ The Antiviruses which this script as a virus : MalwareBytes and BitDefender (as 
 Starting with version  12, you can disable, remove or enable Windows Defender with arguments.  
 __ENABLE DEFENDER WITH ARGUMENTS__
 ```
-Defender.Remover.12.exe /e
+Defender.Removerexe /e
 ```
 OR
 ```
-Defender.Remover.12.exe /E
+Defender.Remover.exe /E
 ```
 OR
 ```
-Defender.Remover.12.exe e or E (without backslash)  
+Defender.Remover.exe E
+```
+OR
+```
+Defender.Remover.exe e
 ```
 
 __DISABLE DEFENDER WITH ARGUMENTS__  
 ```
-Defender.Remover.12.exe /D
+Defender.Remover.exe /D
 ```
 OR
 ```
-Defender.Remover.12.exe /d
+Defender.Remover.exe /d
 ```
 OR
 ```
-Defender.Remover.12.exe d or D (without backslash)  
+Defender.Remover.exe D
+```
+OR
+```
+Defender.Remover.exe d
 ```
 
 __REMOVE DEFENDER WITH ARGUMENTS__  
 ATTENTION! AFTER APPLYING THE PART, YOUR DEVICE WILL REBOOT AUTOMATICLY.
 ```
-Defender.Remover.12.exe /R
+Defender.Remover.exe /R
 ```
 OR
 ```
-Defender.Remover.12.exe /r
+Defender.Remover.exe /r
 ```
 OR
 ```
-Defender.Remover.12.exe R or r (without backslash)  
+Defender.Remover.12 r
+```
+OR
+```
+Defender.Remover.exe R
 ```
 # Disable and/or Remove Windows Defender Application Guard Policies (deeper)
 If you have some problems when open an app (extreme rare) and it will saying "The App it can not run because of Device Guard" or "Windows Defender Application Guard Blocked this app" you must remove 4 files (with same name , from 4 different locations).
@@ -133,3 +142,4 @@ __RESPONSE:__ The "ideal" conditions of Applying the Remnover Version of the scr
 
 # 📄🗝 Components License 
  🧳 PowerRun is created by Sordum. PowerRun is used for applying some settings as SYSTEM User.
+ 🧳 OSCDIMG is a tool created by Microsoft Corp. This is used for creation ISO files which is including Windows Operating System.
