@@ -38,6 +38,7 @@ echo If you press F, it will add Firewall Context Menu.
 echo If you press G, it will remove Firewall Context Menu.
 echo If you press R, it will create a SystemRestore point.
 echo If you press U, it will disable UAC.
+echo If you press I, it to manage Defender Remover Status on an install.wim or install.esd file.
 echo The PC will reboot after the selected action is finalised.
 set /P c=Select one of the option to continue.
 if /I "%c%" EQU "Y" goto :removedef
