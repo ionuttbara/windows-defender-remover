@@ -1,0 +1,86 @@
+Windows Registry Editor Version 5.00
+
+; per-App Menu
+
+[HKEY_CLASSES_ROOT\exefile\shell\WindowsFirewall]
+@=""
+"MUIVerb"="Windows Firewall"
+"icon"="%SystemRoot%\\system32\\FirewallControlPanel.dll,0"
+"subcommands"=""
+
+[HKEY_CLASSES_ROOT\exefile\shell\WindowsFirewall\Shell]
+@=""
+
+
+[HKEY_CLASSES_ROOT\exefile\shell\WindowsFirewall\Shell\block]
+@=""
+"MUIVerb"="Block internet access"
+"icon"="%SystemRoot%\\system32\\imageres.dll,100"
+
+[HKEY_CLASSES_ROOT\exefile\shell\WindowsFirewall\Shell\block\command]
+@="\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -Executionpolicy ByPass -WindowStyle Hidden -NoLogo -Command \"start powershell -Verb runas -ArgumentList \\\"-NoLogo -WindowStyle Hidden -command `\\\"New-NetFirewallRule -DisplayName ([System.IO.Path]::GetFilenameWithoutExtension('%1')) -Name '%1' -Enabled True -Direction Outbound -Action Block -Program '%1'`\\\"\\\"\""
+
+[HKEY_CLASSES_ROOT\exefile\shell\WindowsFirewall\Shell\Remove]
+@=""
+"MUIVerb"="Restore the internet access"
+"icon"="%SystemRoot%\\system32\\imageres.dll,101"
+
+[HKEY_CLASSES_ROOT\exefile\shell\WindowsFirewall\Shell\Remove\command]
+@="\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -Executionpolicy ByPass -WindowStyle Hidden -NoLogo -Command \"start powershell -Verb runas -ArgumentList \\\"-NoLogo -WindowStyle Hidden -command `\\\"Remove-NetFirewallRule -Name '%1'`\\\"\\\"\""
+
+; Desktop Menu
+
+
+
+;Implement Firewall Contextual Menu
+
+[HKEY_CLASSES_ROOT\DesktopBackground\Shell\Firewall]
+"MUIVerb"="Firewall"
+"Icon"="FirewallControlPanel.dll,-1"
+"Position"="Bottom"
+"SubCommands"=""
+
+[HKEY_CLASSES_ROOT\DesktopBackground\Shell\Firewall\shell]
+
+[HKEY_CLASSES_ROOT\DesktopBackground\Shell\Firewall\shell\Command001]
+"MUIVerb"="Windows Firewall"
+"Icon"="FirewallControlPanel.dll,-1"
+
+[HKEY_CLASSES_ROOT\DesktopBackground\Shell\Firewall\shell\Command001\Command]
+@="RunDll32.exe shell32.dll,Control_RunDLL firewall.cpl"
+
+[HKEY_CLASSES_ROOT\DesktopBackground\Shell\Firewall\shell\Command002]
+"MUIVerb"="Windows Firewall with Advanced Security"
+"HasLUAShield"=""
+
+[HKEY_CLASSES_ROOT\DesktopBackground\Shell\Firewall\shell\Command002\Command]
+@="mmc.exe /s wf.msc"
+
+[HKEY_CLASSES_ROOT\DesktopBackground\Shell\Firewall\shell\Command003]
+"MUIVerb"="Configure Allowed Apps"
+"Icon"="FirewallControlPanel.dll,-1"
+
+[HKEY_CLASSES_ROOT\DesktopBackground\Shell\Firewall\shell\Command003\Command]
+@="explorer.exe shell:::{4026492F-2F69-46B8-B9BF-5654FC07E423} -Microsoft.WindowsFirewall\\pageConfigureApps"
+
+[HKEY_CLASSES_ROOT\DesktopBackground\Shell\Firewall\shell\Command004]
+"MUIVerb"="Turn On Windows Firewall"
+"HasLUAShield"=""
+"CommandFlags"=dword:00000020
+
+[HKEY_CLASSES_ROOT\DesktopBackground\Shell\Firewall\shell\Command004\Command]
+@="powershell.exe -windowstyle hidden -command \"Start-Process cmd -ArgumentList '/s,/c,netsh advfirewall set allprofiles state on' -Verb runAs\""
+
+[HKEY_CLASSES_ROOT\DesktopBackground\Shell\Firewall\shell\Command005]
+"MUIVerb"="Turn Off Windows Firewall"
+"HasLUAShield"=""
+
+[HKEY_CLASSES_ROOT\DesktopBackground\Shell\Firewall\shell\Command005\Command]
+@="powershell.exe -windowstyle hidden -command \"Start-Process cmd -ArgumentList '/s,/c,netsh advfirewall set allprofiles state off' -Verb runAs\""
+
+[HKEY_CLASSES_ROOT\DesktopBackground\Shell\Firewall\shell\Command006]
+"MUIVerb"="Reset Windows Firewall"
+"HasLUAShield"=""
+
+[HKEY_CLASSES_ROOT\DesktopBackground\Shell\Firewall\shell\Command006\Command]
+@="powershell.exe -windowstyle hidden -command \"Start-Process cmd -ArgumentList '/s,/c,netsh advfirewall reset' -Verb runAs\""
