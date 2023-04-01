@@ -36,7 +36,7 @@ Defender.Remover installwimmount (option to disable/enable/remove defender from 
 Needs and Windows ISO Image mounted or from a CD/DVD drive or from USB Flash Drive. (The letter of drive is detected automaticly by the script)
 __!Attention__ It takes 8 - 16 GB of space in C:\ (it creates a folder named MountedDefenderRemover in C:\ and mounts Windows Image in that folder)
 __!Attention__ If the disc image contains install.esd source file, the script will convert into .wim file before to take the disabler/remover process.
- 
+After the process is configured , the ISO Image will be saved in ``` c:\defenderRemovedISO\WindowsDefenderRemovedImage.iso ```
 ![terminal_gui](https://user-images.githubusercontent.com/76656855/217674225-554e2c4c-da51-498f-9e62-533f311196c6.png)
 After Applying the script with desired option, the device will reboot automaticly.  
 Before to start the script, an automatic system restore point is created. If something fails, can be restored easily.  
