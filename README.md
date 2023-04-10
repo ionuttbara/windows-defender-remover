@@ -2,7 +2,7 @@
 ![logo of the application](https://user-images.githubusercontent.com/76656855/174484372-75292819-c33f-472e-8250-753519455ad1.png)
 
 ## ❓️ What is the app do?
-This application is removing / disables Windows Defender , including the Windows Security App, Windows Virtualization-Based Security (VBS) , Windows SmartScreen, Windows Security Services , Windows Web-Threat Service and Windows File Virtualization (UAC) and Microsoft Defender App Guard.
+This application is removing / disables Windows Defender , including the Windows Security App, Windows Virtualization-Based Security (VBS) , Windows SmartScreen, Windows Security Services , Windows Web-Threat Service and Windows File Virtualization (UAC) , Microsoft Defender App Guard, Microsoft Driver Block List, and Windows Defender's Settings Page (in Settings App , Winodws 10 or newer).
 
 ## 🖍 System Requirements
 Windows 7,8.x ,10 and 11  (all versions)
