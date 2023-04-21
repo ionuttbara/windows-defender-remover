@@ -1,0 +1,24 @@
+Windows Registry Editor Version 5.00
+
+; Disable Windows Defender Security Center Notifications
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\WindowsDefenderSecurityCenter\DisableEnhancedNotifications]
+"value"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\WindowsDefenderSecurityCenter\DisableNotifications]
+"value"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\WindowsDefenderSecurityCenter\HideWindowsSecurityNotificationAreaControl]
+"value"=dword:00000001
+
+; Disable Windows Security Center Notifications
+
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Security Center]
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Security Center]
+"FirewallDisableNotify"=dword:00000001
+"UpdatesDisableNotify"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications]
+"DisableEnhancedNotifications"=dword:00000001
+"DisableNotifications"=dword:00000001

@@ -21,3 +21,6 @@ Windows Registry Editor Version 5.00
 [-HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SgrmBroker]
 
 [-HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WinDefend]
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\App and Browser protection]
+"DisallowExploitProtectionOverride"=dword:00000001

@@ -8,6 +8,8 @@ Windows Registry Editor Version 5.00
 
 [-HKEY_CLASSES_ROOT\AppX9kvz3rdv8t7twanaezbwfcdgrbg3bck0]
 
+[-HKEY_CURRENT_USER\Software\Classes\ms-cxh]
+
 [-HKEY_CLASSES_ROOT\Local Settings\MrtCache\C:%5CWindows%5CSystemApps%5CMicrosoft.Windows.AppRep.ChxApp_cw5n1h2txyewy%5Cresources.pri]
 
 [-HKEY_CLASSES_ROOT\WindowsDefender]

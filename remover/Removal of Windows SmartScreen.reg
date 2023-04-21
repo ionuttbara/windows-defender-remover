@@ -1,5 +1,13 @@
 Windows Registry Editor Version 5.00
 
+;Remove Windows SmartScreen from WindowsRuntime
+
+[-HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\WindowsRuntime\ActivatableClassId\Windows.Internal.Security.SmartScreen.AppReputationService]
+
+[-HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\WindowsRuntime\ActivatableClassId\Windows.Internal.Security.SmartScreen.EventLogger]
+
+[-HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\WindowsRuntime\ActivatableClassId\Windows.Internal.Security.SmartScreen.UriReputationService]
+
 [-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\Windows.Internal.Security.SmartScreen.AppReputationService]
 
 [-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsRuntime\ActivatableClassId\Windows.Internal.Security.SmartScreen.EventLogger]
@@ -8,32 +16,12 @@ Windows Registry Editor Version 5.00
 
 [-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Office\ClickToRun\AppVMachineRegistryStore\Integration\Ownership\Software\Classes\outlspam.SmartScreenFactoryOutlook]
 
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Office\ClickToRun\REGISTRY\MACHINE\Software\Classes\outlspam.SmartScreenFactoryOutlook]
-
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Office\ClickToRun\REGISTRY\MACHINE\Software\Classes\outlspam.SmartScreenFactoryOutlook.2]
-
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\SideBySide\Winners\amd64_microsoft-windows-d..inition-smartscreen_31bf3856ad364e35_none_37141e2f8f021071]
-
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\SideBySide\Winners\amd64_microsoft-windows-smartscreen.resources_31bf3856ad364e35_en-us_7af3e169cca61aa2]
-
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\SideBySide\Winners\amd64_microsoft-windows-smartscreen_31bf3856ad364e35_none_8c6d0eafaf330721]
-
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\SideBySide\Winners\amd64_microsoft-windows-smartscreen-adm_31bf3856ad364e35_none_5b54a2aad676e77e]
-
-;Removing SmartScreen Classes
-
-[-HKEY_CLASSES_ROOT\WOW6432Node\CLSID\{a463fcb9-6b1c-4e0d-a80b-a2ca7999e25d}]
+;Removing SmartScreen Settings Checker Provider
 
 [-HKEY_CLASSES_ROOT\WOW6432Node\CLSID\{088E8DFB-2464-4C21-BAD2-F0AA6DB5D4BC}]
-
-[-HKEY_CLASSES_ROOT\CLSID\{a463fcb9-6b1c-4e0d-a80b-a2ca7999e25d}]
 
 [-HKEY_CLASSES_ROOT\CLSID\{088E8DFB-2464-4C21-BAD2-F0AA6DB5D4BC}]
 
 [-HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{088E8DFB-2464-4C21-BAD2-F0AA6DB5D4BC}]
 
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Classes\CLSID\{a463fcb9-6b1c-4e0d-a80b-a2ca7999e25d}]
-
 [-HKEY_LOCAL_MACHINE\SOFTWARE\Classes\WOW6432Node\CLSID\{088E8DFB-2464-4C21-BAD2-F0AA6DB5D4BC}]
-
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Classes\WOW6432Node\CLSID\{a463fcb9-6b1c-4e0d-a80b-a2ca7999e25d}]
