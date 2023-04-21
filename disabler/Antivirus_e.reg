@@ -1,36 +1,21 @@
 Windows Registry Editor Version 5.00
 
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Features]
-"TamperProtection"=dword:00000005
-
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender]
-
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\Defender]
-
-[-HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Microsoft Antimalware]
-
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CI\Policy]
-"VerifiedAndReputablePolicyState"=-
-
-; Disable Defender Services (per-System)
-
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WinDefend]
-"Start"=dword:00000002
+;Enable Windows Defender Services and Windows Security Center kind of thing
 
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\MsSecCore]
-"Start"=dword:00000002
+"Start"=dword:00000003
 
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\wscsvc]
 "Start"=dword:00000002
 
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdNisDrv]
-"Start"=dword:00000002
+"Start"=dword:00000003
 
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdNisSvc]
-"Start"=dword:00000002
+"Start"=dword:00000003
 
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdFiltrer]
-"Start"=dword:00000002
+"Start"=dword:00000000
 
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdBoot]
 "Start"=dword:00000002
@@ -43,3 +28,31 @@ Windows Registry Editor Version 5.00
 
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SgrmBroker]
 "Start"=dword:00000002
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WinDefend]
+"Start"=dword:00000002
+
+; Enable Windows Defender WMI Logger
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger]
+"Start"=dword:00000001
+"Status"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\WMI\Autologger\DefenderAuditLogger]
+"Start"=dword:00000001
+"Status"=dword:00000000
+"EnableSecurityProvider"=dword:00000001
+
+
+;Enable Windows Security Health Service Startup Entry
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run]
+"SecurityHealth"="%windir%\\system32\\SecurityHealthSystray.exe"
+
+; Enable Defender Tamper Protection
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Features]
+"TamperProtection"=dword:00000001
+"MpPlatformKillbitsFromEngine"=hex:00,00,00,00,00,00,00,01
+"TamperProtectionSource"=dword:00000005
+"MpCapability"=hex:ff,01,00,00,00,00,00,00
