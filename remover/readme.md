@@ -9,3 +9,6 @@ The components which are unregistered by the registry files are:
   - Windows Security UWP App (all Windows 10 Version, 1703 or later)
   - Windows Services (such as Defender Security Center, Antivirus Service, etc.)
   - Windows Exploit Guard (another component of Windows Security Service)
+  - removes MSSecCore Service, and disables Microsoft Pluton Support, if the PC is having one
+  - shell association, context menus of Windows Defender
+  - removes Windows Action Center and Maintance Section from Control Panel
