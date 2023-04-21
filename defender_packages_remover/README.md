@@ -1,7 +1,7 @@
 # This is the removal of Windows Security and Windows Defender CBS Packages.
 
 _Attention!_ The script (.exe file) is not removing Windows Virtualization Security from System (VBS) because is producing problem with virtualization software such Hyper-V and VirtualBox.  
-If you __DON'T USE__ Hyper-V and VirtualBox, this can be removed easily.
+If you __DON'T USE__ Hyper-V and VirtualBox, this can be removed safetly.
 
 _Attention2!_ The removal of Windows-Defender CBS Package (Component Base System) is not work in lastest Windows 10 22H2, Windows 11 2xH2 after Octomber '22 Quality Updates. It gets an error about permission, so 
 the app can do that automaticly modular remover (in Defender Remover 12.4 or newer) to remove the registry and files affecting Windows Updates. 
