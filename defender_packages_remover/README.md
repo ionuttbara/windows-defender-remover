@@ -8,4 +8,5 @@ the app can do that automaticly modular remover (in Defender Remover 12.4 or new
 
 __Indexed list of CBS Packages can be found in ``` C:\Windows\System32\CatRoot ``` (one of folder) maybe will be ``` {F750E6C3-38EE-11D1-85E5-00C04FC295EE} ``` or idk. The name of package is listed in next format__
 
-nameofpackage-Package~31bf3856ad364e35~amd64~__~buildnumber__.cat (name file of security catalog, indicates the name of the package, for Windows Defender are 8 or 24 , depends what version of Windows 10 or Windows 11 you have.
+```nameofpackage-Package~31bf3856ad364e35~amd64~~buildnumber_.cat ```  
+(name file of security catalog, indicates the name of the package, for Windows Defender are 8 or 24 , depends what version of Windows 10 or Windows 11 you have.)
