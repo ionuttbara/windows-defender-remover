@@ -56,7 +56,7 @@ The Antiviruses which this script as a virus : MalwareBytes and BitDefender (as 
 Starting with version  12, you can disable, remove or enable Windows Defender with arguments.  
 __ENABLE DEFENDER WITH ARGUMENTS__
 ```
-Defender.Removerexe /e
+Defender.Remover.exe /e
 ```
 OR
 ```
