@@ -9,3 +9,4 @@ The section will configure:
      <li> fixes timeouts when defender is disabled and removed (for startup and shutdown)
      <li> Disabling Microsoft Vulnerable Driver blocklist
      <li> disable LSA (Local Account Security) Protection, introduced in Windows 12 Insider Builds
+     <li> disabled security mitigations such Meltdown and Spectre
