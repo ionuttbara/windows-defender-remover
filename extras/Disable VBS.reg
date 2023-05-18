@@ -1,30 +1,34 @@
 Windows Registry Editor Version 5.00
 
+; reset values for Virtualization Settings
+
 [-HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceGuard]
 
 [-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\DeviceGuard]
 
 [-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\VirtualizationBasedTechnology]
 
+;disable Virtualization Based Security
+
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceGuard]
-"DeployConfigCIPolicy"=dword:00000000
 "EnableVirtualizationBasedSecurity"=dword:00000000
+"HypervisorEnforcedCodeIntegrity"=dword:00000000
 "HVCIMATRequired"=dword:00000000
+"LsaCfgFlags"=dword:00000000
+"ConfigureSystemGuardLaunch"=dword:00000002
 "RequirePlatformSecurityFeature"=dword:00000000
 "CachedDrtmAuthIndex"=dword:00000000
-"LsaCfgFlags"=dword:00000000
-"RequireMicrosoftSignedBootChain"=dword:00000000
-"RequirePlatformSecurityFeatures"=dword:00000000
+"RequireMicrosoftSignedBootChain"=dword:00000001
 "Locked"=dword:00000000
-"ConfigCIPolicyFilePath"="C:\\Windows\\schemas\\CodeIntegrity\\ExamplePolicies\\AllowAll.xml"
-"HypervisorEnforcedCodeIntegrity"=dword:00000000
-"ConfigureSystemGuardLaunch"=dword:00000002
-
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\CredentialGuard]
-"Enabled"=dword:00000000
+"RequirePlatformSecurityFeatures"=dword:00000000
 
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity]
 "Enabled"=dword:00000000
+"Locked"=dword:00000000
+"WasEnabledBy"=-
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\VirtualizationBasedTechnology\HypervisorEnforcedCodeIntegrity]
+"value"=dword:00000000
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\DeviceGuard\EnableVirtualizationBasedSecurity]
 "value"=dword:00000000
@@ -38,8 +42,11 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\DeviceGuard\RequirePlatformSecurityFeatures]
 "value"=dword:00000000
 
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\VirtualizationBasedTechnology\HypervisorEnforcedCodeIntegrity]
-"value"=dword:00000000
-
 [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\VirtualizationBasedTechnology\RequireUEFIMemoryAttributesTable]
 "value"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceGuard]
+"DeployConfigCIPolicy"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\CredentialGuard]
+"Enabled"=dword:00000000
