@@ -4,11 +4,11 @@
 
 ## ❓️ What does the app do?
 
-This application removes / disables Windows Defender, including the Windows Security App, Windows Virtualization-Based Security (VBS) , Windows SmartScreen, Windows Security Services , Windows Web-Threat Service and Windows File Virtualization (UAC) , Microsoft Defender App Guard, Microsoft Driver Block List, and Windows Defender's Settings Page (in Settings App , Winodws 10 or newer).
+This application removes / disables Windows Defender, including the Windows Security App, Windows Virtualization-Based Security (VBS) , Windows SmartScreen, Windows Security Services , Windows Web-Threat Service and Windows File Virtualization (UAC) , Microsoft Defender App Guard, Microsoft Driver Block List, System Mitigations and Windows Defender's Settings Page (in Settings App , Winodws 10 or newer).
 
 ## 🖍 System Requirements
 
-* Windows `7`, `8.x`, `10` and `11`  (all versions).
+* Windows `8.x`, `10` and `11`  (all versions).
   
 A system restore point is recommended before you apply the script.
   
@@ -20,12 +20,8 @@ Download the compiled script from [Releases](https://github.com/jbara2002/window
 
 Open with admin rights and follow the window showing menu options.****
 
-## GUI (>Version 13)
-
-Starting with Version 13, the app will move into GUI with Selection of application of Tweaks. Also this will keep the arguments section.
-![image](https://user-images.githubusercontent.com/76656855/211152792-01e5a233-3c71-41fa-a81b-5a7f2be1f3dd.png)
-
-## Terminal GUI (<Version 13)
+## GUI
+![terminal_gui](https://user-images.githubusercontent.com/76656855/217674225-554e2c4c-da51-498f-9e62-533f311196c6.png)
 
 The options are to remove, disable and enable Windows Defender by pressing 3 different buttons.  
 1️⃣. Pressing "Y", Windows Defender will be REMOVED.  
@@ -35,8 +31,8 @@ The options are to remove, disable and enable Windows Defender by pressing 3 dif
 
 ## Remove Windows Defender from a Windows ISO
 
->Requires a Windows 8/10/11 ISO Image with Version > 13
-
+>Requires a Windows 8/10/11 ISO Image
+>
 1️⃣. Extract from ISO or download or extract an valid install.wim from Windows 8 or newer Windows versions.  
 2️⃣. After selecting the .wim file, you can press ```"Y"```, ```"N"```, ```"E"``` by following section.  
 3️⃣. After the settings was applied, you can save changes into ```install.wim``` or into ```ISO Image Disc```.  
@@ -57,8 +53,6 @@ Needs and Windows ISO Image mounted or from a CD/DVD drive or from USB Flash Dri
 **!Attention** If the disc image contains install.esd source file, the script will convert into a .wim file before running the disabler/remover process.
 
 After the process is configured , the ISO Image will be saved in ``` c:\defenderRemovedISO\WindowsDefenderRemovedImage.iso ```
-
-![terminal_gui](https://user-images.githubusercontent.com/76656855/217674225-554e2c4c-da51-498f-9e62-533f311196c6.png)
 After Applying the script with desired option, the device will reboot automaticly.  
 Before to start the script, an automatic system restore point is created. If something fails, can be restored easily.  
 
@@ -198,11 +192,7 @@ i.e:
 
 **RESPONSE:** Run the desired ".bat" file from cmd with PowerRun (by dragging to the executable). You must reboot to take effect of the removal.
 
-2️⃣. Why I used .NET 4.7.2 to realize the GUI of the Defender Remover?
-
-**RESPONSE:** I've used .NET 4.7.2 to realize the GUI because I want the app to be lighter in size.
-
-3️⃣. What are the ideal conditions for running the remover version of the script?
+2️⃣.  What are the ideal conditions for running the remover version of the script?
 
 **RESPONSE:** The "ideal" condition is to run the Remover Version of the script on a Clean Installation of Windows. Why do I recommend that? Because the "Windows Intelligence Update" would not be installed and thus no defender package.
 
