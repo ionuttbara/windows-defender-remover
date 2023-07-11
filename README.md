@@ -26,17 +26,14 @@ Open with admin rights and follow the window showing menu options.****
 The options are to remove, disable and enable Windows Defender by pressing 3 different buttons.  
 1️⃣. Pressing "Y", Windows Defender will be REMOVED.  
 2️⃣. Pressing "N", Windows Defender will be DISABLED.  
-3️⃣. Pressing "E", Windows Defender will be ENABLED.
-4️⃣. Pressing "R" to create a System Restore Point. After creating the app will exit and re-launch the script to apply selected modifications.  
+3️⃣. Pressing "R", Windows Defender will be ENABLED.
 
 ## Remove Windows Defender from a Windows ISO
 
 >Requires a Windows 8/10/11 ISO Image
 >
 1️⃣. Extract from ISO or download or extract an valid install.wim from Windows 8 or newer Windows versions.  
-2️⃣. After selecting the .wim file, you can press ```"Y"```, ```"N"```, ```"E"``` by following section.  
-3️⃣. After the settings was applied, you can save changes into ```install.wim``` or into ```ISO Image Disc```.  
-4️⃣. Or you can do into single **command**
+2️⃣. After the settings was applied, you can save changes into ```install.wim``` or into ```ISO Image Disc```. 
 
 ```PowerShell
 DefenderRemover.exe installwimmount <#(Option to disable/enable/remove defender from .wim image)#> export.iso
@@ -50,8 +47,6 @@ Needs and Windows ISO Image mounted or from a CD/DVD drive or from USB Flash Dri
 
 **!Attention**  This requires 8 - 16 GB of space in C:\ (it creates a folder named MountedDefenderRemover in C:\ and mounts Windows Image in that folder)
 
-**!Attention** If the disc image contains install.esd source file, the script will convert into a .wim file before running the disabler/remover process.
-
 After the process is configured , the ISO Image will be saved in ``` c:\defenderRemovedISO\WindowsDefenderRemovedImage.iso ```
 After Applying the script with desired option, the device will reboot automaticly.  
 Before to start the script, an automatic system restore point is created. If something fails, can be restored easily.  
@@ -60,73 +55,13 @@ Before to start the script, an automatic system restore point is created. If som
 
 That is a false positive.
 
-Some Security apps flag this app as a virus because of the inclusion of IoBit Unlocker, or the way the .exe files are created.
-
-Also, you can download the (*.zip) version.  
-The Antiviruses that flag this script as a virus are MalwareBytes and BitDefender (as Heuristic), maybe it has to do with how the exe file is created.
-
-## 📃 Instructions for the (*.zip) version of the Defender Remover  
-
-1️⃣. Download the [latest version](https://github.com/jbara2002/windows-defender-remover/releases/latest) of the Script from the [Releases](https://github.com/jbara2002/windows-defender-remover/releases) section.  
-2️⃣. Extract into a location.
-3️⃣. Open Script_Run.bat and choose the menu.  
-4️⃣. Like the (*.exe) version, wait until the device reboots.  
-
+Some Security apps flag this app as a virus because  of the way the .exe files are created.
+  
 ## 📃 Automation of the script
 
 Starting with version  12, you can disable, remove or enable Windows Defender with arguments.  
 
 ### **ENABLE DEFENDER WITH ARGUMENTS**
-
-```PowerShell
-Defender.Remover.exe /e
-```
-
-OR
-
-```PowerShell
-Defender.Remover.exe /E
-```
-
-OR
-
-```PowerShell
-Defender.Remover.exe E
-```
-
-OR
-
-```PowerShell
-Defender.Remover.exe e
-```
-
-### **DISABLE DEFENDER WITH ARGUMENTS**  
-
-```PowerShell
-Defender.Remover.exe /D
-```
-
-OR
-
-```PowerShell
-Defender.Remover.exe /d
-```
-
-OR
-
-```PowerShell
-Defender.Remover.exe D
-```
-
-OR
-
-```PowerShell
-Defender.Remover.exe d
-```
-
-### **REMOVE DEFENDER WITH ARGUMENTS**  
-
-ATTENTION! AFTER APPLYING THIS PART, YOUR DEVICE WILL REBOOT AUTOMATICALLY.
 
 ```PowerShell
 Defender.Remover.exe /R
@@ -138,16 +73,30 @@ OR
 Defender.Remover.exe /r
 ```
 
-OR
+### **DISABLE DEFENDER WITH ARGUMENTS**  
 
 ```PowerShell
-Defender.Remover.12 r
+Defender.Remover.exe /N
 ```
 
 OR
 
 ```PowerShell
-Defender.Remover.exe R
+Defender.Remover.exe /n
+```
+
+### **REMOVE DEFENDER WITH ARGUMENTS**  
+
+ATTENTION! AFTER APPLYING THIS PART, YOUR DEVICE WILL REBOOT AUTOMATICALLY.
+
+```PowerShell
+Defender.Remover.exe /Y
+```
+
+OR
+
+```PowerShell
+Defender.Remover.exe /y
 ```
 
 ## Disable and/or Remove Windows Defender *Application Guard Policies* (deeper)
@@ -197,7 +146,5 @@ i.e:
 **RESPONSE:** The "ideal" condition is to run the Remover Version of the script on a Clean Installation of Windows. Why do I recommend that? Because the "Windows Intelligence Update" would not be installed and thus no defender package.
 
 ## 📄🗝 Components License
-
- 🧳 `PowerRun` is created by Sordum. PowerRun is used for applying some settings as SYSTEM User.
 
  🧳 `OSCDIMG` is a tool created by Microsoft Corp. This is used for creating ISO files which is including Windows Operating System.
