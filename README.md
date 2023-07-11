@@ -21,7 +21,7 @@ Download the compiled script from [Releases](https://github.com/jbara2002/window
 Open with admin rights and follow the window showing menu options.****
 
 ## GUI
-![terminal_gui](https://user-images.githubusercontent.com/76656855/217674225-554e2c4c-da51-498f-9e62-533f311196c6.png)
+![terminal_gui](https://github.com/jbara2002/windows-defender-remover/assets/76656855/c0823459-8894-42bc-a3bc-ada6945a6b40)
 
 The options are to remove, disable and enable Windows Defender by pressing 3 different buttons.  
 1️⃣. Pressing "Y", Windows Defender will be REMOVED.  
