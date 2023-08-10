@@ -56,6 +56,11 @@ Before to start the script, an automatic system restore point is created. If som
 That is a false positive.
 
 Some Security apps flag this app as a virus because  of the way the .exe files are created.
+
+## 🛑 If i have a clean installed Windows with no updates the script is works, why in updated Windows the script is not working?
+
+Updated Windows includes a ``` Windows Intelligence Update ``` this is designed for blocking actions , modifying Windows defender/Security Polocies, and so on. 
+If the script is not work for you, first check if you have the Windows Security Intelligence Update installed. If you have, disable tamper protection, and re-apply the script.
   
 ## 📃 Automation of the script
 
