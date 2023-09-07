@@ -156,5 +156,3 @@ i.e:
 **RESPONSE:** The "ideal" condition is to run the Remover Version of the script on a Clean Installation of Windows. Why do I recommend that? Because the "Windows Intelligence Update" would not be installed and thus no defender package.
 
 ## 📄🗝 Components License
-
- 🧳 `OSCDIMG` is a tool created by Microsoft Corp. This is used for creating ISO files which is including Windows Operating System.
