@@ -6,6 +6,11 @@
 
 This application removes / disables Windows Defender, including the Windows Security App, Windows Virtualization-Based Security (VBS) , Windows SmartScreen, Windows Security Services , Windows Web-Threat Service and Windows File Virtualization (UAC) , Microsoft Defender App Guard, Microsoft Driver Block List, System Mitigations and Windows Defender's Settings Page (in Settings App , Winodws 10 or newer).
 
+## Temporary message!
+During the adding of #85 issue, some parts of code in github project can be modified. I want to learn how to work with Sublime Merge.
+When the code will be synced, the message will be removed.
+
+
 ## 🖍 System Requirements
 
 * Windows `8.x`, `10` and `11`  (all versions).
