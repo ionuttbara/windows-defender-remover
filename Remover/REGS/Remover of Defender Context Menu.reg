@@ -1,0 +1,15 @@
+Windows Registry Editor Version 5.00
+
+[-HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\ShellServiceObjects\{900c0763-5cad-4a34-bc1f-40cd513679d5}]
+
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\ShellServiceObjects\{900c0763-5cad-4a34-bc1f-40cd513679d5}]
+
+; Remove "Scan with Defender" Context Menu
+
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender]
+
+[-HKEY_CLASSES_ROOT\Folder\shell\WindowsDefender]
+
+[-HKEY_CLASSES_ROOT\DesktopBackground\Shell\WindowsSecurity]
+
+[-HKEY_CLASSES_ROOT\Folder\shell\WindowsDefender\Command]

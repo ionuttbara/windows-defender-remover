@@ -1,0 +1,21 @@
+Windows Registry Editor Version 5.00
+
+; Disable Windows Defender Anti-Phishing
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\WebThreatDefense\AuditMode]
+"value"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\WebThreatDefense\NotifyUnsafeOrReusedPassword]
+"value"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\WebThreatDefense\ServiceEnabled]
+"value"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\webthreatdefsvc]
+"Start"=dword:00000004
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\webthreatdefusersvc]
+"Start"=dword:00000004
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Svchost\WebThreatDefense]
+"Start"=dword:00000004
