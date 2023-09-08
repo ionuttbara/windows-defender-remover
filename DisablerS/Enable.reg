@@ -190,4 +190,20 @@ Windows Registry Editor Version 5.00
   f3,2b,26,b9,44,77,1e,4f,02,76,63,b5,21,01,01,00,00,00,00,00,05,12,00,00,00,\
   01,01,00,00,00,00,00,05,12,00,00,00
 
+; Enable Security Health Tray
 
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run]
+"SecurityHealth"=hex(2):25,00,77,00,69,00,6e,00,64,00,69,00,72,00,25,00,5c,00,\
+  73,00,79,00,73,00,74,00,65,00,6d,00,33,00,32,00,5c,00,53,00,65,00,63,00,75,\
+  00,72,00,69,00,74,00,79,00,48,00,65,00,61,00,6c,00,74,00,68,00,53,00,79,00,\
+  73,00,74,00,72,00,61,00,79,00,2e,00,65,00,78,00,65,00,00,00
+
+; Enable Dev Drive Protection
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Real-Time Protection]
+"DisableAsyncScanOnOpen"=-
+
+;mitigations
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\FTH]
+"Enabled"=dword:00000001
