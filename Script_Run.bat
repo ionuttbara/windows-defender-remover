@@ -39,12 +39,12 @@ if /I "%c%" EQU "J" goto :image
 cls & echo Killing Tasks...
 for /f "delims=" %%i in (Remover\TKL.txt) do (taskkill.exe /f /im "%%i") >nul
 cls & echo Removing Windows Security UWP...
-for /d %%f in ("C:\Program Files\WindowsApps\Microsoft.SecHealthUI*") do (PowerRun.exe  cmd.exe /c rmdir /s /q "%%f") >nul
+for /d %%f in ("C:\Program Files\WindowsApps\Microsoft.SecHealthUI*") do (PowerRun.exe cmd.exe /c rmdir /s /q "%%f") >nul
 cls & echo Applying Registry Files...
-for /r %%k in (Remover\REGS\*.reg) do (PowerRun.exe  regedit.exe /s "%%k") >nul
+for /r %%k in (Remover\REGS\*.reg) do (PowerRun.exe regedit.exe /s "%%k") >nul
 cls & echo Removing Windows Defender/Security Components Files...
-for /f "delims=" %%i in (Remover\FDL.txt) do (PowerRun.exe  cmd.exe /c del /f /q "%%i") 1>nul
-for /f "delims=" %%i in (Remover\DDL.txt) do (PowerRun.exe  cmd.exe /c rmdir /s /q "%%i") >nul
+for /f "delims=" %%i in (Remover\FDL.txt) do (PowerRun.exe cmd.exe /c del /f /q "%%i") 1>nul
+for /f "delims=" %%i in (Remover\DDL.txt) do (PowerRun.exe cmd.exe /c rmdir /s /q "%%i") >nul
 timeout /t 5 /nobreak
 shutdown /r /f /t 0
 :--------------------------------------
