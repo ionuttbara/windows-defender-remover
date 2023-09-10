@@ -1,5 +1,7 @@
 Windows Registry Editor Version 5.00
 
+; disables reporting of things from Maintenance Task in Windows Security App
+
 [-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Security Health]
 
 [-HKEY_CURRENT_USER\Software\Microsoft\Windows Security Health]
