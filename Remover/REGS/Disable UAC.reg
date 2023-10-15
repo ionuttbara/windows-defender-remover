@@ -3,7 +3,7 @@ Windows Registry Editor Version 5.00
 ; Disable UAC
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System]
-"EnableLUA"=dword:00000001
+"EnableLUA"=dword:00000000
 "ConsentPromptBehaviorAdmin"=dword:00000000
 "ConsentPromptBehaviorUser"=dword:00000000
 "FilterAdministratorToken"=dword:00000001
