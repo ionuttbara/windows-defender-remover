@@ -215,3 +215,8 @@ Windows Registry Editor Version 5.00
 "ConsentPromptBehaviorAdmin"=dword:00000004
 "FilterAdministratorToken"=-
 "LocalAccountTokenFilterPolicy"=-
+
+;enable Windows security Center toast notification
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance]
+"Enabled"=dword:00000001
