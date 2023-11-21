@@ -3,7 +3,6 @@ C:\Windows\SysWOW64\DeviceCensus.exe
 C:\Windows\SysWOW64\GameBarPresenceWriter.exe
 C:\Windows\SysWOW64\smartscreen.dll
 C:\Windows\SysWOW64\smartscreen.exe
-C:\Windows\SysWOW64\smartscreenps.dll
 C:\Windows\System32\DWWIN.EXE
 C:\Windows\System32\GameBarPresenceWriter.exe
 C:\Windows\System32\SecurityAndMaintenance.png
@@ -21,15 +20,16 @@ C:\Windows\System32\drivers\WdBoot.sys
 C:\Windows\System32\drivers\WdDevFlt.sys
 C:\Windows\System32\drivers\WdFilter.sys
 C:\Windows\System32\drivers\WdNisDrv.sys
+C:\Windows\system32\drivers\msseccore.sys
 C:\Windows\System32\smartscreen.dll
 C:\Windows\System32\smartscreen.exe
-C:\Windows\System32\smartscreenps.dll
 C:\Windows\System32\wscadminui.exe
 C:\Windows\System32\wscapi.dll
 C:\Windows\System32\wscisvif.dll
 C:\Windows\System32\wscproxystub.dll
 C:\Windows\System32\wscsvc.dll
+C:\Windows\Containers\WindowsDefenderApplicationGuard.wim
+C:\Windows\Containers\serviced\WindowsDefenderApplicationGuard.wim
 C:\Windows\WinSxS\FileMaps\amd64_windows-defender*.manifest
 C:\Windows\WinSxS\FileMaps\wow64_windows-defender*.manifest
 C:\Windows\WinSxS\FileMaps\x86_windows-defender*.manifest
-C:\Windows\system32\drivers\msseccore.sys
