@@ -42,17 +42,17 @@ goto :eof
 :removedef
 cls
 echo Killing Tasks...
-for /f "delims=" %%i in (Remover\TKL.txt) do (GetTrustedInstaller.exe "C:\Windows\System32\taskkill.exe /f /im "%%i"") >nul
+for /f "delims=" %%i in (Remover\TKL.txt) do (GetTrustedInstaller.exe "C:\Windows\System32\taskkill.exe /f /im ""%%i""") >nul
 cls
 echo Removing Windows Security UWP...
-for /d %%f in ("C:\Program Files\WindowsApps\Microsoft.SecHealthUI*") do (GetTrustedInstaller.exe "C:\Windows\System32\cmd.exe /k rmdir /s /q "%%f"") >nul
+for /d %%f in ("C:\Program Files\WindowsApps\Microsoft.SecHealthUI*") do (GetTrustedInstaller.exe "C:\Windows\System32\cmd.exe /k rmdir /s /q ""%%f""") >nul
 cls
 echo Applying Registry Files...
-for /r %%k in (Remover\REGS\*.reg) do (GetTrustedInstaller.exe "C:\Windows\regedit.exe /s "%%k"") >nul
+for /r %%k in (Remover\REGS\*.reg) do (GetTrustedInstaller.exe "C:\Windows\regedit.exe /s ""%%k""") >nul
 cls
 echo Removing Windows Defender/Security Components Files...
-for /f "delims=" %%i in (Remover\FDL.txt) do (GetTrustedInstaller.exe "C:\Windows\System32\cmd.exe /k del /f /q "%%i"") >nul
-for /f "delims=" %%i in (Remover\DDL.txt) do (GetTrustedInstaller.exe "C:\Windows\System32\cmd.exe /k rmdir /s /q "%%i"") >nul
+for /f "delims=" %%i in (Remover\FDL.txt) do (GetTrustedInstaller.exe "C:\Windows\System32\cmd.exe /k del /f /q ""%%i""") >nul
+for /f "delims=" %%i in (Remover\DDL.txt) do (GetTrustedInstaller.exe "C:\Windows\System32\cmd.exe /k rmdir /s /q ""%%i""") >nul
 timeout /t 5 /nobreak
 shutdown /r /f /t 0
 goto :eof
