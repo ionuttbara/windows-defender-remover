@@ -96,7 +96,7 @@ Windows Registry Editor Version 5.00
 "value"=dword:00000000
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\Defender\SignatureUpdateInterval]
-"value"=dword:000000018
+"value"=dword:00000018
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\Defender\SubmitSamplesConsent]
 "value"=dword:00000000

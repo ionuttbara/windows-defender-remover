@@ -11,10 +11,6 @@
 
 This application removes / disables Windows Defender, including the Windows Security App, Windows Virtualization-Based Security (VBS), Windows SmartScreen, Windows Security Services, Windows Web-Threat Service, Windows File Virtualization (UAC), Microsoft Defender App Guard, Microsoft Driver Block List, System Mitigations and the Windows Defender page in the Settings App on Windows 10 or later.
 
-## 🖍 System Requirements
-
-* Windows `8.x`, `10` and `11` (all versions).
-
 
 ## 📃 Instructions
 
@@ -133,7 +129,8 @@ foreach ($choice in $remove_appx) { if ('' -eq $choice.Trim()) {continue}
 
 That is a false positive.
 
-Some security apps flag this app as a virus because of the way the ".exe" files are created.
+Some security apps flag this app as a virus because of the way the ".exe" files are created. Download with **git** or source code .zip will indicate virus-free.
+Starting with Defender 12.6.x , some versions are considered as virus, some are not (its a bug from me, so do not file for this).
 
 #### ⭕ Why is the patch not working when Windows is updated?
 
