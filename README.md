@@ -19,15 +19,33 @@ This application removes / disables Windows Defender, including the Windows Secu
 ## 📃 Instructions
 
 > [!NOTE]
-> A system restore point is recommended before you run the script.
+> A system restore point is recommended before you run the script. (if you don't know what are you doing)
 
 1. Download the packed script from [Releases](https://github.com/jbara2002/windows-defender-remover/releases)
 2. Run the ".exe" as administrator
 3. Follow the instructions displayed
 
+OR
+
+you can use git
+
+```
+git clone https://github.com/ionuttbara/windows-defender-remover.git
+cd windows-defender-remover
+Script_Run.bat
+```
+
+
+OR 
+
+you can use download entire source code
+1. Download the source code from [Releases](https://github.com/jbara2002/windows-defender-remover/releases).
+2. Choose the file **Source Code(.zip)** from last version and download it.
+3. Unarchive the file into a folder and run the Script_Run.bat.
+
 ![cli](https://github.com/drunkwinter/windows-defender-remover/assets/38593134/46007191-0a65-43c2-b451-a993ff90e00e)
 
-Please file an [issue](https://github.com/ionuttbara/windows-defender-remover/issues) if you experience any problems.
+You can file an [issue](https://github.com/ionuttbara/windows-defender-remover/issues) if you experience any problems.
 
 ## 📃 Automation of the script
 
