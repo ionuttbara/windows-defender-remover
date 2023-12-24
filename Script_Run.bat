@@ -51,8 +51,8 @@ echo Applying Registry Files...
 for /r %%k in (Remover\REGS\*.reg) do (GetTrustedInstaller.exe "C:\Windows\regedit.exe /s ""%%k""") >nul
 cls
 echo Removing Windows Defender/Security Components Files...
-for /f "delims=" %%i in (Remover\FDL.txt) do (GetTrustedInstaller.exe "C:\Windows\System32\cmd.exe /k del /f /q ""%%i""") >nul
-for /f "delims=" %%i in (Remover\DDL.txt) do (GetTrustedInstaller.exe "C:\Windows\System32\cmd.exe /k rmdir /s /q ""%%i""") >nul
+for /f "delims=" %%i in (Remover\FDL.txt) do (GetTrustedInstaller.exe "C:\Windows\System32\cmd.exe /c del /f /q ""%%i""") >nul
+for /f "delims=" %%i in (Remover\DDL.txt) do (GetTrustedInstaller.exe "C:\Windows\System32\cmd.exe /c rmdir /s /q ""%%i""") >nul
 timeout /t 5 /nobreak
 shutdown /r /f /t 0
 goto :eof
