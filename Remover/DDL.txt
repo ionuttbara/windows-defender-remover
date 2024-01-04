@@ -1,26 +1,26 @@
-C:\Program Files (x86)\Windows Defender
-C:\Program Files (x86)\Windows Defender Advanced Threat Protection
-C:\Program Files\Windows Defender
-C:\Program Files\Windows Defender Advanced Threat Protection
-C:\ProgramData\Microsoft\Windows Defender
-C:\ProgramData\Microsoft\Windows Defender Advanced Threat Protection
-C:\ProgramData\Microsoft\Windows Security Health
-C:\WINDOWS\System32\drivers\wd
-C:\Windows\GameBarPresenceWriter
-C:\Windows\SysWOW64\WindowsPowerShell\v1.0\Modules\Defender
-C:\Windows\SysWOW64\WindowsPowerShell\v1.0\Modules\DefenderPerformance
-C:\Windows\System32\HealthAttestationClient
-C:\Windows\System32\SecurityHealth
-C:\Windows\System32\Sgrm
-C:\Windows\System32\Tasks\Microsoft\Windows\Windows Defender
-C:\Windows\System32\Tasks_Migrated\Microsoft\Windows\Windows Defender
-C:\Windows\System32\WebThreatDefSvc
-C:\Windows\System32\WindowsPowerShell\v1.0\Modules\Defender
-C:\Windows\System32\WindowsPowerShell\v1.0\Modules\DefenderPerformance
-C:\Windows\SystemApps\Microsoft.Windows.AppRep.ChxApp_cw5n1h2txyewy
-C:\Windows\WinSxS\amd64_security-octagon*
-C:\Windows\WinSxS\amd64_windows-defender*
-C:\Windows\WinSxS\wow64_windows-defender*
-C:\Windows\WinSxS\x86_windows-defender*
-C:\Windows\bcastdvr
-C:\Windows\SystemApps\Microsoft.Windows.SecHealthUI_cw5n1h2txyewy
+"C:\Program Files (x86)\Windows Defender"
+"C:\Program Files (x86)\Windows Defender Advanced Threat Protection"
+"C:\Program Files\Windows Defender"
+"C:\Program Files\Windows Defender Advanced Threat Protection"
+"C:\ProgramData\Microsoft\Windows Defender"
+"C:\ProgramData\Microsoft\Windows Defender Advanced Threat Protection"
+"C:\ProgramData\Microsoft\Windows Security Health"
+"C:\WINDOWS\System32\drivers\wd"
+"C:\Windows\GameBarPresenceWriter"
+"C:\Windows\SysWOW64\WindowsPowerShell\v1.0\Modules\Defender"
+"C:\Windows\SysWOW64\WindowsPowerShell\v1.0\Modules\DefenderPerformance"
+"C:\Windows\System32\HealthAttestationClient"
+"C:\Windows\System32\SecurityHealth"
+"C:\Windows\System32\Sgrm"
+"C:\Windows\System32\Tasks\Microsoft\Windows\Windows Defender"
+"C:\Windows\System32\Tasks_Migrated\Microsoft\Windows\Windows Defender"
+"C:\Windows\System32\WebThreatDefSvc"
+"C:\Windows\System32\WindowsPowerShell\v1.0\Modules\Defender"
+"C:\Windows\System32\WindowsPowerShell\v1.0\Modules\DefenderPerformance"
+"C:\Windows\SystemApps\Microsoft.Windows.AppRep.ChxApp_cw5n1h2txyewy"
+"C:\Windows\WinSxS\amd64_security-octagon*"
+"C:\Windows\WinSxS\amd64_windows-defender*"
+"C:\Windows\WinSxS\wow64_windows-defender*"
+"C:\Windows\WinSxS\x86_windows-defender*"
+"C:\Windows\bcastdvr"
+"C:\Windows\SystemApps\Microsoft.Windows.SecHealthUI_cw5n1h2txyewy"
