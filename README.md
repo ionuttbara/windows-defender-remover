@@ -45,27 +45,15 @@ You can file an [issue](https://github.com/ionuttbara/windows-defender-remover/i
 
 ## 📃 Automation of the script
 
-You can disable or enable Windows Defender with arguments.
+You can remove Defender with arguments.
 
-#### Enable/Disable Windows Defender and Security Components
+#### Removing
 
 ```PowerShell
-# ENABLE
+# Removal
 Defender.Remover.exe /r <# or /R #>
-
-# DISABLE
-Defender.Remover.exe /n <# or /N #>
 ```
 
-#### Enable/Disable Windows Defender Antivirus only
-
-```PowerShell
-# ENABLE
-Defender.Remover.exe /e <# or /E #>
-
-# DISABLE
-Defender.Remover.exe /m <# or /M #>
-```
 
 ## Disable or Remove Windows Defender *Application Guard Policies* (advanced)
 
@@ -100,9 +88,7 @@ Remove-Item -Path "$env:windir\WinSxS" -Include *winsipolicy.p7b* -Recurse
 #### ⭕ How to remove Windows Security Center / Windows SecurityApp from PC without downloading Script?
 Paste this code into a powershell file and after **Run as Administrator**.
 ```
-$remove_appx = @("SecHealthUI")
-## 4 remove found *SecHealthUI* appx packages with unblock tricks
-$provisioned = get-appxprovisionedpackage -online; $appxpackage = get-appxpackage -allusers; $eol = @()
+$remove_appx = @("SecHealthUI"); $provisioned = get-appxprovisionedpackage -online; $appxpackage = get-appxpackage -allusers; $eol = @()
 $store = 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore'
 $users = @('S-1-5-18'); if (test-path $store) {$users += $((dir $store -ea 0 |where {$_ -like '*S-1-5-21*'}).PSChildName)}
 foreach ($choice in $remove_appx) { if ('' -eq $choice.Trim()) {continue}
@@ -140,3 +126,11 @@ If the script is not working for you, check if you have the Windows Security Int
 #### ⭕ How to use the package remover without downloading the executable from the release?
 
 Run the desired ".bat" file from cmd with PowerRun (by dragging to the executable). You must reboot for the changes to take effect.
+
+#### ⭕ How to disable VBS if the removal script does not work
+
+Disable with this command and reboot.
+
+```
+bcdedit /set hypervisorlaunchtype off
+```

@@ -1,54 +1,63 @@
-@echo off & pushd "%CD%" & CD /D "%~dp0"
-:--------------------------------------
+@echo off
+pushd "%CD%"
+CD /D "%~dp0"
 :: Arguments Section
-IF "%1"== NUL GOTO :menu
-IF "%1"== "/y" GOTO :removedef
-IF "%1"== "/Y" GOTO :removedef
-IF "%1"== "/N" GOTO :tweaksdef
-IF "%1"== "/n" GOTO :tweaksdef
+IF "%1"== "y" GOTO :removedef
+IF "%1"== "Y" GOTO :removedef
 :--------------------------------------
 
+
 :--------------------------------------
-:menu
+::Menu Section
 cls
-echo ------Defender Remover Script , version 12.6.4------
+echo ------Defender Remover Script , version 12.6.9------
 echo Select an option:
 echo.
- echo Press (Y) for removing Defender and Security Components (old method, breaking Windows Updates/UWP in some version of Windows, removes files and unregisters classes) (working for new method)
-echo Press (N) for toggle Defender and Security Components with Safe Method.
-set /P c=Select one of the options to continue: 
-
-:: Check if the input is one of the valid keys
-if /I "%c%" EQU "Y" goto :removedef
-if /I "%c%" EQU "N" goto :tweaksdef
-
-:: If none of the valid keys are pressed, do nothing
-goto :eof
+echo Do you want to remove Windows Defender and alongside components? After this you'll need to reboot.
+echo A backup and/or System Restore point is recommended.
+echo Press Y to Remove, press N to exit from this script.
+set /P c=Select one of the options to continue:
 :--------------------------------------
+
+:--------------------------------------
+
 :--------------------------------------
 :removedef
-cls
-echo Killing Tasks...
-for /f "delims=" %%i in (Remover\TKL.txt) do (GetTrustedInstaller.exe "C:\Windows\System32\taskkill.exe /f /im ""%%i""") >nul
-cls
-echo Applying Registry Files...
-for /r %%k in (Remover\REGS\*.reg) do (GetTrustedInstaller.exe "C:\Windows\regedit.exe /s ""%%k""") >nul
-cls
-echo Removing Windows Defender/Security Components Files...
-for /f "delims=" %%i in (Remover\FDL.txt) do (GetTrustedInstaller.exe "C:\Windows\System32\cmd.exe /c del /f /q ""%%i""") >nul
-for /f "delims=" %%i in (Remover\DDL.txt) do (GetTrustedInstaller.exe "C:\Windows\System32\cmd.exe /c rmdir /s /q ""%%i""") >nul
-timeout /t 5 /nobreak
+::killing proceses
+CLS
+echo Killing Processes which are using Windows Defender Files...
+taskkill /f /im explorer.exe >nul
+taskkill /f /im smartscreen.exe >nul
+taskkill /f /im SecurityHealthSystray.exe >nul
+taskkill /f /im SecurityHealthHost.exe >nul
+taskkill /f /im SecurityHealthService.exe >nul
+taskkill /f /im SecurityHealthHost.exe >nul
+taskkill /f /im DWWIN.EXE >nul
+taskkill /f /im CompatTelRunner.exe >nul
+taskkill /f /im GameBarPresenceWriter.exe >nul
+taskkill /f /im DeviceCensus.exe >nul
+bcdedit /set hypervisorlaunchtype off
+
+CLS
+echo Removing Windows Security UWP App...
+:: Remove Windows Security App
+PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& {Start-Process PowerShell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -File ""%~dp0.\RemoveSecHealthApp.ps1""' -Verb RunAs}"
+
+CLS
+echo Unregister Windows Defender Security Components...
+:: Registry Remove of Windows Defender
+FOR /R %%f IN (Remove_defender\*.reg) DO regedit.exe /s "%%f"
+FOR /R %%f IN (Remove_defender\*.reg) DO PowerRun.exe regedit.exe /s "%%f"
+CLS
+echo Removing Files...
+Dism /online /Disable-Feature /FeatureName:Windows-Defender-Default-Definitions /Remove
+Dism /online /Disable-Feature /FeatureName:Windows-Defender-ApplicationGuard /Remove
+:: Removing files and folders
+for %%d in ("C:\Windows\WinSxS\FileMaps\wow64_windows-defender*.manifest" "C:\Windows\WinSxS\FileMaps\x86_windows-defender*.manifest" "C:\Windows\WinSxS\FileMaps\amd64_windows-defender*.manifest" "C:\Windows\System32\SecurityAndMaintenance_Error.png" "C:\Windows\System32\SecurityAndMaintenance.png" "C:\Windows\System32\SecurityHealthSystray.exe" "C:\Windows\System32\SecurityHealthService.exe" "C:\Windows\System32\SecurityHealthHost.exe" "C:\Windows\System32\drivers\SgrmAgent.sys" "C:\Windows\System32\drivers\WdDevFlt.sys" "C:\Windows\System32\drivers\WdBoot.sys" "C:\Windows\System32\drivers\WdFilter.sys" "C:\Windows\System32\wscsvc.dll" "C:\Windows\System32\drivers\WdNisDrv.sys" "C:\Windows\System32\wscsvc.dll" "C:\Windows\System32\wscproxystub.dll" "C:\Windows\System32\wscisvif.dll" "C:\Windows\System32\SecurityHealthProxyStub.dll" "C:\Windows\System32\smartscreen.dll" "C:\Windows\SysWOW64\smartscreen.dll" "C:\Windows\System32\smartscreen.exe" "C:\Windows\SysWOW64\smartscreen.exe" "C:\Windows\System32\DWWIN.EXE" "C:\Windows\SysWOW64\smartscreenps.dll" "C:\Windows\System32\smartscreenps.dll" "C:\Windows\System32\SecurityHealthCore.dll" "C:\Windows\System32\SecurityHealthSsoUdk.dll" "C:\Windows\System32\SecurityHealthUdk.dll" "C:\Windows\System32\SecurityHealthAgent.dll" "C:\Windows\System32\wscapi.dll" "C:\Windows\System32\wscadminui.exe" "C:\Windows\SysWOW64\GameBarPresenceWriter.exe" "C:\Windows\System32\GameBarPresenceWriter.exe" "C:\Windows\SysWOW64\DeviceCensus.exe" "C:\Windows\SysWOW64\CompatTelRunner.exe" "C:\Windows\system32\drivers\msseccore.sys" "C:\Windows\system32\drivers\MsSecFltWfp.sys" "C:\Windows\system32\drivers\MsSecFlt.sys") DO PowerRun cmd.exe /c del /f "%%d"
+:: part 2
+for %%d in ("C:\Windows\WinSxS\amd64_security-octagon*" "C:\Windows\WinSxS\x86_windows-defender*" "C:\Windows\WinSxS\wow64_windows-defender*" "C:\Windows\WinSxS\amd64_windows-defender*" "C:\Windows\SystemApps\Microsoft.Windows.AppRep.ChxApp_cw5n1h2txyewy" "C:\ProgramData\Microsoft\Windows Defender" "C:\ProgramData\Microsoft\Windows Defender Advanced Threat Protection" "C:\Program Files (x86)\Windows Defender Advanced Threat Protection" "C:\Program Files\Windows Defender Advanced Threat Protection" "C:\ProgramData\Microsoft\Windows Security Health" "C:\ProgramData\Microsoft\Storage Health" "C:\WINDOWS\System32\drivers\wd" "C:\Program Files (x86)\Windows Defender" "C:\Program Files\Windows Defender" "C:\Windows\System32\SecurityHealth" "C:\Windows\System32\WebThreatDefSvc" "C:\Windows\System32\Sgrm" "C:\Windows\Containers\WindowsDefenderApplicationGuard.wim" "C:\Windows\SysWOW64\WindowsPowerShell\v1.0\Modules\DefenderPerformance" "C:\Windows\System32\WindowsPowerShell\v1.0\Modules\DefenderPerformance" "C:\Windows\System32\WindowsPowerShell\v1.0\Modules\Defender" "C:\Windows\System32\Tasks_Migrated\Microsoft\Windows\Windows Defender" "C:\Windows\System32\Tasks\Microsoft\Windows\Windows Defender" "C:\Windows\SysWOW64\WindowsPowerShell\v1.0\Modules\Defender" "C:\Windows\System32\HealthAttestationClient" "C:\Windows\GameBarPresenceWriter" "C:\Windows\bcastdvr" "C:\Windows\Containers\serviced\WindowsDefenderApplicationGuard.wim") do PowerRun cmd.exe /c rmdir "%%~d" /s /q
+echo Your PC will reboot in 10 seconds..
+timeout 10
 shutdown /r /f /t 0
-goto :eof
-:--------------------------------------
-
-:--------------------------------------
-
-:tweaksdef
-"Safe_Method.bat"
-
-:--------------------------------------
-:eof
-:: End of script, do nothing
 exit
 :--------------------------------------
