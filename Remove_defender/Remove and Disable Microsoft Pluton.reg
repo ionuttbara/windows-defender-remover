@@ -1,0 +1,7 @@
+Windows Registry Editor Version 5.00
+
+[-HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PlutonHsp2]
+
+[-HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PlutonHeci]
+
+[-HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Hsp]
