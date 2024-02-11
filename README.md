@@ -84,6 +84,21 @@ Remove-Item -LiteralPath "$env:windir\Boot\EFI\wisipolicy.p7b"
 Remove-Item -Path "$env:windir\WinSxS" -Include *winsipolicy.p7b* -Recurse
 ```
 
+## Creating an ISO with Windows Defender and Services disabled
+
+You can create an ISO with Windoows Defender and Security Services Disabled. It's easy, so this is a fiie which it can helps you.
+Here are the rules:
+1. Mount the ISO and extract it into location.
+2. Open the **sources** folder and create the **$OEM$** folder. (this is needed to run the DefenderRemover part in OOBE).
+3. Open the **$OEM$** folder and create the folder with **$$** name.
+4. Open the **$$** folder and create the folder with **Panther** name.
+5. Open the **Panther** folder.
+   The path it shown like to
+    **%location of extracted ISO%\sources\$OEM$\$$\Panther\**
+6. Download the unnatended.xml file from repo in ISO_Maker folder and put it in Panther folder.
+7. Save this as bootable ISO. (for now the script can't do this automaticly, but it will do in next version).
+    
+
 ## ❓ Frequently Asked Questions
 #### ⭕ How to remove Windows Security Center / Windows SecurityApp from PC without downloading Script?
 Paste this code into a powershell file and after **Run as Administrator**.
