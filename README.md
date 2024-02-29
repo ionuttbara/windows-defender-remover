@@ -12,12 +12,41 @@
 This application removes / disables Windows Defender, including the Windows Security App, Windows Virtualization-Based Security (VBS), Windows SmartScreen, Windows Security Services, Windows Web-Threat Service, Windows File Virtualization (UAC), Microsoft Defender App Guard, Microsoft Driver Block List, System Mitigations and the Windows Defender page in the Settings App on Windows 10 or later.
 
 
+## ❓️ What components are removing?
+
+### Removing Security Components
+    This script removes/disables following security components:
+        - support for Windows Security Center including Windows Security Center Service (wscsvc), Windows Security Service (SgrmBroker, Sgrm Drivers) which are needed to run Windows Security App.
+        - virtualization support.
+            - Hypervisor startup (this fixes disablation of Virtualization Based Security, this will auto enable if you use Hyper-V and/or WSL (Windows Subsystem for Linux), WSA (Windows Subsystem for Android))
+            - LUA (disables File Virtualization and User Account Control, which will run all apps as administrator priviliges (also fixes old app errors))
+            - Exploit Guard (something about Exploits)
+            - Windows Smart Control
+            - Tamper Protection (for Windows 11 21H2 or earlier)
+        - SecHealthUI (Windows Security UWP App)
+        - SmartScreen
+        - Pluton Support and Pluton Services Support
+        - System Mitigations
+          - "Services Mitigations" (search on admx.help for more informations, its policy)
+          - Spectre and Meltdown Mitigation (for get +30% performance on old Intel CPUs)
+        - Windows Security Section from Settings App.
+
+### Removing Antivirus Components
+    This script forcily removes following antivirus components:
+      - Windows Defender Definition Update List (this will disable updating definitions of Defender because its removed)
+      - Windows Defender SpyNet Telemetry
+      - Antivirus Service
+      - Windows Defender Antivirus filter and windows defender rootkit scanner drivers
+      - Antivirus Scanning Tasks
+      - Shell Associations (Context Menu)
+      - Hides Antivirus Protection section from Windows Security App.
+
 ## 📃 Instructions
 
 > [!NOTE]
 > A system restore point is recommended before you run the script. (if you don't know what are you doing)
 
-1. Download the packed script from [Releases](https://github.com/jbara2002/windows-defender-remover/releases)
+1. Download the packed script from [Releases](https://github.com/ionuttbara/windows-defender-remover/releases)
 2. Run the ".exe" as administrator
 3. Follow the instructions displayed
 
@@ -32,7 +61,7 @@ Script_Run.bat
 ```
 
 
-OR 
+OR
 
 you can use download entire source code
 1. Download the source code from [Releases](https://github.com/jbara2002/windows-defender-remover/releases).
