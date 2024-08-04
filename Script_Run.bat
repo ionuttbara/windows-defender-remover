@@ -43,7 +43,7 @@ bcdedit /set hypervisorlaunchtype off
 CLS
 echo Removing Windows Security UWP App...
 :: Remove Windows Security App
-PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& {Start-Process PowerShell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -File ""RemoveSecHealthApp.ps1""' -Verb RunAs}"
+Powershell -noprofile -executionpolicy bypass -file "%~dp0\RemoveSecHealthApp.ps1"
 
 CLS
 echo Unregister Windows Defender Security Components...
@@ -71,7 +71,7 @@ bcdedit /set hypervisorlaunchtype off
 CLS
 echo Removing Windows Security UWP App...
 :: Remove Windows Security App
-PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& {Start-Process PowerShell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -File ""RemoveSecHealthApp.ps1""' -Verb RunAs}"
+Powershell -noprofile -executionpolicy bypass -file "%~dp0\RemoveSecHealthApp.ps1"
 
 CLS
 echo Unregister Windows Defender Security Components...
