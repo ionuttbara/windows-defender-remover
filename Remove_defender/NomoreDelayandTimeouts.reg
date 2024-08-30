@@ -23,13 +23,6 @@ Windows Registry Editor Version 5.00
 
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control]
 "WaitToKillServiceTimeout"="1"
-"DisableRemoteScmEndpoints"dword:00000000
-"HandlerTimeout"=dword:7FFFFFFF
-"ServicesPipeTimeout"=dword:00240000
-
-[HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control]
-"WaitToKillServiceTimeout"="1"
-"DisableRemoteScmEndpoints"dword:00000000
 "HandlerTimeout"=dword:7FFFFFFF
 "ServicesPipeTimeout"=dword:00240000
 
