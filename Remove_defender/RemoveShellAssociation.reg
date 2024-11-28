@@ -20,18 +20,9 @@ Windows Registry Editor Version 5.00
 
 [-HKEY_LOCAL_MACHINE\SOFTWARE\Classes\WindowsDefender]
 
-[HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\Ubpm]
-"CriticalMaintenance_DefenderCleanup"=-
-"CriticalMaintenance_DefenderVerification"=-
-
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Ubpm]
 "CriticalMaintenance_DefenderCleanup"=-
 "CriticalMaintenance_DefenderVerification"=-
-
-[HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\SharedAccess\Parameters\FirewallPolicy\RestrictedServices\Static\System]
-"WindowsDefender-1"=-
-"WindowsDefender-2"=-
-"WindowsDefender-3"=-
 
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\RestrictedServices\Static\System]
 "WindowsDefender-1"=-
