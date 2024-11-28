@@ -1,0 +1,34 @@
+Windows Registry Editor Version 5.00
+
+; disabling Antivirus
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender]
+"DisableRoutinelyTakingAction"=dword:00000001
+"ServiceKeepAlive"=dword:00000000
+"AllowFastServiceStartup"=dword:00000000
+"DisableLocalAdminMerge"=dword:00000001
+
+; disable overwriting real time protection settings
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection]
+"LocalSettingOverrideDisableOnAccessProtection"=dword:00000000
+"LocalSettingOverrideRealtimeScanDirection"=dword:00000000
+"LocalSettingOverrideDisableIOAVProtection"=dword:00000000
+"LocalSettingOverrideDisableBehaviorMonitoring"=dword:00000000
+"LocalSettingOverrideDisableIntrusionPreventionSystem"=dword:00000000
+"LocalSettingOverrideDisableRealtimeMonitoring"=dword:00000000
+"DisableIOAVProtection"=dword:00000001
+"DisableRealtimeMonitoring"=dword:00000001
+"DisableBehaviorMonitoring"=dword:00000001
+"DisableOnAccessProtection"=dword:00000001
+"DisableScanOnRealtimeEnable"=dword:00000001
+"RealtimeScanDirection"=dword:00000002
+"DisableInformationProtectionControl"=dword:00000001
+"DisableIntrusionPreventionSystem"=dword:00000001
+"DisableRawWriteNotification"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\Defender\AllowBehaviorMonitoring]
+"value"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Policies\Microsoft\Windows Defender]
+"DisableRoutinelyTakingAction"=dword:00000001

@@ -1,0 +1,14 @@
+Windows Registry Editor Version 5.00
+
+; this file disables Signature Updates in Windows Defender
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Signature Updates]
+"SignatureDisableNotification"=dword:00000001
+"RealtimeSignatureDelivery"=dword:00000000
+"ForceUpdateFromMU"=dword:00000000
+"DisableScheduledSignatureUpdateOnBattery"=dword:00000001
+"UpdateOnStartUp"=dword:00000000
+"SignatureUpdateCatchupInterval"=dword:00000002
+"DisableUpdateOnStartupWithoutEngine"=dword:00000001
+"ScheduleTime"=dword:00001440
+"DisableScanOnUpdate"=dword:00000001

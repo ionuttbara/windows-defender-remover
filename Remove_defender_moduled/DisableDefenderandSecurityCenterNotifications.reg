@@ -1,0 +1,28 @@
+Windows Registry Editor Version 5.00
+
+; Disable Windows Defender Security Center Notifications
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\WindowsDefenderSecurityCenter\DisableEnhancedNotifications]
+"value"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\WindowsDefenderSecurityCenter\DisableNotifications]
+"value"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\default\WindowsDefenderSecurityCenter\HideWindowsSecurityNotificationAreaControl]
+"value"=dword:00000001
+
+; Disable Windows Security Center Notifications
+
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Security Center]
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Security Center]
+"FirstRunDisabled"=dword:00000001
+"AntiVirusOverride"=dword:00000001
+"FirewallOverride"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications]
+"DisableEnhancedNotifications"=dword:00000001
+"DisableNotifications"=dword:00000001
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance]
+"Enabled"=dword:00000000
