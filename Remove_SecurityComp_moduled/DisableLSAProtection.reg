@@ -4,10 +4,6 @@ Windows Registry Editor Version 5.00
 "RunAsPPL"=dword:00000000
 
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa]
-"restrictanonymous"=dword:00000001
-"everyoneincludesanonymous"=dword:00000000
-"restrictanonymoussam"=dword:00000001
-"SCENoApplyLegacyAuditPolicy"=dword:00000000
 "LsaConfigFlags"=dword:00000000
 "RunAsPPL"=dword:00000000
 "RunAsPPLBoot"=dword:00000000
