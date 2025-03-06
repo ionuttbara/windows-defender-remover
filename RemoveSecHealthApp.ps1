@@ -4,14 +4,12 @@ if (Test-Path $store) { $sids += Get-ChildItem $store -ea 0 | %{ $_.PSChildName 
 
 $appx = Get-AppxPackage -AllUsers -Name "Microsoft.Windows.SecHealthUI"
 if ($null -eq $appx) { return }
-$packageFullName = $appx.PackageFullName
-$packageFamilyName = $appx.PackageFamilyName
-New-Item "$store\Deprovisioned\$packageFamilyName" -Force | Out-Null
+New-Item "$store\Deprovisioned\$appx.PackageFamilyName" -Force | Out-Null
 foreach ($sid in $sids) {
     New-Item "$store\EndOfLife\$sid\$packageName" -Force | Out-Null
-    New-Item "$store\EndOfLife\$sid\$packageFullName" -Force | Out-Null
+    New-Item "$store\EndOfLife\$sid\$appx.PackageFullName" -Force | Out-Null
 }
 
-DISM /Online /Set-NonRemovableAppPolicy /PackageFamily:$packageFamilyName /NonRemovable:0 | Out-Null
-Remove-AppxPackage -AllUsers -Package $packageFullName
-Remove-AppxProvisionedPackage -Online -PackageName $packageFullName -AllUsers
+DISM /Online /Set-NonRemovableAppPolicy /PackageFamily:$appx.PackageFamilyName /NonRemovable:0 | Out-Null
+Remove-AppxPackage -AllUsers -Package $appx.PackageFullName
+Remove-AppxProvisionedPackage -Online -PackageName $appx.PackageFullName -AllUsers
