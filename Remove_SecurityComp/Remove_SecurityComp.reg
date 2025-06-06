@@ -130,10 +130,13 @@
 "FilterAdministratorToken"=dword:00000001
 "LocalAccountTokenFilterPolicy"=dword:00000001
 "EnableUIADesktopToggle"=dword:00000000
-"ValidateAdminCodeSignatures"=dword:00000001
+"ValidateAdminCodeSignatures"=dword:00000000
 "EnableSecureUIAPaths"=dword:00000000
 "DelayedDesktopSwitchTimemout"=dword:00000000
 "PromptOnSecureDesktop"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System]
+"TypeOfAdminApprovalMode"=dword:00000001
 
 ; Fix mouse cursor dissapeiring
 

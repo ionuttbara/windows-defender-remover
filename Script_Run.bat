@@ -1,4 +1,4 @@
-@set defenderremoverver=12.8.2
+@set defenderremoverver=12.8.3
 @setlocal DisableDelayedExpansion
 @echo off
 pushd "%CD%"
