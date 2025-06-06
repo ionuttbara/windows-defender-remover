@@ -1,9 +1,7 @@
 ﻿Windows Registry Editor Version 5.00
-; File: E:\Projects\Development\GitHub Repos\Listed Repos\windows-defender-remover\Remove_SecurityComp_moduled\DisableDevDriveProtection.reg
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Real-Time Protection]
 "DisableAsyncScanOnOpen"=dword:00000001
-; File: E:\Projects\Development\GitHub Repos\Listed Repos\windows-defender-remover\Remove_SecurityComp_moduled\DisableLSAProtection.reg
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System]
 "RunAsPPL"=dword:00000000
@@ -13,7 +11,6 @@
 "RunAsPPL"=dword:00000000
 "RunAsPPLBoot"=dword:00000000
 "LmCompatibilityLevel"=-
-; File: E:\Projects\Development\GitHub Repos\Listed Repos\windows-defender-remover\Remove_SecurityComp_moduled\DisableMaintenanceTaskreportinginSecurityHealthUI.reg
 
 ; disables reporting of things from Maintenance Task in Windows Security App
 
@@ -26,11 +23,9 @@
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Security Health\Platform]
 "Registered"=dword:00000000
-; File: E:\Projects\Development\GitHub Repos\Listed Repos\windows-defender-remover\Remove_SecurityComp_moduled\DisableMicrosoftVulnerabileDriverBlocklist.reg
 
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CI\Config]
 "VulnerableDriverBlocklistEnable"=dword:00000000
-; File: E:\Projects\Development\GitHub Repos\Listed Repos\windows-defender-remover\Remove_SecurityComp_moduled\DisableSmartScreen.reg
 
 ; Disable SmartScreen for Microsoft Edge
 
@@ -76,7 +71,6 @@
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\SmartScreen]
 "ConfigureAppInstallControlEnabled"=dword:00000001
 "ConfigureAppInstallControl"="Anywhere"
-; File: E:\Projects\Development\GitHub Repos\Listed Repos\windows-defender-remover\Remove_SecurityComp_moduled\DisableSpyNetTelemetry.reg
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet]
 "DisableBlockAtFirstSeen"=dword:00000001
@@ -87,7 +81,6 @@
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Microsoft Antimalware\SpyNet]
 "SpyNetReporting"=dword:00000000
 "LocalSettingOverrideSpyNetReporting"=dword:00000000
-; File: E:\Projects\Development\GitHub Repos\Listed Repos\windows-defender-remover\Remove_SecurityComp_moduled\DisableSystemMitigations.reg
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsMitigation]
 "UserPreference"=dword:00000002
@@ -110,7 +103,6 @@
 
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SCMConfig]
 "EnableSvchostMitigationPolicy"=hex(b):00,00,00,00,00,00,00,00
-; File: E:\Projects\Development\GitHub Repos\Listed Repos\windows-defender-remover\Remove_SecurityComp_moduled\DisableTamperProtection.reg
 
 ; Remove Defender's Tamper Protection
 
@@ -119,30 +111,16 @@
 "TamperProtectionSource"=dword:00000000
 "MpCapability"=hex:00,00,00,00,00,00,00,00
 "TamperProtection"=dword:00000000
-; File: E:\Projects\Development\GitHub Repos\Listed Repos\windows-defender-remover\Remove_SecurityComp_moduled\DisableUAC.reg
-
 ; Disable UAC
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System]
-"EnableLUA"=dword:00000000
 "ConsentPromptBehaviorAdmin"=dword:00000000
-"ConsentPromptBehaviorUser"=dword:00000000
-"FilterAdministratorToken"=dword:00000001
-"LocalAccountTokenFilterPolicy"=dword:00000001
-"EnableUIADesktopToggle"=dword:00000000
-"ValidateAdminCodeSignatures"=dword:00000000
-"EnableSecureUIAPaths"=dword:00000000
-"DelayedDesktopSwitchTimemout"=dword:00000000
 "PromptOnSecureDesktop"=dword:00000000
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System]
-"TypeOfAdminApprovalMode"=dword:00000001
 
 ; Fix mouse cursor dissapeiring
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System]
 "EnableCursorSuppression"=dword:00000000
-; File: E:\Projects\Development\GitHub Repos\Listed Repos\windows-defender-remover\Remove_SecurityComp_moduled\DisableVBS.reg
 
 ; Reset values for Virtualization Settings
 
@@ -194,7 +172,6 @@
 
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\CredentialGuard]
 "Enabled"=dword:00000000
-; File: E:\Projects\Development\GitHub Repos\Listed Repos\windows-defender-remover\Remove_SecurityComp_moduled\ExploitGuard_d.reg
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Windows Defender Exploit Guard\Controlled Folder Access]
 "EnableControlledFolderAccess"=dword:00000000
@@ -214,11 +191,9 @@
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Windows Defender Exploit Guard\ASR]
 "EnableASRConsumers"=dword:00000000
-; File: E:\Projects\Development\GitHub Repos\Listed Repos\windows-defender-remover\Remove_SecurityComp_moduled\MitigationofFaultTorelantHeap.reg
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\FTH]
 "Enabled"=dword:00000000
-; File: E:\Projects\Development\GitHub Repos\Listed Repos\windows-defender-remover\Remove_SecurityComp_moduled\RemovalofAnti-PhishingServices.reg
 
 [-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsRuntime\Server\WebThreatDefSvc]
 
@@ -269,14 +244,12 @@
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Svchost]
 "WebThreatDefense"=-
-; File: E:\Projects\Development\GitHub Repos\Listed Repos\windows-defender-remover\Remove_SecurityComp_moduled\Remove and Disable Microsoft Pluton.reg
 
 [-HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PlutonHsp2]
 
 [-HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PlutonHeci]
 
 [-HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Hsp]
-; File: E:\Projects\Development\GitHub Repos\Listed Repos\windows-defender-remover\Remove_SecurityComp_moduled\RemoveSecurityandMaintenance.reg
 
 [-HKEY_CLASSES_ROOT\CLSID\{BB64F8A7-BEE7-4E1A-AB8D-7D8273F7FDB6}]
 
@@ -291,7 +264,6 @@
 [-HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Classes\CLSID\{BB64F8A7-BEE7-4E1A-AB8D-7D8273F7FDB6}]
 
 [-HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\ControlPanel\NameSpace\{BB64F8A7-BEE7-4E1A-AB8D-7D8273F7FDB6}]
-; File: E:\Projects\Development\GitHub Repos\Listed Repos\windows-defender-remover\Remove_SecurityComp_moduled\RemoveWindowsDefenderFirewallRules.reg
 
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\RestrictedServices\Static\System]
 "WebThreatDefSvc_Allow_In"=-

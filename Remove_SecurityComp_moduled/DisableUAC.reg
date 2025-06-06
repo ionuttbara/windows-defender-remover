@@ -3,15 +3,7 @@ Windows Registry Editor Version 5.00
 ; Disable UAC
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System]
-"EnableLUA"=dword:00000000
 "ConsentPromptBehaviorAdmin"=dword:00000000
-"ConsentPromptBehaviorUser"=dword:00000000
-"FilterAdministratorToken"=dword:00000001
-"LocalAccountTokenFilterPolicy"=dword:00000001
-"EnableUIADesktopToggle"=dword:00000000
-"ValidateAdminCodeSignatures"=dword:00000001
-"EnableSecureUIAPaths"=dword:00000000
-"DelayedDesktopSwitchTimemout"=dword:00000000
 "PromptOnSecureDesktop"=dword:00000000
 
 ; Fix mouse cursor dissapeiring
