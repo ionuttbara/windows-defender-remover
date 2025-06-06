@@ -178,3 +178,17 @@ Disable with this command and reboot.
 ```
 bcdedit /set hypervisorlaunchtype off
 ```
+After that you will not be able to use virtual machines.  
+
+#### ⭕  Why  VBS is keeping enabling on Windows 11?
+
+By default the script is disabling VBS to gain performance in your system. The factors which is keeping VBS enabled is Windows Virtualization.  
+    
+Apps and features which is used by Windows Virtualization:  
+
+- Windows Subsystem for **Android**/**Linux**  
+- HyperV Virtual Machine
+- <a href="https://apps.microsoft.com/detail/9n0tn65p5bf6?hl=en-US&gl=US" target="_blank">Microsoft Emulator</a>  (Windows 10X Emulator which you can find in Microsoft Store)
+- Android Studio integration in VisuaL Studio  or another Emulators (for Windows 10 22H2 with March 2025 Update or newer)
+
+If you open those one of that app mentioned earlier, VBS will be enabled without user intervention. Its needed to run Virtual Machine engine. If you don't use any virtual machine, you can file an Issue at <a href="https://github.com/ionuttbara/windows-defender-remover/issues" target="_blank">here</a>.
