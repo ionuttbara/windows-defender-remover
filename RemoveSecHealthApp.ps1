@@ -1,21 +1,16 @@
-$remove_appx = @("SecHealthUI"); $provisioned = get-appxprovisionedpackage -online; $appxpackage = get-appxpackage -allusers; $eol = @()
 $store = 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Appx\AppxAllUserStore'
-$users = @('S-1-5-18'); if (test-path $store) {$users += $((dir $store -ea 0 |where {$_ -like '*S-1-5-21*'}).PSChildName)}
-foreach ($choice in $remove_appx) { if ('' -eq $choice.Trim()) {continue}
-  foreach ($appx in $($provisioned |where {$_.PackageName -like "*$choice*"})) {
-    $next = !1; foreach ($no in $skip) {if ($appx.PackageName -like "*$no*") {$next = !0}} ; if ($next) {continue}
-    $PackageName = $appx.PackageName; $PackageFamilyName = ($appxpackage |where {$_.Name -eq $appx.DisplayName}).PackageFamilyName 
-    ni "$store\Deprovisioned\$PackageFamilyName" -force >''; $PackageFamilyName  
-    foreach ($sid in $users) {ni "$store\EndOfLife\$sid\$PackageName" -force >''} ; $eol += $PackageName
-    dism /online /set-nonremovableapppolicy /packagefamily:$PackageFamilyName /nonremovable:0 >''
-    remove-appxprovisionedpackage -packagename $PackageName -online -allusers >''
-  }
-  foreach ($appx in $($appxpackage |where {$_.PackageFullName -like "*$choice*"})) {
-    $next = !1; foreach ($no in $skip) {if ($appx.PackageFullName -like "*$no*") {$next = !0}} ; if ($next) {continue}
-    $PackageFullName = $appx.PackageFullName; 
-    ni "$store\Deprovisioned\$appx.PackageFamilyName" -force >''; $PackageFullName
-    foreach ($sid in $users) {ni "$store\EndOfLife\$sid\$PackageFullName" -force >''} ; $eol += $PackageFullName
-    dism /online /set-nonremovableapppolicy /packagefamily:$PackageFamilyName /nonremovable:0 >''
-    remove-appxpackage -package $PackageFullName -allusers >''
-  }
+$sids = @('S-1-5-18') # https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/understand-security-identifiers
+if (Test-Path $store) { $sids += Get-ChildItem $store -ea 0 | %{ $_.PSChildName } | ?{ $_.StartsWith('S-1-5-21') } }
+
+if ((Get-CimInstance -Class Win32_OperatingSystem).Caption -Match "Windows 11") { 
+	$name = "Microsoft.SecHealthUI" 
+} else { 
+	$name = "Microsoft.Windows.SecHealthUI" 
 }
+$appx = Get-AppxPackage -AllUsers -Name $name
+if ($null -eq $appx) { return Write-Host "WindowsDefender Appx Package not found." -ForegroundColor Red }
+New-Item "$store\Deprovisioned\$($appx.PackageFamilyName)" -Force | Out-Null
+foreach ($sid in $sids) { New-Item "$store\EndOfLife\$sid\$($appx.PackageFullName)" -Force | Out-Null }
+
+DISM /Online /Set-NonRemovableAppPolicy /PackageFamily:$appx.PackageFamilyName /NonRemovable:0 | Out-Null
+$appx | Remove-AppxPackage -AllUsers
