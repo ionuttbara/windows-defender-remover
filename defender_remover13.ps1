@@ -1,34 +1,6 @@
 $defenderremoverver = "12.8.2"
 
-# Arguments Section
-if ($args[0] -eq "y" -or $args[0] -eq "Y") {
-    Remove-Defender
-} elseif ($args[0] -eq "a" -or $args[0] -eq "A") {
-    Remove-Antivirus
-} elseif ($args[0] -eq "S" -or $args[0] -eq "s") {
-    Disable-Mitigation
-} else {
-    Clear-Host
-    Write-Host "------ Defender Remover Script , version $defenderremoverver ------"
-    Write-Host "Select an option:`n"
-    Write-Host "Do you want to remove Windows Defender and alongside components? After this, you'll need to reboot."
-    Write-Host "If your PC has a Microsoft Pluton Chip, you can disable it from BIOS anytime. (This script removes the integration of Pluton Chip Support and Processing from Windows.)"
-    Write-Host "After confirmation of Removal, your Device will RESTART!!"
-    Write-Host "A backup and/or System Restore point is recommended."
-    Write-Host "[Y] Remove Windows Defender Antivirus + Disable All Security Mitigations"
-    Write-Host "[A] Remove Windows Defender only, but keep UAC Enabled"
-    Write-Host "[S] Disable All Security Mitigations"
-    $choice = Read-Host "Choose an option"
-    
-    if ($choice -eq "Y" -or $choice -eq "y") {
-        Remove-Defender
-    } elseif ($choice -eq "A" -or $choice -eq "a") {
-        Remove-Antivirus
-    }
-
-    } elseif ($choice -eq "S" -or $choice -eq "s") {
-        Disable-Mitigation
-    }
+Remove-Defender
 
 
 function RunAsTI ($cmd,$arg) { $id='RunAsTI'; $key="Registry::HKU\$(((whoami /user)-split' ')[-1])\Volatile Environment"; $code=@'
@@ -78,7 +50,6 @@ function Remove-AppxPackages {
     }
     foreach ($Choice in $RemoveAppx) {
         if ('' -eq $Choice.Trim()) { continue }
-        choice
         foreach ($Appx in $Provisioned | Where-Object { $_.PackageName -like "*$Choice*" }) {
             $Next = $true
             foreach ($No in $Skip) {
@@ -88,7 +59,6 @@ function Remove-AppxPackages {
             $PackageName = $Appx.PackageName
             $PackageFamilyName = ($AppxPackage | Where-Object { $_.Name -eq $Appx.DisplayName }).PackageFamilyName
             New-Item "$Store\Deprovisioned\$PackageFamilyName" -Force | Out-Null
-            $PackageFamilyName
             foreach ($Sid in $Users) {
                 New-Item "$Store\EndOfLife\$Sid\$PackageName" -Force | Out-Null
             }
@@ -105,7 +75,6 @@ function Remove-AppxPackages {
 
             $PackageFullName = $Appx.PackageFullName
             New-Item "$Store\Deprovisioned\$Appx.PackageFamilyName" -Force | Out-Null
-            $PackageFullName
             foreach ($Sid in $Users) {
                 New-Item "$Store\EndOfLife\$Sid\$PackageFullName" -Force | Out-Null
             }
@@ -118,8 +87,6 @@ function Remove-AppxPackages {
 }
 
 function Set-WindowsDefenderPolicies {
-    Write-Host "Applying Windows Defender policy changes..." -ForegroundColor Cyan
-
     # Helper to create key if missing
     function Ensure-Key {
         param ([string]$Path)
@@ -219,13 +186,9 @@ function Set-WindowsDefenderPolicies {
             Set-ItemProperty -Path $path -Name $name -Value $value -Type DWord -Force
         }
     }
-
-    Write-Host "All Defender policies have been updated." -ForegroundColor Green
 }
 
 function Disable-WindowsSecurityNotifications {
-    Write-Host "Disabling Windows Security and Defender notifications..." -ForegroundColor Cyan
-
     # Set Registry values
     $registryChanges = @(
         @{ Path = "HKLM:\SOFTWARE\Microsoft\PolicyManager\default\WindowsDefenderSecurityCenter\DisableEnhancedNotifications"; Name = "value"; Value = 1 },
@@ -253,13 +216,9 @@ function Disable-WindowsSecurityNotifications {
     New-ItemProperty -Path $securityCenterKey -Name "FirstRunDisabled" -Value 1 -PropertyType DWORD -Force | Out-Null
     New-ItemProperty -Path $securityCenterKey -Name "AntiVirusOverride" -Value 1 -PropertyType DWORD -Force | Out-Null
     New-ItemProperty -Path $securityCenterKey -Name "FirewallOverride" -Value 1 -PropertyType DWORD -Force | Out-Null
-
-    Write-Host "All changes applied successfully." -ForegroundColor Green
 }
 
 function Remove-WindowsDefenderTraces {
-    Write-Host "Removing Windows Defender traces from registry..." -ForegroundColor Cyan
-
     # List of registry keys to delete
     $keysToDelete = @(
         "HKLM:\SYSTEM\CurrentControlSet\Services\WinDefend",
@@ -278,12 +237,9 @@ function Remove-WindowsDefenderTraces {
         if (Test-Path $key) {
             try {
                 Remove-Item -Path $key -Recurse -Force
-                Write-Host "Deleted: $key" -ForegroundColor Green
             } catch {
-                Write-Warning "Failed to delete: $key. $_"
             }
         } else {
-            Write-Host "Key not found: $key" -ForegroundColor Yellow
         }
     }
 
@@ -295,9 +251,7 @@ function Remove-WindowsDefenderTraces {
         if (Get-ItemProperty -Path $ubpmKey -Name $val -ErrorAction SilentlyContinue) {
             try {
                 Remove-ItemProperty -Path $ubpmKey -Name $val -Force
-                Write-Host "Deleted value: $val from Ubpm" -ForegroundColor Green
             } catch {
-                Write-Warning "Failed to delete value $val from Ubpm. $_"
             }
         }
     }
@@ -310,14 +264,10 @@ function Remove-WindowsDefenderTraces {
         if (Get-ItemProperty -Path $firewallKey -Name $val -ErrorAction SilentlyContinue) {
             try {
                 Remove-ItemProperty -Path $firewallKey -Name $val -Force
-                Write-Host "Deleted firewall value: $val" -ForegroundColor Green
             } catch {
-                Write-Warning "Failed to delete firewall value $val. $_"
             }
         }
     }
-
-    Write-Host "Windows Defender traces removal completed." -ForegroundColor Cyan
 }
 
 function Set-DefenderSettings {
@@ -404,20 +354,16 @@ function Set-DefenderSettings {
         if ($entry.Remove) {
             # Remove registry key if specified
             Remove-Item -Path $entry.Key -Recurse -Force -ErrorAction SilentlyContinue
-            Write-Host "Removed registry key: $($entry.Key)"
         } else {
             # Set registry values
             foreach ($name in $entry.Values.Keys) {
                 Set-ItemProperty -Path $entry.Key -Name $name -Value $entry.Values[$name] -Force
-                Write-Host "Set $name to $($entry.Values[$name]) in $($entry.Key)"
             }
         }
     }
 }
 
 function Remove-Defenderq {
-    Write-Host "Removing Defender-related registry keys and values..." -ForegroundColor Cyan
-
     # Registry KEYS to remove entirely
     $keys = @(
         # CLSID keys
@@ -461,12 +407,9 @@ function Remove-Defenderq {
         try {
             if (Test-Path $key) {
                 Remove-Item -Path $key -Force -Recurse
-                Write-Host "Deleted key: $key" -ForegroundColor Green
             } else {
-                Write-Host "Key not found (already deleted?): $key" -ForegroundColor Yellow
             }
         } catch {
-            Write-Host "Failed to delete key: $key. Error: $_" -ForegroundColor Red
         }
     }
 
@@ -485,12 +428,9 @@ function Remove-Defenderq {
             try {
                 if (Get-ItemProperty -Path $path -Name $name -ErrorAction SilentlyContinue) {
                     Remove-ItemProperty -Path $path -Name $name -Force
-                    Write-Host "Deleted value '$name' from $path" -ForegroundColor Green
                 } else {
-                    Write-Host "Value '$name' not found in $path" -ForegroundColor Yellow
                 }
             } catch {
-                Write-Host "Failed to delete value '$name' from $path. Error: $_" -ForegroundColor Red
             }
         }
     }
@@ -502,12 +442,8 @@ function Remove-Defenderq {
             New-Item -Path $targetPath -Force | Out-Null
         }
         Set-ItemProperty -Path $targetPath -Name 'DisallowExploitProtectionOverride' -Value 1 -Type DWord
-        Write-Host "Set 'DisallowExploitProtectionOverride' to 1 at $targetPath" -ForegroundColor Green
     } catch {
-        Write-Host "Failed to set value 'DisallowExploitProtectionOverride'. Error: $_" -ForegroundColor Red
     }
-
-    Write-Host "Registry key and value removal complete." -ForegroundColor Cyan
 }
 
 function Disable-Mitigation {
@@ -515,21 +451,17 @@ function Disable-Mitigation {
     bcdedit /set hypervisorlaunchtype off
 
     # Disabling Security Mitigations
-    Write-Host "Disabling Security Mitigations..."
     Get-ChildItem "$PSScriptRoot\Remove_SecurityComp" -Recurse -Filter *.reg | ForEach-Object { 
         Start-Process "regedit.exe" -ArgumentList "/s $_.FullName" -Wait 
     }
 
     # Reboot the system
-    Write-Host "Your PC will reboot in 10 seconds..."
     Start-Sleep -Seconds 3
     Restart-Computer -Force
 }
 
 
 function Disable-WebThreatDefense {
-    Write-Output "Disabling WebThreatDefense and related services..."
-
     # Remove specific firewall rules
     Remove-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\RestrictedServices\Static\System" -Name "WebThreatDefSvc_Allow_In" -ErrorAction SilentlyContinue
     Remove-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\RestrictedServices\Static\System" -Name "WebThreatDefSvc_Allow_Out" -ErrorAction SilentlyContinue
@@ -557,16 +489,13 @@ function Disable-WebThreatDefense {
     foreach ($path in $pathsToDelete) {
         if (Test-Path $path) {
             Remove-Item -Path $path -Recurse -Force -ErrorAction SilentlyContinue
-            Write-Output "Removed $path"
         }
     }
 
     # Remove value from Svchost
     try {
         Remove-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Svchost" -Name "WebThreatDefense" -ErrorAction SilentlyContinue
-        Write-Output "Removed WebThreatDefense from Svchost group."
     } catch {
-        Write-Warning "Failed to remove WebThreatDefense value from Svchost."
     }
 
     # Set policy-related values to 0
@@ -588,14 +517,10 @@ function Disable-WebThreatDefense {
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\PolicyManager\default\WebThreatDefense\ServiceEnabled" -Name "value" -Value 0 -Force
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WTDS\Components" -Name "NotifyPasswordReuse" -Value 0 -Force
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WTDS\Components" -Name "NotifyMalicious" -Value 0 -Force
-
-    Write-Output "WebThreatDefense successfully disabled."
 }
 
 
 function Disable-SmartScreen {
-    Write-Host "Disabling SmartScreen settings..."
-
     # Disable SmartScreen for Microsoft Edge
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\PhishingFilter" -Name "EnabledV9" -Value 0 -Type DWord -Force
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\PhishingFilter" -Name "PreventOverride" -Value 0 -Type DWord -Force
@@ -633,14 +558,10 @@ function Disable-SmartScreen {
     New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\SmartScreen" -Force | Out-Null
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\SmartScreen" -Name "ConfigureAppInstallControlEnabled" -Value 1 -Type DWord -Force
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender\SmartScreen" -Name "ConfigureAppInstallControl" -Value "Anywhere" -Type String -Force
-
-    Write-Host "SmartScreen has been disabled successfully."
 }
 
 
 function Disable-SystemMitigations {
-    Write-Output "Disabling system mitigations and SmartScreen..."
-
     # Helper function
     function Set-RegValue {
         param($Path, $Name, $Type, $Value)
@@ -721,8 +642,6 @@ function Disable-SystemMitigations {
     foreach ($key in $keysToDelete) {
         Remove-RegKey $key
     }
-
-    Write-Output "System mitigations disabled successfully."
 }
 
 
@@ -730,15 +649,12 @@ function Remove-Defender {
     RunAsTI $args[0] $args[1..11]
 
     # Reboot the system
-    Write-Host "Your PC will reboot in 10 seconds..."
     Start-Sleep -Seconds 3
     Restart-Computer -Force
 }
 
 
 function Remove-FilesAndFolders {
-    Write-Output "Removing Windows Defender-related files and directories..."
-
     # File patterns to delete
     $filesToDelete = @(
         "C:\Windows\WinSxS\FileMaps\wow64_windows-defender*.manifest",
@@ -768,8 +684,6 @@ function Remove-FilesAndFolders {
             Remove-Item -Path $dir -Recurse -Force -ErrorAction SilentlyContinue
         }
     }
-
-    Write-Output "Removal of Defender components completed."
 }
 
 
@@ -778,21 +692,8 @@ function Remove-Antivirus {
     bcdedit /set hypervisorlaunchtype off
     RunAsTI $args[0] $args[1..10]
     # Reboot the system
-    Write-Host "Your PC will reboot in 10 seconds..."
     Start-Sleep -Seconds 3
     Restart-Computer -Force
 }
 
 
-write-host args: $args
-Set-WindowsDefenderPolicies
-Disable-WindowsSecurityNotifications
-Remove-WindowsDefenderTraces
-Set-DefenderSettings
-Remove-Defenderq
-Disable-WebThreatDefense
-Disable-Mitigation
-Disable-WebThreatDefense
-Disable-SmartScreen
-Remove-FilesAndFolders
-Disable-SystemMitigations
