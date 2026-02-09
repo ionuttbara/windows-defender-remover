@@ -2,10 +2,20 @@
 
 <a href="https://github.com/ionuttbara/windows-defender-remover">
     <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="https://github.com/drunkwinter/windows-defender-remover/assets/38593134/8072a566-5bf0-4f05-9994-808145406bdc">
-        <img alt="Defender Remover" src="https://user-images.githubusercontent.com/79479952/239704528-c017473e-1d2a-4d4a-a215-bf71d137b86a.png">
+        <source media="(prefers-color-scheme: dark)" srcset="./site-res/darkmode.png">
+        <img alt="Defender Remover" src="./site-res/lightmode.png">
     </picture>
 </a>
+
+##  Project Modules
+
+For specific details on the sub-components, please check:
+
+* **[💿 ISO Maker](./ISO_Maker/README.md)** - Create a custom Windows ISO with Defender disabled.
+* **[🛡️ Remove Defender Engine](./Remove_Defender/README.md)** - Remove the antivirus core and services.
+* **[🖥️ Remove Security App](./Remove_SecurityComp/README.md)** - Remove the Windows Security UI.
+
+---
 
 ## ❓️ What does the app do?
 
@@ -55,7 +65,7 @@ OR
 you can use git
 
 ```
-git clone https://github.com/ionuttbara/windows-defender-remover.git
+git clone [https://github.com/ionuttbara/windows-defender-remover.git](https://github.com/ionuttbara/windows-defender-remover.git)
 cd windows-defender-remover
 Script_Run.bat
 ```
@@ -186,8 +196,7 @@ By default the script is disabling VBS to gain performance in your system. The f
     
 Apps and features which is used by Windows Virtualization:  
 
-- Windows Subsystem for **Android**/**Linux**  
-- HyperV Virtual Machine
+- Windows Subsystem for **Android**/**Linux** - HyperV Virtual Machine
 - <a href="https://apps.microsoft.com/detail/9n0tn65p5bf6?hl=en-US&gl=US" target="_blank">Microsoft Emulator</a>  (Windows 10X Emulator which you can find in Microsoft Store)
 - Android Studio integration in VisuaL Studio  or another Emulators (for Windows 10 22H2 with March 2025 Update or newer)
 

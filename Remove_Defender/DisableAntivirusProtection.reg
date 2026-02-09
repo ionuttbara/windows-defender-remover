@@ -32,3 +32,17 @@ Windows Registry Editor Version 5.00
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Policies\Microsoft\Windows Defender]
 "DisableRoutinelyTakingAction"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet]
+"DisableBlockAtFirstSeen"=dword:00000001
+"LocalSettingOverrideSpynetReporting"=dword:00000000
+"SpynetReporting"=dword:00000000
+"SubmitSamplesConsent"=dword:00000002
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Microsoft Antimalware\SpyNet]
+"SpyNetReporting"=dword:00000000
+"LocalSettingOverrideSpyNetReporting"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\RemovalTools\MpGears]
+"HeartbeatTrackingIndex"=dword:00000000
+"SpyNetReportingLocation"="0"

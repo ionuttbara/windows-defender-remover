@@ -14,8 +14,6 @@ Windows Registry Editor Version 5.00
 
 [-HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\WdBoot]
 
-[-HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SecurityHealthService]
-
 [-HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SgrmAgent]
 
 [-HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SgrmBroker]
@@ -28,3 +26,19 @@ Windows Registry Editor Version 5.00
 [-HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\MsSecFlt]
 
 [-HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\MsSecWfp]
+
+[-HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\whesvc]
+
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsRuntime\Server\WebThreatDefSvc]
+
+[-HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\webthreatdefsvc]
+
+[-HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\webthreatdefusersvc]
+
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Svchost\WebThreatDefense]
+
+[-HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PlutonHsp2]
+
+[-HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PlutonHeci]
+
+[-HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Hsp]

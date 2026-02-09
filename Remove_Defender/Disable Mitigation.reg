@@ -1,0 +1,37 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WindowsMitigation]
+"UserPreference"=dword:00000002
+
+; In-kernel Mitigations
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\kernel]
+"MitigationAuditOptions"=hex:00,00,00,00,00,00,20,22,00,00,00,00,00,00,00,20,00,00,00,00,00,00,00,00
+"MitigationOptions"=hex:00,22,22,20,22,20,22,22,20,00,00,00,00,20,00,20,00,00,00,00,00,00,00,00
+"KernelSEHOPEnabled"=dword:00000000
+
+; Services Mitigations
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SCMConfig]
+"EnableSvchostMitigationPolicy"=hex(b):00,00,00,00,00,00,00,00
+
+; Remove Defender's Tamper Protection
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Features]
+"MpPlatformKillbitsFromEngine"=hex:00,00,00,00,00,00,00,00
+"TamperProtectionSource"=dword:00000000
+"MpCapability"=hex:00,00,00,00,00,00,00,00
+"TamperProtection"=dword:00000000
+
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System]
+"RunAsPPL"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa]
+"LsaConfigFlags"=dword:00000000
+"RunAsPPL"=dword:00000000
+"RunAsPPLBoot"=dword:00000000
+"LmCompatibilityLevel"=-
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CI\Config]
+"VulnerableDriverBlocklistEnable"=dword:00000000
