@@ -66,7 +66,7 @@ you can use git
 
 ```
 git clone https://github.com/ionuttbara/windows-defender-remover.git
-Script_Run.bat
+script/Script_Run.cmd
 ```
 
 
