@@ -82,6 +82,28 @@ you can use download entire source code
 
 You can file an [issue](https://github.com/ionuttbara/windows-defender-remover/issues) if you experience any problems.
 
+## Verification script
+
+A standalone CMD script can be used to verify whether the main Windows Defender / Windows Security components were removed successfully after running the remover.
+
+### Usage
+- Run it as **Administrator**
+- Run it **after the final reboot**
+- It does **not** remove anything
+- It only checks and reports the result
+
+### What it checks
+- Leftover Defender folders
+- Defender / Security-related services and drivers
+- Windows Security app (`SecHealthUI`)
+- Windows Defender scheduled tasks
+- A few registry consistency checks
+
+### Output
+- `[OK]` expected result
+- `[WARN]` secondary check mismatch
+- `[KO]` component still appears present
+
 ## 📃 Automation of the script
 
 You can remove Defender with arguments.
