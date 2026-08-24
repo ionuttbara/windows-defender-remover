@@ -2,18 +2,18 @@
 
 <a href="https://github.com/ionuttbara/windows-defender-remover">
     <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="./site-res/darkmode.png">
-        <img alt="Defender Remover" src="./site-res/lightmode.png">
+        <source media="(prefers-color-scheme: dark)" srcset="./site-res/new_darkmode.png">
+        <img alt="Defender Remover" src="./site-res/new_lightmode.png">
     </picture>
 </a>
 
-##  Project Modules
+## Project Modules
 
 For specific details on the sub-components, please check:
 
 * **[💿 ISO Maker](./ISO_Maker/README.md)** - Create a custom Windows ISO with Defender disabled.
-* **[🛡️ Remove Defender Engine](./Remove_Defender/README.md)** - Remove the antivirus core and services.
-* **[🖥️ Remove Security App](./Remove_SecurityComp/README.md)** - Remove the Windows Security UI.
+* **[🛡️ Remove Defender Engine](./script/Remove_Defender/README.md)** - Remove the antivirus core and services.
+* **[🖥️ Remove Security App](./script/Remove_SecurityComp/README.md)** - Remove the Windows Security UI.
 
 ---
 
@@ -66,7 +66,6 @@ you can use git
 
 ```
 git clone https://github.com/ionuttbara/windows-defender-remover.git
-cd windows-defender-remover
 Script_Run.bat
 ```
 
@@ -81,28 +80,6 @@ you can use download entire source code
 ![cli](https://github.com/drunkwinter/windows-defender-remover/assets/38593134/46007191-0a65-43c2-b451-a993ff90e00e)
 
 You can file an [issue](https://github.com/ionuttbara/windows-defender-remover/issues) if you experience any problems.
-
-## Verification script
-
-A standalone CMD script can be used to verify whether the main Windows Defender / Windows Security components were removed successfully after running the remover.
-
-### Usage
-- Run it as **Administrator**
-- Run it **after the final reboot**
-- It does **not** remove anything
-- It only checks and reports the result
-
-### What it checks
-- Leftover Defender folders
-- Defender / Security-related services and drivers
-- Windows Security app (`SecHealthUI`)
-- Windows Defender scheduled tasks
-- A few registry consistency checks
-
-### Output
-- `[OK]` expected result
-- `[WARN]` secondary check mismatch
-- `[KO]` component still appears present
 
 ## 📃 Automation of the script
 

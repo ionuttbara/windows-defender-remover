@@ -1,76 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
 <unattend xmlns="urn:schemas-microsoft-com:unattend" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State">
+	<!--https://schneegans.de/windows/unattend-generator/?LanguageMode=Unattended&UILanguage=ro-RO&Locale=en-US&Keyboard=00000409&UseKeyboard2=true&Locale2=ro-RO&Keyboard2=00010418&GeoLocation=244&PEMode=Generated&Disable8Dot3Names=true&DisableDefender=true&SkipIntegrityCheck=true&InstallFromMode=Automatic&PartitionMode=Unattended&TargetDisk=0&SystemSize=300&PartitionLayout=Automatic&RecoveryMode=None&DiskAssertionMode=Skip&WindowsEditionMode=Generic&WindowsEdition=pro&ProcessorArchitecture=amd64&BypassRequirementsCheck=true&BypassNetworkCheck=true&UseConfigurationSet=true&HidePowerShellWindows=true&KeepSensitiveFiles=true&ComputerNameMode=Random&TimeZoneMode=Explicit&TimeZone=GTB+Standard+Time&UserAccountMode=InteractiveLocal&PasswordExpirationMode=Unlimited&LockoutMode=Disabled&HideFiles=HiddenSystem&ShowFileExtensions=true&ClassicContextMenu=true&LaunchToThisPC=true&ShowEndTask=true&TaskbarSearch=Hide&TaskbarIconsMode=Default&DisableWidgets=true&LeftTaskbar=true&HideTaskViewButton=true&DisableBingResults=true&StartTilesMode=Empty&StartPinsMode=Empty&DisableWindowsUpdate=true&DisableUac=true&DisableSac=true&DisableSmartScreen=true&DisableFastStartup=true&DisableSystemRestore=true&EnableLongPaths=true&DeleteJunctions=true&AllowPowerShellScripts=true&DisableLastAccess=true&PreventAutomaticReboot=true&TurnOffSystemSounds=true&DisableAppSuggestions=true&PreventDeviceEncryption=true&HideEdgeFre=true&DisableEdgeStartupBoost=true&DisablePointerPrecision=true&DeleteWindowsOld=true&DisableAutomaticRestartSignOn=true&DisableWpbt=true&EffectsMode=Custom&ThumbnailsOrIcon=true&DragFullWindows=true&FontSmoothing=true&ListBoxSmoothScrolling=true&DesktopIconsMode=Custom&IconRecycleBin=true&IconThisPC=true&StartFoldersMode=Custom&StartFolderDocuments=true&StartFolderDownloads=true&StartFolderMusic=true&StartFolderNetwork=true&StartFolderPictures=true&StartFolderVideos=true&CoreIsolationMode=Disabled&WifiMode=Skip&ExpressSettings=DisableAll&LockKeysMode=Skip&StickyKeysMode=Disabled&ColorMode=Custom&SystemColorTheme=Light&AppsColorTheme=Light&AccentColor=%230078d4&EnableTransparency=true&WallpaperMode=Solid&WallpaperColor=%23000000&LockScreenMode=Default&SystemScript0=%23+Autotuning+Internet+Speed+and+making+it+persistent%0D%0ASet-NetTCPSetting+-SettingName+*+-ScalingHeuristics+Disabled%0D%0ASet-NetTCPSetting+-SettingName+*+-InitialRto+3000+-Timestamps+Disabled+-MemoryPressureProtection+Disabled+-NonSackRttResiliency+Disabled+-MaxSynRetransmissions+2%0D%0ASet-NetIPv4Protocol+-IcmpRedirects+Disabled+-DefaultHopLimit+64+-MultipleArpAnnouncements+Disabled%0D%0A%0D%0Anetsh.exe+interface+tcp+set+supplemental+Internet+congestionprovider%3Dctcp%0D%0Anetsh.exe+interface+tcp+set+supplemental+InternetCustom+congestionprovider%3Dctcp%0D%0Anetsh.exe+interface+tcp+set+supplemental+Datacenter+congestionprovider%3Dctcp%0D%0Anetsh.exe+interface+tcp+set+supplemental+Compat+congestionprovider%3Dctcp%0D%0Anetsh.exe+interface+tcp+set+supplemental+DatacenterCustom+congestionprovider%3Dctcp%0D%0A%0D%0A%23+OffloadGlobal+Settings%0D%0ASet-NetOffloadGlobalSetting+-PacketCoalescingFilter+disabled+-Chimney+Disabled+-Taskoffload+Enabled+-ReceiveSideScaling+Enabled+-ReceiveSegmentCoalescing+Disabled%0D%0A%0D%0A%23+tweaking+features+from+network+adapters%0D%0ADisable-NetAdapterLso+-Name+*%0D%0ADisable-NetAdapterBinding+-Name+*+-ComponentID+ms_pacer%0D%0ASet-NetIPInterface+-WeakHostSend+Enabled+-WeakHostReceive+Enabled+-ErrorAction+SilentlyContinue%0D%0A%0D%0A%23+TCP%2FIP+Protocole+Tweaks%0D%0Anetsh.exe+int+isatap+set+state+disable+%7C+Out-Null%0D%0Anetsh.exe+int+tcp+set+global+ecncapability%3Denabled+%7C+Out-Null%0D%0Anetsh.exe+int+tcp+set+global+ecn%3Denabled+%7C+Out-Null%0D%0Anetsh.exe+interface+tcp+set+global+fastopen%3Denabled+%7C+Out-Null%0D%0Anetsh.exe+interface+tcp+set+global+fastopenfallback%3Denabled+%7C+Out-Null%0D%0Anetsh.exe+interface+ip+set+global+neighborcachelimit%3D4096+taskoffload%3Denabled+%7C+Out-Null%0D%0Anetsh.exe+interface+tcp+set+global+hystart%3Ddisabled+%7C+Out-Null%0D%0A%0D%0A%23+Function+to+add+or+update+registry+keys%0D%0Afunction+Set-RegKey+%7B%0D%0A++++param+%28%0D%0A++++++++%5Bstring%5D%24path%2C%0D%0A++++++++%5Bstring%5D%24name%2C%0D%0A++++++++%5Bstring%5D%24value%2C%0D%0A++++++++%5Bstring%5D%24type+%3D+%22DWord%22%0D%0A++++%29%0D%0A%0D%0A++++if+%28%24type+-eq+%22DWord%22%29+%7B%0D%0A++++++++Set-ItemProperty+-Path+%24path+-Name+%24name+-Value+%24value+-Type+DWord+-Force%0D%0A++++%7D+else+%7B%0D%0A++++++++Set-ItemProperty+-Path+%24path+-Name+%24name+-Value+%24value+-Type+String+-Force%0D%0A++++%7D%0D%0A%7D%0D%0A%0D%0A%23+Adding+NetBIOS+Options%0D%0A%24netbtPath+%3D+%22HKLM%3A%5CSYSTEM%5CCurrentControlSet%5Cservices%5CNetBT%5CParameters%5CInterfaces%22%0D%0A%24interfaces+%3D+Get-ChildItem+-Path+%24netbtPath%0D%0A%0D%0Aforeach+%28%24interface+in+%24interfaces%29+%7B%0D%0A++++Set-RegKey+-path+%24interface.PSPath+-name+%22NetbiosOptions%22+-value+1+-type+%22DWord%22%0D%0A%7D%0D%0A%0D%0A%23+Updating+registry+keys+for+network+interfaces%0D%0A%24regPath+%3D+%22HKLM%3A%5CSYSTEM%5CCurrentControlSet%5CServices%5CTcpip%5CParameters%5CInterfaces%22%0D%0A%24networkInterfaces+%3D+Get-ChildItem+-Path+%24regPath+%7C+Where-Object+%7B+%24_.Name+-match+%22000%22+%7D%0D%0A%0D%0Aforeach+%28%24interface+in+%24networkInterfaces%29+%7B%0D%0A++++%23+Disable+Flow+Control%0D%0A++++Set-RegKey+-path+%24interface.PSPath+-name+%22*FlowControl%22+-value+%220%22+-type+%22String%22%0D%0A++++Set-RegKey+-path+%24interface.PSPath+-name+%22FlowControlCap%22+-value+%220%22+-type+%22String%22%0D%0A%0D%0A++++%23+Remove+Interrupt+Delays%0D%0A++++Set-RegKey+-path+%24interface.PSPath+-name+%22TxIntDelay%22+-value+%220%22+-type+%22String%22%0D%0A++++Set-RegKey+-path+%24interface.PSPath+-name+%22TxAbsIntDelay%22+-value+%220%22+-type+%22String%22%0D%0A++++Set-RegKey+-path+%24interface.PSPath+-name+%22RxIntDelay%22+-value+%220%22+-type+%22String%22%0D%0A++++Set-RegKey+-path+%24interface.PSPath+-name+%22RxAbsIntDelay%22+-value+%220%22+-type+%22String%22%0D%0A%0D%0A++++%23+Remove+Adapter+Notification%0D%0A++++Set-RegKey+-path+%24interface.PSPath+-name+%22FatChannelIntolerant%22+-value+%220%22+-type+%22String%22%0D%0A%0D%0A++++%23+Disable+Interrupt+Moderation%0D%0A++++Set-RegKey+-path+%24interface.PSPath+-name+%22*InterruptModeration%22+-value+%220%22+-type+%22String%22%0D%0A%0D%0A++++%23+Disable+-+Allow+the+computer+to+turn+off+this+device+to+save+power%0D%0A++++Set-RegKey+-path+%24interface.PSPath+-name+%22LogDisconnectEvent%22+-value+%220%22+-type+%22String%22%0D%0A++++Set-RegKey+-path+%24interface.PSPath+-name+%22LogLinkStateEvent%22+-value+16+-type+%22String%22%0D%0A%0D%0A++++%23+Disable+-+Reduce+network+speed+to+10%2F100%0D%0A++++Set-RegKey+-path+%24interface.PSPath+-name+%22GigaLite%22+-value+%220%22+-type+%22String%22%0D%0A%0D%0A++++%23+Disabling+Green+Ethernet%0D%0A++++Set-RegKey+-path+%24interface.PSPath+-name+%22*EEE%22+-value+%220%22+-type+%22String%22%0D%0A++++Set-RegKey+-path+%24interface.PSPath+-name+%22AdvancedEEE%22+-value+%220%22+-type+%22String%22%0D%0A++++Set-RegKey+-path+%24interface.PSPath+-name+%22AutoPowerSaveModeEnabled%22+-value+%220%22+-type+%22String%22%0D%0A++++Set-RegKey+-path+%24interface.PSPath+-name+%22EnableEDT%22+-value+%220%22+-type+%22String%22%0D%0A++++Set-RegKey+-path+%24interface.PSPath+-name+%22EnableGreenEthernet%22+-value+%220%22+-type+%22String%22%0D%0A++++Set-RegKey+-path+%24interface.PSPath+-name+%22EEELinkAdvertisement%22+-value+%220%22+-type+%22String%22%0D%0A++++Set-RegKey+-path+%24interface.PSPath+-name+%22ENPWMode%22+-value+%220%22+-type+%22String%22%0D%0A++++Set-RegKey+-path+%24interface.PSPath+-name+%22GPPSW%22+-value+%220%22+-type+%22String%22%0D%0A++++Set-RegKey+-path+%24interface.PSPath+-name+%22PowerSavingMode%22+-value+%220%22+-type+%22String%22%0D%0A++++Set-RegKey+-path+%24interface.PSPath+-name+%22ULPMode%22+-value+%220%22+-type+%22String%22%0D%0A%7D%0D%0A%0D%0A%23+Disabling+Nagle%27s+Algorithm+for+better+Gaming+Latency%0D%0A%24tcpipPath+%3D+%22HKLM%3A%5CSYSTEM%5CCurrentControlSet%5CServices%5CTcpip%5CParameters%5CInterfaces%22%0D%0A%24tcpInterfaces+%3D+Get-ChildItem+-Path+%24tcpipPath+%7C+Where-Object+%7B+%24_.Name+-match+%221%22+%7D%0D%0A%0D%0Aforeach+%28%24tcpInterface+in+%24tcpInterfaces%29+%7B%0D%0A++++Set-RegKey+-path+%24tcpInterface.PSPath+-name+%22TCPNoDelay%22+-value+1+-type+%22DWord%22%0D%0A++++Set-RegKey+-path+%24tcpInterface.PSPath+-name+%22TcpAckFrequency%22+-value+1+-type+%22DWord%22%0D%0A++++Set-RegKey+-path+%24tcpInterface.PSPath+-name+%22TcpDelAckTicks%22+-value+0+-type+%22DWord%22%0D%0A%7D%0D%0A%0D%0A%23+A+string+list+which+has+listed+capabilities+or+FoD+to+be+disabled+and+removed.%0D%0A%24flist+%3D+%40%28%22*Realtek*%22%2C+%22*Intel*%22%2C+%22*Broadcom*%22%2C+%22*Qualcomm*%22%2C+%22*Marvel*%22%2C%0D%0A++++++++++++%22*Vmware*%22%2C+%22*Ethernet*%22%2C+%22*InternetExplorer*%22%2C+%22*StepsRecorder*%22%2C+%22*WindowsMediaPlayer*%22%2C%0D%0A++++++++++++%22*Wallpapers*%22%2C+%22*Print*%22%2C+%22*MathRecognizer*%22%2C+%22*PowerShell*%22%2C+%0D%0A%09++++%22*QuickAssist*%22%2C+%22*OneSync*%22%2C+%22*LA57*%22%2C+%22*Ralink*%22%2C+%22*Virtual*%22%2C+%22*TCP*%22%2C+%22*Hello*%22%2C%22*Theme*%22%2C%22*Edge*%22%29%0D%0A%0D%0Aforeach+%28%24item+in+%24flist%29+%7B%0D%0A++++%23+Get+the+list+of+capabilities+that+match+the+current+item%0D%0A++++%24checkCapabilities+%3D+Get-WindowsCapability+-Online+%7C+Where-Object+%7B+%24_.Name+-like+%24item+%7D%0D%0A++++%0D%0A++++foreach+%28%24checkCapability+in+%24checkCapabilities%29+%7B%0D%0A++++++++if+%28%24checkCapability.State+-eq+%27Installed%27%29+%7B%0D%0A++++++++++++try+%7B%0D%0A++++++++++++++++%23+Remove+each+capability+found%0D%0A++++++++++++++++Remove-WindowsCapability+-Online+-Name+%24checkCapability.Name+-ErrorAction+Stop%0D%0A++++++++++++%7D+catch+%7B%0D%0A++++++++++++++++Write-Host+%22Error+at+%24%28%24checkCapability.Name%29%3A+%24%28%24_.Exception.Message%29%22%0D%0A++++++++++++%7D%0D%0A++++++++%7D%0D%0A++++%7D%0D%0A%7D%0D%0A%0D%0A%24Host.UI.RawUI.WindowTitle+%3D+%22Unsplitter%22%0D%0ASet-Location+-Path+%24PSScriptRoot%0D%0A%24os+%3D+Get-WmiObject+-Class+Win32_OperatingSystem%0D%0A%24mem+%3D+%24os.TotalVisibleMemorySize%0D%0A%24ram+%3D+%24mem+%2B+1024000%0D%0ASet-ItemProperty+-Path+%22HKLM%3A%5CSYSTEM%5CCurrentControlSet%5CControl%22+-Name+%22SvcHostSplitThresholdInKB%22+-Value+%24ram+-Type+DWord%0D%0A&SystemScriptType0=Ps1&SystemScript1=Windows+Registry+Editor+Version+5.00%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5D%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C0e796bdb-100d-47d6-a2d5-f7d2daa51f51%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000001%0D%0A%22DCSettingIndex%22%3Ddword%3A00000001%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C29F6C1DB-86DA-48C5-9FDB-F2B67B1F44DA%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%5B-HKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C309dce9b-bef4-4119-9921-a851fb12f0f4%5D%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C3C0BC021-C8A8-4E07-A973-6B14CBCB2B7E%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A0000012c%0D%0A%22DCSettingIndex%22%3Ddword%3A0000012c%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C5CA83367-6E45-459F-A27B-476B1D01C936%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000001%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C637EA02F-BBCB-4015-8E2C-A1C7B9C0B546%5D%0D%0A%22DCSettingIndex%22%3Ddword%3A00000003%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C6738E2C4-E8A5-4A42-B16A-E040E769756E%5D%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C7648EFA3-DD9C-4E3E-B566-50F929386280%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000003%0D%0A%22DCSettingIndex%22%3Ddword%3A00000003%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C7bc4a2f9-d8fc-4469-b07b-33eb785aaca0%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C8183ba9a-e910-48da-8769-14ae6dc1170a%5D%0D%0A%22DCSettingIndex%22%3Ddword%3A0000000f%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C90959D22-D6A1-49B9-AF93-BCE885AD335B%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000001%0D%0A%22DCSettingIndex%22%3Ddword%3A00000001%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C94ac6d29-73ce-41a6-809f-6363ba21b47e%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C96996BC0-AD50-47EC-923B-6F41874DD9EB%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000001%0D%0A%22DCSettingIndex%22%3Ddword%3A00000001%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C9A66D8D7-4FF7-4EF9-B5A2-5A326CA2A469%5D%0D%0A%22DCSettingIndex%22%3Ddword%3A00000005%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C9D7815A6-7EE4-497E-8888-515A05F02364%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5CA4B195F5-8225-47D8-8012-9D41369786E2%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000001%0D%0A%22DCSettingIndex%22%3Ddword%3A00000001%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5CA7066653-8D6C-40A8-910E-A1F54B84C7E5%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000002%0D%0A%22DCSettingIndex%22%3Ddword%3A00000002%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Cabfc2519-3608-4c2a-94ea-171b0ed546ab%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000001%0D%0A%22DCSettingIndex%22%3Ddword%3A00000001%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5CB7A27025-E569-46c2-A504-2B96CAD225A1%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000001%0D%0A%22DCSettingIndex%22%3Ddword%3A00000001%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Cbcded951-187b-4d05-bccc-f7e51960c258%5D%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Cd4c1d4c8-d5cc-43d3-b83e-fc51215cb04d%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000001%0D%0A%22DCSettingIndex%22%3Ddword%3A00000001%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Cd8742dcb-3e6a-4b3c-b3fe-374623cdcf06%5D%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5CE69653CA-CF7F-4F05-AA73-CB833FA90AD4%5D%0D%0A%22DCSettingIndex%22%3Ddword%3A0000000f%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Cf15576e8-98b7-4186-b944-eafa664402d9%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000001%0D%0A%22DCSettingIndex%22%3Ddword%3A00000001%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Cf1fbfde2-a960-4165-9f88-50667911ce96%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000028%0D%0A%22DCSettingIndex%22%3Ddword%3A00000028%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5CF3C5027D-CD16-4930-AA6B-90DB844A8F00%5D%0D%0A%22DCSettingIndex%22%3Ddword%3A00000002%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Cbe337238-0d82-4146-a960-4f3749d470c7%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%3B+USB+selective+suspend+setting+%28GUID%3A+48e6b7a6-50f5-4782-a5d4-53bb8f07e226%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C48e6b7a6-50f5-4782-a5d4-53bb8f07e226%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%3B+Turn+off+hard+disk+after+%28GUID%3A+29f6c1db-86da-48c5-9fdb-f2b67b1f44da%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C29f6c1db-86da-48c5-9fdb-f2b67b1f44da%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%3B+NVMe+NOPPME+%28GUID%3A+d639518a-e56d-4345-8af2-b9f32fb26109%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Cd639518a-e56d-4345-8af2-b9f32fb26109%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%3B+NVMe+Primary+Idle+Timeout+%28GUID%3A+d3d55efd-c1ff-424e-9dc3-441be7833010%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Cd3d55efd-c1ff-424e-9dc3-441be7833010%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%3B+AHCI+Link+Power+Management+-+HIPM%2FDIPM+%28GUID%3A+0b2d69d7-a2a1-449c-9680-f91c70521c60%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C0b2d69d7-a2a1-449c-9680-f91c70521c60%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%3B+AHCI+Link+Power+Management+-+Adaptive+%28GUID%3A+dab60367-53fe-4fbc-825e-521d069d2456%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Cdab60367-53fe-4fbc-825e-521d069d2456%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C0cc5b647-c1df-4637-891a-dec35c318583%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C0cc5b647-c1df-4637-891a-dec35c318584%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000064%0D%0A%22DCSettingIndex%22%3Ddword%3A00000064%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C12a0ab44-fe28-4fa9-b3bd-4b64f44960a6%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C12a0ab44-fe28-4fa9-b3bd-4b64f44960a7%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%3B+Energy+performance+preference+policy+%280%25+-+Max+Performance+%2F+EPP+0%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C36687f9e-e3a5-4dbf-b1dc-15eb381c6863%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%3B+Energy+performance+preference+policy+Class+1+%280%25+-+Max+Performance+EPP+0%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C36687f9e-e3a5-4dbf-b1dc-15eb381c6864%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Cd639518a-e56d-4345-8af2-b9f32fb26109%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Cdbc9e238-6de9-49e3-92cd-8c2b4946b472%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Cfc95af4d-40e7-4b6d-835a-56d131dbc80e%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Cee12f906-d277-404b-b6da-e5fa1a576df5%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%3B+%2D%2D-+CPU+CORE+PARKING+%2D%2D-%0D%0A%0D%0A%3B+CPMinCores+%28100%25+-+Dezactiveaz%C4%83+Parking%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C0cc5b647-c74e-4111-92e3-3b129533f4d5%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000064%0D%0A%22DCSettingIndex%22%3Ddword%3A00000064%0D%0A%0D%0A%3B+CPMaxCores+%28100%25%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Cea0653f4-9251-4ca4-99a3-324b3d2b0636%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000064%0D%0A%22DCSettingIndex%22%3Ddword%3A00000064%0D%0A%0D%0A%3B+CPIncreaseTime+%28Minim+-+1%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C2430ab6f-a544-49aa-a9d7-2b7ab794b238%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000001%0D%0A%22DCSettingIndex%22%3Ddword%3A00000001%0D%0A%0D%0A%3B+CPDecreaseTime+%28Maxim+-+100%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Cdf142941-20f3-4edf-9a4a-9c8398d99316%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000064%0D%0A%22DCSettingIndex%22%3Ddword%3A00000064%0D%0A%0D%0A%3B+CPConcurrency+%28100%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C24331756-9f37-4a91-8aa2-cd24f05145b1%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000064%0D%0A%22DCSettingIndex%22%3Ddword%3A00000064%0D%0A%0D%0A%3B+CPDistribution+%280%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Ca55612aa-f62a-4414-bdc9-1157d0d01477%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%3B+CPHeadroom+%280%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C7354e7bc-61d6-4765-b384-839981369279%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%3B+CpLatencyHintUnpark+%281%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C6161914b-2401-4061-a4a0-76169c08044b%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000001%0D%0A%22DCSettingIndex%22%3Ddword%3A00000001%0D%0A%0D%0A%3B+%2D%2D-+IDLE+THRESHOLDS+%2D%2D-%0D%0A%0D%0A%3B+IdleDemoteThreshold+%28100%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C4b92d772-746b-4dc8-bc01-e63086603a11%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000064%0D%0A%22DCSettingIndex%22%3Ddword%3A00000064%0D%0A%0D%0A%3B+IdlePromoteThreshold+%28100%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C7b224883-ad29-4c39-ad36-f310058e3393%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000064%0D%0A%22DCSettingIndex%22%3Ddword%3A00000064%0D%0A%0D%0A%3B+%2D%2D-+PERFORMANCE+STATES+%2D%2D-%0D%0A%0D%0A%3B+MinPerformance+%28100%25%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C893dee03-5242-4113-8214-4362fe445d4d%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000064%0D%0A%22DCSettingIndex%22%3Ddword%3A00000064%0D%0A%0D%0A%3B+MaxPerformance+%28100%25%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Cbc5038f7-23e0-4960-96da-33abaf5935ec%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000064%0D%0A%22DCSettingIndex%22%3Ddword%3A00000064%0D%0A%0D%0A%3B+PerfIncreasePolicy+%28Ideal+-+0%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C45bcc044-d885-43e2-8605-ee0ec6e96b59%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%3B+PerfIncreaseThreshold+%2810%25%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C06cadf0e-64ed-447a-ad35-13f31347019a%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A0000000a%0D%0A%22DCSettingIndex%22%3Ddword%3A0000000a%0D%0A%0D%0A%3B+PerfIncreaseTime+%281%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C984c071e-2352-4220-8044-03cf06c03b2f%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000001%0D%0A%22DCSettingIndex%22%3Ddword%3A00000001%0D%0A%0D%0A%3B+PerfDecreasePolicy+%28Single+-+1%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C40fb19d1-5c9a-4c1d-8c41-2ca4ca564e05%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000001%0D%0A%22DCSettingIndex%22%3Ddword%3A00000001%0D%0A%0D%0A%3B+PerfDecreaseThreshold+%280%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C12a0abc1-4b95-46f3-80f3-c7a035c34a4c%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%3B+PerfDecreaseTime+%28100%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Cd806336b-ee4a-4a9d-9f1c-596c463b322a%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000064%0D%0A%22DCSettingIndex%22%3Ddword%3A00000064%0D%0A%0D%0A%3B+PerfLatencyHint+%28100%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C03310071-7006-4444-88f6-ec61386127e2%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000064%0D%0A%22DCSettingIndex%22%3Ddword%3A00000064%0D%0A%0D%0A%3B+%2D%2D-+AUTONOMOUS+%26+EPP+%2D%2D-%0D%0A%0D%0A%3B+PerfAutonomousMode+%28Enabled+-+1%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C8baa4a8a-3315-4420-b301-3e6601b0f0a4%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000001%0D%0A%22DCSettingIndex%22%3Ddword%3A00000001%0D%0A%0D%0A%3B+PerfEnergyPreference+%28Performance+-+0%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C36687e9e-e3a5-4dbf-b1dc-15eb31c7448b%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%3B+LatencyHintEpp+%28Performance+-+0%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C461a3406-018d-4f10-9118-8f53a479a95f%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%3B+%2D%2D-+UNPARK+POLICIES+%2D%2D-%0D%0A%0D%0A%3B+ModuleUnparkPolicy+%28All+cores+-+1%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Cc4581d15-9658-4ac2-8953-2d10f285aa5b%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000001%0D%0A%22DCSettingIndex%22%3Ddword%3A00000001%0D%0A%0D%0A%3B+ComplexUnparkPolicy+%281%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Cd6138075-8025-467f-8592-349818804975%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000001%0D%0A%22DCSettingIndex%22%3Ddword%3A00000001%0D%0A%0D%0A%3B+SmtUnparkPolicy+%281%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C30169123-d349-4184-9134-8c8713fca3b3%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000001%0D%0A%22DCSettingIndex%22%3Ddword%3A00000001%0D%0A%0D%0A%3B+%2D%2D-+HETERO+%2F+HYBRID+CORE+SETTINGS+%2D%2D-%0D%0A%0D%0A%3B+CPMinCores1+%28100%25+-+Toate+nucleele+de+clasa+1+active%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C75e83fb4-118d-4f18-a648-4321040c4e13%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000064%0D%0A%22DCSettingIndex%22%3Ddword%3A00000064%0D%0A%0D%0A%3B+CPMaxCores1+%28100%25%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C230c3d33-3d02-4bf1-8935-779836371f4b%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000064%0D%0A%22DCSettingIndex%22%3Ddword%3A00000064%0D%0A%0D%0A%3B+HeteroIncreaseTime+%28Minim+-+1%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C7f2492b6-6011-457a-85c0-514a510ed951%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000001%0D%0A%22DCSettingIndex%22%3Ddword%3A00000001%0D%0A%0D%0A%3B+HeteroDecreaseTime+%28Maxim+-+100%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Cc7499445-3172-46aa-9d41-39994c9657f8%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000064%0D%0A%22DCSettingIndex%22%3Ddword%3A00000064%0D%0A%0D%0A%3B+HeteroIncreaseThreshold+%28Prag+mic+pentru+mutare+pe+nuclee+rapide%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Cb000397d-9d0d-4dfd-9afd-be5045091a13%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A0000000a%0D%0A%22DCSettingIndex%22%3Ddword%3A0000000a%0D%0A%0D%0A%3B+HeteroDecreaseThreshold+%28Prag+mare+pentru+a+r%C4%83m%C3%A2ne+pe+nuclee+rapide%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C6317c06e-8260-47b2-8789-532669e46950%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A0000005a%0D%0A%22DCSettingIndex%22%3Ddword%3A0000005a%0D%0A%0D%0A%3B+CpLatencyHintUnpark1+%281%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C10a28bdc-3834-4bc1-9034-45300305a414%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000001%0D%0A%22DCSettingIndex%22%3Ddword%3A00000001%0D%0A%0D%0A%3B+%2D%2D-+PERFORMANCE+CLASS+1+%28E-CORES+%2F+SECONDARY%29+%2D%2D-%0D%0A%0D%0A%3B+MinPerformance1+%28100%25%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C893dee03-5242-4113-8214-4362fe445d4e%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000064%0D%0A%22DCSettingIndex%22%3Ddword%3A00000064%0D%0A%0D%0A%3B+MaxPerformance1+%28100%25%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Cbc5038f7-23e0-4960-96da-33abaf5935ed%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000064%0D%0A%22DCSettingIndex%22%3Ddword%3A00000064%0D%0A%0D%0A%3B+PerfIncreasePolicy1+%28Ideal+-+0%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C45bcc044-d885-43e2-8605-ee0ec6e96b5a%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%3B+PerfIncreaseThreshold1+%2810%25%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C06cadf0e-64ed-447a-ad35-13f31347019b%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A0000000a%0D%0A%22DCSettingIndex%22%3Ddword%3A0000000a%0D%0A%0D%0A%3B+PerfIncreaseTime1+%281%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C984c071e-2352-4220-8044-03cf06c03b30%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000001%0D%0A%22DCSettingIndex%22%3Ddword%3A00000001%0D%0A%0D%0A%3B+PerfDecreasePolicy1+%28Single+-+1%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C40fb19d1-5c9a-4c1d-8c41-2ca4ca564e06%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000001%0D%0A%22DCSettingIndex%22%3Ddword%3A00000001%0D%0A%0D%0A%3B+PerfDecreaseThreshold1+%280%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C12a0abc1-4b95-46f3-80f3-c7a035c34a4d%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%3B+PerfDecreaseTime1+%28100%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Cd806336b-ee4a-4a9d-9f1c-596c463b322b%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000064%0D%0A%22DCSettingIndex%22%3Ddword%3A00000064%0D%0A%0D%0A%3B+PerfLatencyHint1+%28100%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C03310071-7006-4444-88f6-ec61386127e3%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000064%0D%0A%22DCSettingIndex%22%3Ddword%3A00000064%0D%0A%0D%0A%3B+LatencyHintEpp1+%280%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C461a3406-018d-4f10-9118-8f53a479a960%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%3B+%2D%2D-+HETERO+CLASS+PERFORMANCE+%2D%2D-%0D%0A%0D%0A%3B+HeteroClass1InitialPerf+%28100%25+la+activare%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C6737e22e-7d14-4acb-a3fa-a69006900405%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000064%0D%0A%22DCSettingIndex%22%3Ddword%3A00000064%0D%0A%0D%0A%3B+HeteroClass0FloorPerf+%28100%25+minim+pentru+clasa+0%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Cf7358ef9-bb6e-473d-b4f0-466548777771%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000064%0D%0A%22DCSettingIndex%22%3Ddword%3A00000064%0D%0A%0D%0A%3B+HeteroIncreaseThreshold1+%28Prag+pentru+clasa+1%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Cb000397d-9d0d-4dfd-9afd-be5045091a14%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A0000000a%0D%0A%22DCSettingIndex%22%3Ddword%3A0000000a%0D%0A%0D%0A%3B+HeteroDecreaseThreshold1+%28Prag+pentru+clasa+1%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C6317c06e-8260-47b2-8789-532669e46951%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A0000005a%0D%0A%22DCSettingIndex%22%3Ddword%3A0000005a%0D%0A%0D%0A%3B+%2D%2D-+FREQUENCY+%26+BOOST+%2D%2D-%0D%0A%0D%0A%3B+MaxFrequency+%280+%3D+Nelimitat%2FFrecven%C8%9Ba+maxim%C4%83+a+procesorului%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C75b0ae3f-bce0-45a7-8c89-c9611c251100%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%3B+MaxFrequency1+%28E-Cores%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C75b0ae3f-bce0-45a7-8c89-c9611c251101%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%3B+PerfBoostMode+%28Aggressive+-+2%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Cbe337238-0d82-4146-a960-4f3749d470c2%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000002%0D%0A%22DCSettingIndex%22%3Ddword%3A00000002%0D%0A%0D%0A%3B+%2D%2D-+SCHEDULING+POLICIES+%28DISTRIBUIRE+SARCINI%29+%2D%2D-%0D%0A%0D%0A%3B+SchedulingPolicy+%28High+Performance+-+2%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C93b22d1d-9513-4bc7-ad42-1e967313f2e4%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000002%0D%0A%22DCSettingIndex%22%3Ddword%3A00000002%0D%0A%0D%0A%3B+ShortSchedulingPolicy+%28High+Performance+-+2%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Cbae08b81-2d5e-4688-ad6a-13243356654b%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000002%0D%0A%22DCSettingIndex%22%3Ddword%3A00000002%0D%0A%0D%0A%3B+%2D%2D-+ARCH+CLASS+THRESHOLDS+%28HIBRID+P%2FE+CORES%29+%2D%2D-%0D%0A%0D%0A%3B+LongThreadArchClassLowerThreshold+%28Prag+nuclee+clasa+inferioar%C4%83%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C82643a6d-9610-4493-9c86-13da7601d006%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%3B+LongThreadArchClassUpperThreshold%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Ca2283733-1492-49d6-b516-724e335f9923%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%3B+ShortThreadArchClassLowerThreshold%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C05658661-f09c-48c9-9407-743a60b73cf2%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%3B+ShortThreadArchClassUpperThreshold%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C0762957b-7b3b-4876-9694-8840da70877a%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%3B+%2D%2D-+AUTONOMOUS+%26+WINDOWS+%2D%2D-%0D%0A%0D%0A%3B+PerfAutonomousWindow+%28Minim+-+0+pentru+reac%C8%9Bie+instant%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Ccfeda3d0-7697-4566-a922-a9086cd3632a%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%3B+%2D%2D-+THERMAL+%2D%2D-%0D%0A%0D%0A%3B+THERMALTHROTTLING+%28Dezactivat%2FPassiv+-+0%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C5702737c-659f-4491-b4d0-4061a9954a20%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%3B+%2D%2D-+REPETATE+%2F+CLASA+1+%28PENTRU+SIGURAN%C8%9A%C4%82%29+%2D%2D-%0D%0A%0D%0A%3B+PerfEnergyPreference+%280+%3D+Max+Performance%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C36687e9e-e3a5-4dbf-b1dc-15eb31c7448b%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%3B+PerfEnergyPreference1+%28E-Cores+-+0+%3D+Max+Perf%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C36687e9e-e3a5-4dbf-b1dc-15eb31c7448c%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Cd4e98f31-5ffe-4ce1-be31-1b38b384c009%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSYSTEM%5CCurrentControlSet%5CControl%5CSession+Manager%5CKernel%5D%0D%0A%22ThreadDpcEnable%22%3Ddword%3A00000001%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C10778347-1370-4ee0-8bbd-33bdacaade49%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000001%0D%0A%22DCSettingIndex%22%3Ddword%3A00000001%0D%0A%0D%0A%3B+%2D%2D-+IDLE+RESILIENCY+%28SUB_IR%29+%2D%2D-%0D%0A%0D%0A%3B+Execution+Required+power+request+timeout+%280+%3D+Dezactivat+%2F+Reac%C8%9Bie+imediat%C4%83+la+cereri%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C3166bc41-7e98-4e03-b34e-ec0f5f2b218e%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%3B+IO+coalescing+timeout+%280+%3D+Dezactivat+%2F+F%C4%83r%C4%83+%C3%AEnt%C3%A2rziere+pentru+opera%C8%9Biunile+I%2FO%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Cc36f0eb4-2988-4a70-8eee-0884fc2c2433%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%3B+Processor+Idle+Resiliency+Timer+Resolution+%280+%3D+Rezolu%C8%9Bie+maxim%C4%83+%2F+F%C4%83r%C4%83+coalescing+de+timere%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Cc42b79aa-aa3a-484b-a98f-2cf32aa90a28%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%3B+Interrupt+Steering+Mode+%283+%3D+Any+unparked+processor+%2F+Cel+mai+rapid+r%C4%83spuns%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C2bfc24f9-5ea2-4801-8213-3dbae01aa39d%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000003%0D%0A%22DCSettingIndex%22%3Ddword%3A00000003%0D%0A%0D%0A%3B+Target+Load+%28100%25+%3D+10000+%C3%AEn+zecimi+de+procent+%2F+Evit%C4%83+mutarea+inutil%C4%83+a+%C3%AEntreruperilor%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C73cde64d-d720-4bb2-a860-c755afe77ef2%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00002710%0D%0A%22DCSettingIndex%22%3Ddword%3A00002710%0D%0A%0D%0A%3B+Unparked+time+trigger+%280+%3D+Reac%C8%9Bie+instantanee%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Cd6ba4903-386f-4c2c-8adb-5c21b3328d25%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C3b04d4fd-1cc7-4f23-ab1c-d1337819c4bb%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%3B+Processor+performance+decrease+policy+%281+%3D+Single+%2F+Scade+frecven%C8%9Ba+c%C3%A2t+mai+lent%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C40fbefc7-2e9d-4d25-a185-0cfd8574bac6%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000001%0D%0A%22DCSettingIndex%22%3Ddword%3A00000001%0D%0A%0D%0A%3B+Processor+performance+decrease+policy+Class+1+%281+%3D+Single%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C40fbefc7-2e9d-4d25-a185-0cfd8574bac7%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000001%0D%0A%22DCSettingIndex%22%3Ddword%3A00000001%0D%0A%0D%0A%3B+CP+Concurrency+Threshold+%28100%25+-+Evit%C4%83+mutarea+firelor+de+execu%C8%9Bie+%C3%AEntre+nuclee%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C2430ab6f-a520-44a2-9601-f7f23b5134b1%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000064%0D%0A%22DCSettingIndex%22%3Ddword%3A00000064%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C97cfac41-2217-47eb-992d-618b1977c907%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%3B+CPINCREASETIME+%281+%3D+Reac%C8%9Bie+instantanee+la+nevoie+de+putere%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C2ddd5a84-5a71-437e-912a-db0b8c788732%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000001%0D%0A%22DCSettingIndex%22%3Ddword%3A00000001%0D%0A%0D%0A%3B+CPDISTRIBUTION+%280+%3D+Dezactivat+%2F+Nu+%C3%AEmpr%C4%83%C8%99tia+sarcina+inutil+pentru+a+men%C8%9Bine+cache-ul+cald%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C4bdaf4e9-d103-46d7-a5f0-6280121616ef%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%3B+CPOVERUTIL+%285%25+%3D+Prag+minim+pentru+a+considera+un+nucleu+supra%C3%AEnc%C4%83rcat+%C8%99i+a+muta+sarcina+rapid%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C943c8cb6-6f93-4227-ad87-e9a3feec08d1%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000005%0D%0A%22DCSettingIndex%22%3Ddword%3A00000005%0D%0A%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Cb0deaf6b-59c0-4523-8a45-ca7f40244114%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000002%0D%0A%22DCSettingIndex%22%3Ddword%3A00000002%0D%0A%0D%0A%3B+SMT+threads+unpark+policy+%281+%3D+Core+per+Thread+%2F+Performan%C8%9B%C4%83+maxim%C4%83+per+nucleu+fizic%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Cb28a6829-c5f7-444e-8f61-10e24e85c532%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000001%0D%0A%22DCSettingIndex%22%3Ddword%3A00000001%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Cb669a5e9-7b1d-4132-baaa-49190abcfeb6%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000002%0D%0A%22DCSettingIndex%22%3Ddword%3A00000002%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Cc7be0679-2817-4d69-9d02-519a537ed0c6%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000002%0D%0A%22DCSettingIndex%22%3Ddword%3A00000002%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Cd8edeb9b-95cf-4f95-a73c-b061973693c8%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000064%0D%0A%22DCSettingIndex%22%3Ddword%3A00000064%0D%0A%0D%0A%3B+PerfDecreaseTime1+%28100+%3D+Maxim+pentru+E-Cores%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Cd8edeb9b-95cf-4f95-a73c-b061973693c9%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000064%0D%0A%22DCSettingIndex%22%3Ddword%3A00000064%0D%0A%0D%0A%3B+Short+vs.+long+running+thread+threshold+%280+%3D+Toate+firele+sunt+tratate+ca+prioritate+de+execu%C8%9Bie%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Cd92998c2-6a48-49ca-85d4-8cceec294570%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%3B+CPDecreaseTime+%28100+%3D+Maxim+%2F+%C3%8Ent%C3%A2rzie+parcarea+nucleelor%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Cdfd10d17-d5eb-45dd-877a-9a34ddd15c82%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000064%0D%0A%22DCSettingIndex%22%3Ddword%3A00000064%0D%0A%0D%0A%3B+CPHeadroom+%280+%3D+Dezactiveaz%C4%83+marja+de+siguran%C8%9B%C4%83+pentru+parking%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Cf735a673-2066-4f80-a0c5-ddee0cf1bf5d%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%3B+HeteroDecreaseThreshold+%2810%25+%3D+P%C4%83streaz%C4%83+sarcinile+pe+nuclee+performante%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Cf8861c27-95e7-475c-865b-13c0cb3f9d6b%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A0000000a%0D%0A%22DCSettingIndex%22%3Ddword%3A0000000a%0D%0A%0D%0A%3B+HeteroDecreaseThreshold1+%2810%25%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Cf8861c27-95e7-475c-865b-13c0cb3f9d6c%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A0000000a%0D%0A%22DCSettingIndex%22%3Ddword%3A0000000a%0D%0A%0D%0A%3B+%2D%2D-+LIMITS+%26+FLOOR+PERF+%2D%2D-%0D%0A%0D%0A%3B+LongThreadArchClassUpperLimit+%280+%3D+For%C8%9Beaz%C4%83+firele+lungi+pe+P-Cores%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Cbf903d33-9d24-49d3-a468-e65e0325046a%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%3B+Heterogeneous+policy+in+effect+%280+%3D+Policy+0+%2F+Max+Performance+P-Core+priority%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C7f2f5cfa-f10c-4823-b5e1-e93ae85f46b5%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%3B+Latency+Hint+EPP+%280+%3D+Max+Performance+c%C3%A2nd+laten%C8%9Ba+e+critic%C4%83%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C4b70f900-cdd9-4e66-aa26-ae8417f98173%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%3B+Latency+Hint+EPP+Class+1+%28E-Cores%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C4b70f900-cdd9-4e66-aa26-ae8417f98174%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%3B+Latency+Hint+EPP+Class+2%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C4b70f900-cdd9-4e66-aa26-ae8417f98175%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%3B+Latency+Hint+Processor+Performance+Class+2+%28100%25%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C619b7505-003b-4e82-b7a6-4dd29c300973%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000064%0D%0A%22DCSettingIndex%22%3Ddword%3A00000064%0D%0A%0D%0A%3B+Short+Thread+Arch+Class+Upper+Limit+%280+%3D+For%C8%9Beaz%C4%83+firele+scurte+s%C4%83+NU+plece+de+pe+P-Cores%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C828423eb-8662-4344-90f7-52bf15870f5a%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Cfddc842b-8364-4edc-94cf-c17f60de1c80%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000064%0D%0A%22DCSettingIndex%22%3Ddword%3A00000064%0D%0A%0D%0A%3B+DistributeUtil+%280+%3D+Disabled+%2F+Evit%C4%83+%C3%AEmpr%C4%83%C8%99tierea+inutil%C4%83+a+sarcinii+pentru+a+men%C8%9Bine+cache-ul+cald%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Ce0007330-f589-42ed-a401-5ddb10e785d3%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%3B+CPMaxCores+%2F+CPMaxCores1+%28100%25+%3D+Toate+nucleele+pot+fi+folosite%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Cea062031-0e34-4ff1-9b6d-eb1059334028%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000064%0D%0A%22DCSettingIndex%22%3Ddword%3A00000064%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5Cea062031-0e34-4ff1-9b6d-eb1059334029%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000064%0D%0A%22DCSettingIndex%22%3Ddword%3A00000064%0D%0A%0D%0A%3B+HETEROCLASS1INITIALPERF+%28100%25+%3D+E-Cores+pornesc+direct+la+frecven%C8%9B%C4%83+maxim%C4%83%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C1facfc65-a930-4bc5-9f38-504ec097bbc0%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000064%0D%0A%22DCSettingIndex%22%3Ddword%3A00000064%0D%0A%0D%0A%3B+CPPERF+%2F+CPPERF1+%282+%3D+Lightest+Performance+State+%2F+R%C4%83m%C3%A2ne+%C3%AEn+cea+mai+rapid%C4%83+stare+c%C3%A2nd+e+parcat%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C447235c7-6a8d-4cc0-8e24-9eaf70b96e2b%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000002%0D%0A%22DCSettingIndex%22%3Ddword%3A00000002%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C447235c7-6a8d-4cc0-8e24-9eaf70b96e2c%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000002%0D%0A%22DCSettingIndex%22%3Ddword%3A00000002%0D%0A%0D%0A%3B+CPDECREASEPOL+%281+%3D+Single+Core+%2F+Scade+num%C4%83rul+de+nuclee+active+unul+c%C3%A2te+unul%2C+nu+toate+odat%C4%83%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C71021b41-c749-4d21-be74-a00f335d582b%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000001%0D%0A%22DCSettingIndex%22%3Ddword%3A00000001%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C68afb2d9-ee95-47a8-8f50-4115088073b1%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%3B+Heterogeneous+thread+scheduling+policy+%281+%3D+Performant+processors+%2F+For%C8%9Beaz%C4%83+P-Cores%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C93b8b6dc-0698-4d1c-9ee4-0644e900c85d%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000001%0D%0A%22DCSettingIndex%22%3Ddword%3A00000001%0D%0A%0D%0A%3B+Minimum+processor+state+%28100%25+-+P-Cores%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C893dee8e-2bef-41e0-89c6-b55d0929964c%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000064%0D%0A%22DCSettingIndex%22%3Ddword%3A00000064%0D%0A%0D%0A%3B+Minimum+processor+state+Class+1+%28100%25+-+E-Cores+%2F+For%C8%9Beaz%C4%83+frecven%C8%9Ba+maxim%C4%83+%C8%99i+aici%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C893dee8e-2bef-41e0-89c6-b55d0929964d%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000064%0D%0A%22DCSettingIndex%22%3Ddword%3A00000064%0D%0A%0D%0A%3B+Minimum+processor+state+Class+2+%28100%25%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C893dee8e-2bef-41e0-89c6-b55d0929964e%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000064%0D%0A%22DCSettingIndex%22%3Ddword%3A00000064%0D%0A%0D%0A%3B+%2D%2D-+TIMING+%26+HISTORY+%2D%2D-%0D%0A%0D%0A%3B+Hetero+Decrease+Time+%28100+%3D+Maxim+%2F+Men%C8%9Bine+sarcinile+pe+nuclee+rapide+c%C3%A2t+mai+mult%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C7f2492b6-60b1-45e5-ae55-773f8cd5caec%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000064%0D%0A%22DCSettingIndex%22%3Ddword%3A00000064%0D%0A%0D%0A%3B+Processor+performance+history+count+%281+%3D+Minim+%2F+Reac%C8%9Bie+instant%C4%83%2C+f%C4%83r%C4%83+a+analiza+istoricul+mediu%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C7d24baa7-0b84-480f-840c-1b0743c00f5f%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000001%0D%0A%22DCSettingIndex%22%3Ddword%3A00000001%0D%0A%0D%0A%3B+Processor+performance+history+count+Class+1+%281%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C7d24baa7-0b84-480f-840c-1b0743c00f60%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000001%0D%0A%22DCSettingIndex%22%3Ddword%3A00000001%0D%0A%0D%0A%3B+%2D%2D-+IDLE+%26+LATENCY+%2D%2D-%0D%0A%0D%0A%3B+Processor+idle+state+maximum+%280+%3D+F%C4%83r%C4%83+st%C4%83ri+de+somn+profund+%2F+Reac%C8%9Bie+instant%C4%83%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C9943e905-9a30-4ec1-9b99-44dd3b76f7a2%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%3B+Processor+performance+increase+time+%281%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C984cf492-3bed-4488-a8f9-4286c97bf5aa%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000001%0D%0A%22DCSettingIndex%22%3Ddword%3A00000001%0D%0A%0D%0A%3B+Processor+performance+increase+time+Class+1+%281%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C984cf492-3bed-4488-a8f9-4286c97bf5ab%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000001%0D%0A%22DCSettingIndex%22%3Ddword%3A00000001%0D%0A%0D%0A%3B+%2D%2D-+HETERO+CONTAINMENT+%26+IDLE+%2D%2D-%0D%0A%0D%0A%3B+HETEROCONTAINMENTINCREASETIME+%281+%3D+Reac%C8%9Bie+instantanee+%C3%AEn+zonele+de+izolare%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C64fcee6b-5b1f-45a4-a76a-19b2c36ee290%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000001%0D%0A%22DCSettingIndex%22%3Ddword%3A00000001%0D%0A%0D%0A%3B+HETEROCONTAINMENTDECREASETIME+%28100+%3D+Men%C8%9Bine+performan%C8%9Ba+maxim%C4%83+%C3%AEn+zonele+de+izolare+c%C3%A2t+mai+mult%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C6ff13aeb-7897-4356-9999-dd9930af065f%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000064%0D%0A%22DCSettingIndex%22%3Ddword%3A00000064%0D%0A%0D%0A%3B+IDLEPROMOTE+%28100%25+%3D+Face+mult+mai+dificil%C4%83+intrarea+nucleului+%C3%AEn+stare+de+Idle%2FSleep%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C7b224883-b3cc-4d79-819f-8374152cbe7c%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000064%0D%0A%22DCSettingIndex%22%3Ddword%3A00000064%0D%0A%0D%0A%3B+%2D%2D-+SET%C4%82RI+DEJA+OPTIMIZATE+%28PENTRU+POLICIES%29+%2D%2D-%0D%0A%0D%0A%3B+HETEROHYBRIDCONTAINMENTTHRESHOLD+%280%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C6788488b-1b90-4d11-8fa7-973e470dff47%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%3B+HETEROEFFICIENCYCONTAINMENTTHRESHOLD+%280%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C69439b22-221b-4830-bd34-f7bcece24583%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%3B+IDLESCALING+%280+%3D+Disabled+%2F+Previne+scalarea+pragului+de+idle+pentru+laten%C8%9B%C4%83+constant%C4%83%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C6c2993b0-8f48-481f-bcc6-00dd2742aa06%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%3B+HETEROCONTAINMENTEFFICIENCYIMPUTILTHRESHOLD+%280%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C6ece9e1f-b6dd-42bf-b1b7-5a512b10c092%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%0D%0A%3B+Processor+idle+demote+threshold+%280%25+%3D+Trece+instantaneu+la+o+stare+de+performan%C8%9B%C4%83+mai+mare+la+cea+mai+mic%C4%83+activitate%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C4b92d758-5a24-4851-a470-815d78aee119%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%3B+Processor+performance+time+check+interval+%281ms+%3D+Verific%C4%83+%C8%99i+ajusteaz%C4%83+frecven%C8%9Ba+la+fiecare+milisecund%C4%83%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C4d2b0152-7d5c-498b-88e2-34345392a2c5%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000001%0D%0A%22DCSettingIndex%22%3Ddword%3A00000001%0D%0A%0D%0A%3B+%2D%2D-+RESOURCE+PRIORITY+%26+DUTY+CYCLING+%2D%2D-%0D%0A%0D%0A%3B+Processor+duty+cycling+%280+%3D+Disabled+%2F+Previne+oprirea+for%C8%9Bat%C4%83+a+procesorului+pentru+r%C4%83cire%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C4e4450b3-6179-4e91-b8f1-5bb9938f81a1%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%3B+Processor+resource+priority+%28100%25+%2F+Max%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C603fe9ce-8d01-4b48-a968-1d706c28fd5c%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000064%0D%0A%22DCSettingIndex%22%3Ddword%3A00000064%0D%0A%0D%0A%3B+Processor+resource+priority+Class+1+%28100%25+%2F+Max%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C603fe9ce-8d01-4b48-a968-1d706c28fd5d%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000064%0D%0A%22DCSettingIndex%22%3Ddword%3A00000064%0D%0A%0D%0A%3B+%2D%2D-+HETERO+POLICY+DEFAULTS+%28FOR%C8%9AARE%29+%2D%2D-%0D%0A%0D%0A%3B+Hetero+containment+policy+%280+%3D+Disabled+%2F+Previne+izolarea+restrictiv%C4%83+a+proceselor%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C60fbe21b-efd9-49f2-b066-8674d8e9f423%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%3B+%2D%2D-+PROCESSOR+PERFORMANCE+INCREASE+SETTINGS+%2D%2D-%0D%0A%0D%0A%3B+Processor+performance+increase+threshold+%2810%25+-+Reac%C8%9Bie+rapid%C4%83+pentru+P-Cores%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C06cadf0e-64ed-448a-8927-ce7bf90eb35d%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A0000000a%0D%0A%22DCSettingIndex%22%3Ddword%3A0000000a%0D%0A%0D%0A%3B+Processor+performance+increase+threshold+Class+1+%2810%25+-+Reac%C8%9Bie+rapid%C4%83+pentru+E-Cores%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C06cadf0e-64ed-448a-8927-ce7bf90eb35e%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A0000000a%0D%0A%22DCSettingIndex%22%3Ddword%3A0000000a%0D%0A%0D%0A%3B+Processor+performance+increase+policy+%282+%3D+Rocket+%2F+Sare+direct+la+frecven%C8%9Ba+maxim%C4%83%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C465e1f50-b610-473a-ab58-00d1077dc418%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000002%0D%0A%22DCSettingIndex%22%3Ddword%3A00000002%0D%0A%0D%0A%3B+Processor+performance+increase+policy+Class+1+%282+%3D+Rocket+%2F+IdealAggressive+era+3%2C+Rocket+e+mai+direct%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C465e1f50-b610-473a-ab58-00d1077dc419%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000002%0D%0A%22DCSettingIndex%22%3Ddword%3A00000002%0D%0A%0D%0A%3B+%2D%2D-+HETERO+%26+RESTRICTIONS+%2D%2D-%0D%0A%0D%0A%3B+HETEROINCREASETIME+%281+%3D+Reac%C8%9Bie+instantanee+pentru+clasa+hibrid%C4%83%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowferSettings%5C4009efa7-e72d-4cba-9edf-91084ea8cbc3%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000001%0D%0A%22DCSettingIndex%22%3Ddword%3A00000001%0D%0A%0D%0A%3B+Hybrid+containment+important+utility+threshold+%280+%3D+Toate+sarcinile+sunt+importante%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C12fd031f-53d2-4bf4-ac6d-c699fc9538c7%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0A%3B+Processor+Restriction+Count+%280+%3D+F%C4%83r%C4%83+restric%C8%9Bii+pe+num%C4%83rul+de+nuclee+utilizabile%29%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CPower%5CPowerSettings%5C1a98ad09-af22-42ca-8e61-f0a5802c270a%5D%0D%0A%22ACSettingIndex%22%3Ddword%3A00000000%0D%0A%22DCSettingIndex%22%3Ddword%3A00000000%0D%0A%0D%0AWindows+Registry+Editor+Version+5.00%0D%0A%0D%0A%5BHKEY_CURRENT_USER%5CSOFTWARE%5CMicrosoft%5CPowerShell%5C1%5CShellIds%5CMicrosoft.PowerShell%5D%0D%0A%22ExecutionPolicy%22%3D%22Bypass%22%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CMicrosoft%5CPowerShell%5C1%5CShellIds%5CMicrosoft.PowerShell%5D%0D%0A%22ExecutionPolicy%22%3D%22Bypass%22%0D%0A%0D%0A%5BHKEY_CURRENT_USER%5CSOFTWARE%5CPolicies%5CMicrosoft%5CWindows%5CPowerShell%5D%0D%0A%22ExecutionPolicy%22%3D%22Bypass%22%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CWindows%5CExplorer%5D%0D%0A%22ShowRunAsDifferentUserInStart%22%3Ddword%3A00000001%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CWindows%5CPowerShell%5D%0D%0A%22EnableScripts%22%3Ddword%3A00000001%0D%0A%22ExecutionPolicy%22%3D%22Bypass%22%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CWindows%5CPowerShell%5CModuleLogging%5D%0D%0A%22EnableModuleLogging%22%3Ddword%3A00000000%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CWindows%5CPowerShell%5CScriptBlockLogging%5D%0D%0A%22EnableScriptBlockLogging%22%3Ddword%3A00000000%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CWindows%5CPowerShell%5CTranscription%5D%0D%0A%22EnableTranscripting%22%3Ddword%3A00000000%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSYSTEM%5CCurrentControlSet%5CControl%5CPower%5D%0D%0A%22ExitLatency%22%3Ddword%3A00000001%0D%0A%22DisableSensorWatchdog%22%3Ddword%3A00000001%0D%0A%22Latency%22%3Ddword%3A00000001%0D%0A%22LatencyToleranceDefault%22%3Ddword%3A00000001%0D%0A%22LatencyToleranceFSVP%22%3Ddword%3A00000001%0D%0A%22LatencyTolerancePerfOverride%22%3Ddword%3A00000001%0D%0A%22LatencyToleranceVSyncEnabled%22%3Ddword%3A00000001%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSYSTEM%5CCurrentControlSet%5CControl%5CGraphicsDrivers%5CPower%5D%0D%0A%22RmGpsPsEnablePerCpuCoreDpc%22%3Ddword%3A00000001%0D%0A%22DisableWriteCombining%22%3Ddword%3A00000001%0D%0A%22Node3DLowLatency%22%3Ddword%3A00000001%0D%0A%22RmDisableRegistryCaching%22%3Ddword%3A00000001%0D%0A%22RMDisablePostL2Compression%22%3Ddword%3A00000001%0D%0A%22DefaultMemoryRefreshLatencyToleranceActivelyUsed%22%3Ddword%3A00000001%0D%0A%22DefaultD3TransitionLatencyIdleShortTime%22%3Ddword%3A00000001%0D%0A%22TransitionLatency%22%3Ddword%3A00000001%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSYSTEM%5CCurrentControlSet%5CControl%5CVideo%5C%7BDEB039CC-B704-4F53-B43E-9DD4432FA2E9%7D%5C0000%5D%0D%0A%22PerfLevelSrc%22%3Ddword%3A00003322%0D%0A%22PowerMizerEnable%22%3Ddword%3A00000001%0D%0A%22PowermizerLevel%22%3Ddword%3A00000001%0D%0A%22PowermizerLevelAC%22%3Ddword%3A00000001%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CMicrosoft%5CWindows+NT%5CCurrentVersion%5CWindows%5D%0D%0A%22DesktopHeapLogging%22%3Ddword%3A00000000%0D%0A%22DwmInputUsesIoCompletionPort%22%3Ddword%3A00000000%0D%0A%22EnableDwmInputProcessing%22%3Ddword%3A00000000%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CWindows%5CLLTD%5D%0D%0A%22EnableLLTDIO%22%3Ddword%3A00000001%0D%0A%22AllowLLTDIOOnDomain%22%3Ddword%3A00000001%0D%0A%22ProhibitLLTDIOOnPrivateNet%22%3Ddword%3A00000000%0D%0A%22AllowLLTDIOOnPublicNet%22%3Ddword%3A00000000%0D%0A%22EnableRspndr%22%3Ddword%3A00000001%0D%0A%22AllowRspndrOnDomain%22%3Ddword%3A00000001%0D%0A%22AllowRspndrOnPublicNet%22%3Ddword%3A00000000%0D%0A%22ProhibitRspndrOnPrivateNet%22%3Ddword%3A00000001%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CWindows%5CTCPIP%5Cv6Transition%5D%0D%0A%22Teredo_ClientPort%22%3Ddword%3A00000000%0D%0A%22Teredo_DefaultQualified%22%3D%22Enabled%22%0D%0A%22Teredo_RefreshRate%22%3Ddword%3A0000001e%0D%0A%22Teredo_ServerName%22%3D%22win10.ipv6.microsoft.com%22%0D%0A%22Teredo_State%22%3D%22Enterprise+Client%22%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSYSTEM%5CCurrentControlSet%5CServices%5CTcpip6%5CParameters%5D%0D%0A%22DisabledComponents%22%3Ddword%3A00000000%0D%0A&SystemScriptType1=Reg&DefaultUserScript0=Windows+Registry+Editor+Version+5.00%0D%0A%0D%0A%5BHKEY_USERS%5CDefaultUser%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CExplorer%5D%0D%0A%22ExcludedFromStableAnaheimDownloadPromotionSL%22%3Ddword%3A00000001%0D%0A%22IrisClientRefresh%22%3Ddword%3A00000000%0D%0A%22ExplorerStartupTraceRecorded%22%3Ddword%3A00000000%0D%0A%22TelemetrySalt%22%3Ddword%3A00000000%0D%0A%22SIDUpdatedOnLibraries%22%3Ddword%3A00000000%0D%0A%0D%0A%5BHKEY_USERS%5CDefaultUser%5CSoftware%5CPolicies%5CMicrosoft%5CWindows%5CExplorer%5D%0D%0A%22ExcludedFromStableAnaheimDownloadPromotionSL%22%3Ddword%3A00000001%0D%0A%22IrisClientRefresh%22%3Ddword%3A00000000%0D%0A%22ExplorerStartupTraceRecorded%22%3Ddword%3A00000000%0D%0A%22TelemetrySalt%22%3Ddword%3A00000000%0D%0A%22SIDUpdatedOnLibraries%22%3Ddword%3A00000000%0D%0A%0D%0A%5BHKEY_USERS%5CDefaultUser%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CExplorer%5CAdvanced%5D%0D%0A%22SeparateProcess%22%3Ddword%3A00000001&DefaultUserScriptType0=Reg&AppLockerMode=Skip-->
 	<settings pass="offlineServicing"></settings>
 	<settings pass="windowsPE">
 		<component name="Microsoft-Windows-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
-			<UserData>
-				<ProductKey>
-					<Key>00000-00000-00000-00000-00000</Key>
-					<WillShowUI>Always</WillShowUI>
-				</ProductKey>
-				<AcceptEula>true</AcceptEula>
-			</UserData>
-			<UseConfigurationSet>false</UseConfigurationSet>
 			<RunSynchronous>
 				<RunSynchronousCommand wcm:action="add">
 					<Order>1</Order>
-					<Path>reg.exe add "HKLM\SYSTEM\Setup\LabConfig" /v BypassTPMCheck /t REG_DWORD /d 1 /f</Path>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:@echo off&amp;echo:call :print ^"Setting keyboard layout for PE session^"&amp;echo:wpeutil.exe SetKeyboardLayout 0409:00000409&amp;echo:for ^%^%d in (C D E F G H I J K L M N O P Q T U V X Y Z^) do ()</Path>
 				</RunSynchronousCommand>
 				<RunSynchronousCommand wcm:action="add">
 					<Order>2</Order>
-					<Path>reg.exe add "HKLM\SYSTEM\Setup\LabConfig" /v BypassSecureBootCheck /t REG_DWORD /d 1 /f</Path>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:if exist ^%^%d:\sources\install.wim set ^"IMAGE_FILE=^%^%d:\sources\install.wim^"&amp;echo:if exist ^%^%d:\sources\install.esd set ^"IMAGE_FILE=^%^%d:\sources\install.esd^")</Path>
 				</RunSynchronousCommand>
 				<RunSynchronousCommand wcm:action="add">
 					<Order>3</Order>
-					<Path>reg.exe add "HKLM\SYSTEM\Setup\LabConfig" /v BypassRAMCheck /t REG_DWORD /d 1 /f</Path>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:if exist ^%^%d:\sources\install.swm set ^"IMAGE_FILE=^%^%d:\sources\install.swm^" ^&amp; set ^"SWM_PARAM=/SWMFile:^%^%d:\sources\install*.swm^"&amp;echo:if exist ^%^%d:\autounattend.xml set ^"XML_FILE=^%^%d:\autounattend.xml^")</Path>
 				</RunSynchronousCommand>
 				<RunSynchronousCommand wcm:action="add">
 					<Order>4</Order>
-					<Path>cmd.exe /c &gt;&gt;X:\defender.vbs (echo:WScript.Echo ^"Scanning for newly created SYSTEM registry hive file to disable Windows Defender services...^"&amp;echo:Set fso = CreateObject(^"Scripting.FileSystemObject^"^))</Path>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:if exist ^%^%d:\$OEM$ set ^"OEM_FOLDER=^%^%d:\$OEM$^"&amp;echo:if exist ^%^%d:\$WinPEDriver$ set ^"PEDRIVERS_FOLDER=^%^%d:\$WinPEDriver$^"&amp;echo:^))</Path>
 				</RunSynchronousCommand>
 				<RunSynchronousCommand wcm:action="add">
 					<Order>5</Order>
-					<Path>cmd.exe /c &gt;&gt;X:\defender.vbs (echo:Set existing = CreateObject(^"Scripting.Dictionary^"^)&amp;echo:Function Execute(command^)&amp;echo:WScript.Echo ^"Running command '^" + command + ^"'^"&amp;echo:Set shell = CreateObject(^"WScript.Shell^"^))</Path>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:for /f ^"tokens=3^" ^%^%t in ('reg.exe query HKLM\System\Setup /v UnattendFile 2^^^&gt;nul'^) do ( if exist ^%^%t set ^"XML_FILE=^%^%t^" ^))</Path>
 				</RunSynchronousCommand>
 				<RunSynchronousCommand wcm:action="add">
 					<Order>6</Order>
-					<Path>cmd.exe /c &gt;&gt;X:\defender.vbs (echo:Set exec = shell.Exec(command^)&amp;echo:Do While exec.Status = 0&amp;echo:WScript.Sleep 100&amp;echo:Loop&amp;echo:WScript.Echo exec.StdOut.ReadAll&amp;echo:WScript.Echo exec.StdErr.ReadAll&amp;echo:Execute = exec.ExitCode&amp;echo:End Function)</Path>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:if not defined IMAGE_FILE call :fail ^"Could not locate install.wim, install.esd or install.swm.^"&amp;echo:if not defined XML_FILE call :fail ^"Could not locate autounattend.xml.^"&amp;echo:set ^"OS_VERSION=11^")</Path>
 				</RunSynchronousCommand>
 				<RunSynchronousCommand wcm:action="add">
 					<Order>7</Order>
-					<Path>cmd.exe /c &gt;&gt;X:\defender.vbs (echo:Function FindHiveFiles&amp;echo:Set FindHiveFiles = CreateObject(^"Scripting.Dictionary^"^)&amp;echo:For Each drive In fso.Drives&amp;echo:If drive.IsReady And drive.DriveLetter ^&lt;^&gt; ^"X^" Then)</Path>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:for /f ^"tokens=3 delims=.^" ^%^%v in ('ver'^) do (&amp;echo:if ^%^%v LSS 20000 set ^"OS_VERSION=10^"&amp;echo:^)&amp;echo:if defined PEDRIVERS_FOLDER (&amp;echo:call :print ^"Loading drivers from $WinPEDriver$ folder^")</Path>
 				</RunSynchronousCommand>
 				<RunSynchronousCommand wcm:action="add">
 					<Order>8</Order>
-					<Path>cmd.exe /c &gt;&gt;X:\defender.vbs (echo:For Each folder In Array(^"$Windows.~BT\NewOS\Windows^", ^"Windows^"^)&amp;echo:file = fso.BuildPath(fso.BuildPath(drive.RootFolder, folder^), ^"System32\config\SYSTEM^"^))</Path>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:for /R ^%PEDRIVERS_FOLDER^% ^%^%f IN (*.inf^) do drvload.exe ^"^%^%f^"&amp;echo:^)&amp;echo:^&gt;X:\GPT.txt (&amp;echo:echo:SELECT DISK=0&amp;echo:echo:CLEAN&amp;echo:echo:CONVERT GPT&amp;echo:echo:CREATE PARTITION EFI SIZE=300)</Path>
 				</RunSynchronousCommand>
 				<RunSynchronousCommand wcm:action="add">
 					<Order>9</Order>
-					<Path>cmd.exe /c &gt;&gt;X:\defender.vbs (echo:If fso.FileExists(file^) And fso.FileExists(file + ^".LOG1^"^) And fso.FileExists(file + ^".LOG2^"^) Then&amp;echo:FindHiveFiles.Add file, Nothing&amp;echo:End If&amp;echo:Next&amp;echo:End If&amp;echo:Next&amp;echo:End Function)</Path>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:echo:FORMAT QUICK FS=FAT32 LABEL=^^^"System^^^"&amp;echo:echo:ASSIGN LETTER=S&amp;echo:echo:CREATE PARTITION MSR SIZE=16&amp;echo:echo:CREATE PARTITION PRIMARY&amp;echo:echo:FORMAT QUICK FS=NTFS LABEL=^^^"Windows^^^")</Path>
 				</RunSynchronousCommand>
 				<RunSynchronousCommand wcm:action="add">
 					<Order>10</Order>
-					<Path>cmd.exe /c &gt;&gt;X:\defender.vbs (echo:For Each file In FindHiveFiles&amp;echo:WScript.Echo ^"Will ignore file at '^" + file + ^"' because it was already present when Windows Setup started.^"&amp;echo:existing.Add file, Nothing&amp;echo:Next&amp;echo:Do)</Path>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:echo:ASSIGN LETTER=W&amp;echo:^)&amp;echo:^&gt;X:\MBR.txt (&amp;echo:echo:SELECT DISK=0&amp;echo:echo:CLEAN&amp;echo:echo:CREATE PARTITION PRIMARY SIZE=300&amp;echo:echo:FORMAT QUICK FS=NTFS LABEL=^^^"System^^^"&amp;echo:echo:ASSIGN LETTER=S)</Path>
 				</RunSynchronousCommand>
 				<RunSynchronousCommand wcm:action="add">
 					<Order>11</Order>
-					<Path>cmd.exe /c &gt;&gt;X:\defender.vbs (echo:For Each file In FindHiveFiles&amp;echo:If Not existing.Exists(file^) Then&amp;echo:ret = 1&amp;echo:While ret ^&gt; 0&amp;echo:WScript.Sleep 500&amp;echo:ret = Execute(^"reg.exe LOAD HKLM\mount ^" + file^)&amp;echo:Wend)</Path>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:echo:ACTIVE&amp;echo:echo:CREATE PARTITION PRIMARY&amp;echo:echo:FORMAT QUICK FS=NTFS LABEL=^^^"Windows^^^"&amp;echo:echo:ASSIGN LETTER=W&amp;echo:^)&amp;echo:wpeutil.exe UpdateBootInfo)</Path>
 				</RunSynchronousCommand>
 				<RunSynchronousCommand wcm:action="add">
 					<Order>12</Order>
-					<Path>cmd.exe /c &gt;&gt;X:\defender.vbs (echo:For Each service In Array(^"Sense^", ^"WdBoot^", ^"WdFilter^", ^"WdNisDrv^", ^"WdNisSvc^", ^"WinDefend^"^))</Path>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:for /f ^"tokens=3^" ^%^%t in ('reg.exe query HKLM\System\CurrentControlSet\Control /v PEFirmwareType'^) do (&amp;echo:if ^%^%t == 0x1 (&amp;echo:set ^"LAYOUT=MBR^"&amp;echo:^) else if ^%^%t == 0x2 (&amp;echo:set ^"LAYOUT=GPT^"&amp;echo:^) else ()</Path>
 				</RunSynchronousCommand>
 				<RunSynchronousCommand wcm:action="add">
 					<Order>13</Order>
-					<Path>cmd.exe /c &gt;&gt;X:\defender.vbs (echo:ret = Execute(^"reg.exe ADD HKLM\mount\ControlSet001\Services\^" + service + ^" /v Start /t REG_DWORD /d 4 /f^"^)&amp;echo:Next&amp;echo:ret = Execute(^"reg.exe UNLOAD HKLM\mount^"^))</Path>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:call :fail ^"Unexpected value ^%^%t.^"&amp;echo:^)&amp;echo:^)&amp;echo:call :print ^"The target disk will be configured with the ^%LAYOUT^% partition layout^"&amp;echo:call :print ^"diskpart will now partition and format your disk^")</Path>
 				</RunSynchronousCommand>
 				<RunSynchronousCommand wcm:action="add">
 					<Order>14</Order>
-					<Path>cmd.exe /c &gt;&gt;X:\defender.vbs (echo:WScript.Echo ^"Found and successfully modified SYSTEM registry hive file at '^" + file + ^"'. This window will now close.^"&amp;echo:WScript.Sleep 5000&amp;echo:Exit Do&amp;echo:End If&amp;echo:WScript.Sleep 1000&amp;echo:Next&amp;echo:Loop)</Path>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:diskpart.exe /s X:\^%LAYOUT^%.txt ^|^| call :fail ^"diskpart.exe encountered an error.^"&amp;echo:set ^"IMG_PARAM=/Name:^"Windows ^%OS_VERSION^% Pro^"^"&amp;echo:call :print ^"Applying Windows image to target disk^")</Path>
 				</RunSynchronousCommand>
 				<RunSynchronousCommand wcm:action="add">
 					<Order>15</Order>
-					<Path>cmd.exe /c "start /MIN cscript.exe //E:vbscript X:\defender.vbs"</Path>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:dism.exe /Apply-Image /ImageFile:^%IMAGE_FILE^% ^%SWM_PARAM^% ^%IMG_PARAM^% /ApplyDir:W:\ ^|^| call :fail ^"dism.exe encountered an error.^"&amp;echo:call :print ^"Making system partition bootable^")</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>16</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:bcdboot.exe W:\Windows /s S: ^|^| call :fail ^"bcdboot.exe encountered an error.^"&amp;echo:bcdedit.exe /set {fwbootmgr} bootsequence {bootmgr}&amp;echo:call :print ^"Deleting winre.wim file to avoid creation of recovery partition^")</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>17</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:del W:\Windows\System32\Recovery\winre.wim&amp;echo:call :print ^"Copying answer file to target disk^"&amp;echo:mkdir W:\Windows\Panther&amp;echo:copy ^%XML_FILE^% W:\Windows\Panther\unattend.xml&amp;echo:if defined PEDRIVERS_FOLDER ()</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>18</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:call :print ^"Adding drivers from $WinPEDriver$ folder to new installation^"&amp;echo:dism.exe /Add-Driver /Image:W:\ /Driver:^"^%PEDRIVERS_FOLDER^%^" /Recurse&amp;echo:^)&amp;echo:call :print ^"Setting time zone^")</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>19</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:dism.exe /Image:W:\ /Set-TimeZone:^"GTB Standard Time^"&amp;echo:call :print ^"Disabling 8.3 file names^"&amp;echo:fsutil.exe 8dot3name set W: 1&amp;echo:fsutil.exe 8dot3name strip /s /f W:\)</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>20</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:reg.exe LOAD HKLM\mount W:\Windows\System32\config\SYSTEM&amp;echo:reg.exe ADD HKLM\mount\ControlSet001\Control\FileSystem /v NtfsDisable8dot3NameCreation /t REG_DWORD /d 1 /f&amp;echo:reg.exe UNLOAD HKLM\mount)</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>21</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:call :print ^"Disabling Windows Defender^"&amp;echo:reg.exe LOAD HKLM\mount W:\Windows\System32\config\SYSTEM)</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>22</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:for ^%^%s in (Sense WdBoot WdFilter WdNisDrv WdNisSvc WinDefend^) do reg.exe ADD HKLM\mount\ControlSet001\Services\^%^%s /v Start /t REG_DWORD /d 4 /f&amp;echo:reg.exe UNLOAD HKLM\mount&amp;echo:call :print ^"Disabling WPBT^")</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>23</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:reg.exe LOAD HKLM\mount W:\Windows\System32\config\SYSTEM&amp;echo:reg.exe add ^"HKLM\mount\ControlSet001\Control\Session Manager^" /v DisableWpbtExecution /t REG_DWORD /d 1 /f&amp;echo:reg.exe UNLOAD HKLM\mount)</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>24</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:call :print ^"Setting device setup region to United States (GeoID 244^)^"&amp;echo:reg.exe LOAD HKLM\mount W:\Windows\System32\config\SOFTWARE)</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>25</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:reg.exe ADD ^"HKLM\mount\Microsoft\Windows\CurrentVersion\Control Panel\DeviceRegion^" /v DeviceRegion /t REG_DWORD /d 244 /f&amp;echo:reg.exe UNLOAD HKLM\mount&amp;echo:set ^"ROBOCOPY_ARGS=/E /XX /COPY:DAT /DCOPY:DAT /R:0^")</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>26</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:if defined OEM_FOLDER (&amp;echo:call :print ^"Copying contents of $OEM$ folder^"&amp;echo:if exist ^"^%OEM_FOLDER^%\$$^" robocopy.exe ^"^%OEM_FOLDER^%\$$^" W:\Windows ^%ROBOCOPY_ARGS^%)</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>27</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:if exist ^"^%OEM_FOLDER^%\$1^" robocopy.exe ^"^%OEM_FOLDER^%\$1^" W:\ ^%ROBOCOPY_ARGS^%&amp;echo:for ^%^%d in (C D E F G H I J K L M N O P Q R S T U V W X Y Z^) do ()</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>28</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:if exist ^"^%OEM_FOLDER^%\^%^%d^" robocopy.exe ^"^%OEM_FOLDER^%\^%^%d^" ^%^%d:\ ^%ROBOCOPY_ARGS^%&amp;echo:^)&amp;echo:^)&amp;echo:call :print ^"Computer will now reboot^"&amp;echo:wpeutil.exe reboot&amp;echo:goto :eof&amp;echo::fail&amp;echo:echo:)</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>29</Order>
+					<Path>cmd.exe /c &gt;&gt;X:\pe.cmd (echo:echo:Fatal error: ^%~1&amp;echo:echo:&amp;echo:pause&amp;echo:exit 1&amp;echo::print&amp;echo:echo:&amp;echo:echo:*** ^%~1 ***&amp;echo:echo:&amp;echo:goto :eof)</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>30</Order>
+					<Path>cmd.exe /c "X:\pe.cmd"</Path>
 				</RunSynchronousCommand>
 			</RunSynchronous>
 		</component>
@@ -101,47 +154,25 @@
 				</RunSynchronousCommand>
 			</RunSynchronous>
 		</component>
+		<component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+			<TimeZone>GTB Standard Time</TimeZone>
+		</component>
 	</settings>
 	<settings pass="auditSystem"></settings>
 	<settings pass="auditUser"></settings>
 	<settings pass="oobeSystem">
+		<component name="Microsoft-Windows-International-Core" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+			<InputLocale>0409:00000409;0418:00010418</InputLocale>
+			<SystemLocale>en-US</SystemLocale>
+			<UILanguage>ro-RO</UILanguage>
+			<UserLocale>en-US</UserLocale>
+		</component>
 		<component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
-			<UserAccounts>
-				<LocalAccounts>
-					<LocalAccount wcm:action="add">
-						<Name>Admin</Name>
-						<DisplayName></DisplayName>
-						<Group>Administrators</Group>
-						<Password>
-							<Value></Value>
-							<PlainText>true</PlainText>
-						</Password>
-					</LocalAccount>
-					<LocalAccount wcm:action="add">
-						<Name>User</Name>
-						<DisplayName></DisplayName>
-						<Group>Users</Group>
-						<Password>
-							<Value></Value>
-							<PlainText>true</PlainText>
-						</Password>
-					</LocalAccount>
-				</LocalAccounts>
-			</UserAccounts>
-			<AutoLogon>
-				<Username>Admin</Username>
-				<Enabled>true</Enabled>
-				<LogonCount>1</LogonCount>
-				<Password>
-					<Value></Value>
-					<PlainText>true</PlainText>
-				</Password>
-			</AutoLogon>
 			<OOBE>
 				<ProtectYourPC>3</ProtectYourPC>
 				<HideEULAPage>true</HideEULAPage>
-				<HideWirelessSetupInOOBE>false</HideWirelessSetupInOOBE>
-				<HideOnlineAccountScreens>false</HideOnlineAccountScreens>
+				<HideWirelessSetupInOOBE>true</HideWirelessSetupInOOBE>
+				<HideOnlineAccountScreens>true</HideOnlineAccountScreens>
 			</OOBE>
 			<FirstLogonCommands>
 				<SynchronousCommand wcm:action="add">
@@ -152,6 +183,12 @@
 		</component>
 	</settings>
 	<Extensions xmlns="https://schneegans.de/windows/unattend-generator/">
+		<Build>
+			<Commit>
+				<Hash>3de37dc6bc9bb1f63aeac7aa137c84c1b30b3b28</Hash>
+				<GitHubUrl>https://github.com/cschneegans/unattend-generator/commit/3de37dc6bc9bb1f63aeac7aa137c84c1b30b3b28</GitHubUrl>
+			</Commit>
+		</Build>
 		<ExtractScript>
 param(
     [xml] $Document
@@ -169,27 +206,6 @@ foreach( $file in $Document.unattend.Extensions.File ) {
     [System.IO.File]::WriteAllBytes( $path, $bytes );
 }
 		</ExtractScript>
-		<File path="C:\Windows\Setup\Scripts\PauseWindowsUpdate.ps1">
-$formatter = {
-	$args[0].ToString( "yyyy'-'MM'-'dd'T'HH':'mm':'ssK" );
-};
-$now = [datetime]::UtcNow;
-$start = &amp; $formatter $now;
-$end = &amp; $formatter $now.AddDays( 7 );
-
-$params = @{
-	LiteralPath = 'Registry::HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings';
-	Type = 'String';
-	Force = $true;
-};
-
-Set-ItemProperty @params -Name 'PauseFeatureUpdatesStartTime' -Value $start;
-Set-ItemProperty @params -Name 'PauseFeatureUpdatesEndTime' -Value $end;
-Set-ItemProperty @params -Name 'PauseQualityUpdatesStartTime' -Value $start;
-Set-ItemProperty @params -Name 'PauseQualityUpdatesEndTime' -Value $end;
-Set-ItemProperty @params -Name 'PauseUpdatesStartTime' -Value $start;
-Set-ItemProperty @params -Name 'PauseUpdatesExpiryTime' -Value $end;
-		</File>
 		<File path="C:\Windows\Setup\Scripts\PauseWindowsUpdate.xml">
 &lt;Task version="1.2" xmlns="http://schemas.microsoft.com/windows/2004/02/mit/task"&gt;
 	&lt;Triggers&gt;
@@ -229,18 +245,1319 @@ Set-ItemProperty @params -Name 'PauseUpdatesExpiryTime' -Value $end;
 	&lt;Actions Context="Author"&gt;
 		&lt;Exec&gt;
 			&lt;Command&gt;C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe&lt;/Command&gt;
-			&lt;Arguments&gt;-ExecutionPolicy "Unrestricted" -NoProfile -File "C:\Windows\Setup\Scripts\PauseWindowsUpdate.ps1"&lt;/Arguments&gt;
+			&lt;Arguments&gt;-WindowStyle Hidden -NoProfile -NonInteractive -Command "$format = 'yyyy-MM-ddTHH\:mm\:ssK'; $now = [datetime]::UtcNow; $start = $now.ToString($format); $end = $now.AddDays(7).ToString($format); $params = @{ LiteralPath = 'Registry::HKLM\Software\Microsoft\WindowsUpdate\UX\Settings'; Type = 'String'; Force = $true; Verbose = $true; }; 'PauseFeatureUpdatesStartTime', 'PauseQualityUpdatesStartTime', 'PauseUpdatesStartTime' | foreach { Set-ItemProperty @params -Name $_ -Value $start; }; 'PauseFeatureUpdatesEndTime', 'PauseQualityUpdatesEndTime', 'PauseUpdatesExpiryTime' | foreach { Set-ItemProperty @params -Name $_ -Value $end; };"&lt;/Arguments&gt;
 		&lt;/Exec&gt;
 	&lt;/Actions&gt;
 &lt;/Task&gt;
 		</File>
+		<File path="C:\Windows\Setup\Scripts\MoveActiveHours.xml">
+&lt;Task version="1.2" xmlns="http://schemas.microsoft.com/windows/2004/02/mit/task"&gt;
+	&lt;Triggers&gt;
+		&lt;BootTrigger&gt;
+			&lt;Repetition&gt;
+				&lt;Interval&gt;PT4H&lt;/Interval&gt;
+				&lt;StopAtDurationEnd&gt;false&lt;/StopAtDurationEnd&gt;
+			&lt;/Repetition&gt;
+			&lt;Enabled&gt;true&lt;/Enabled&gt;
+		&lt;/BootTrigger&gt;
+		&lt;RegistrationTrigger&gt;
+			&lt;Repetition&gt;
+				&lt;Interval&gt;PT4H&lt;/Interval&gt;
+				&lt;StopAtDurationEnd&gt;false&lt;/StopAtDurationEnd&gt;
+			&lt;/Repetition&gt;
+			&lt;Enabled&gt;true&lt;/Enabled&gt;
+		&lt;/RegistrationTrigger&gt;
+	&lt;/Triggers&gt;
+	&lt;Principals&gt;
+		&lt;Principal id="Author"&gt;
+			&lt;UserId&gt;S-1-5-19&lt;/UserId&gt;
+			&lt;RunLevel&gt;LeastPrivilege&lt;/RunLevel&gt;
+		&lt;/Principal&gt;
+	&lt;/Principals&gt;
+	&lt;Settings&gt;
+		&lt;MultipleInstancesPolicy&gt;IgnoreNew&lt;/MultipleInstancesPolicy&gt;
+		&lt;DisallowStartIfOnBatteries&gt;false&lt;/DisallowStartIfOnBatteries&gt;
+		&lt;StopIfGoingOnBatteries&gt;false&lt;/StopIfGoingOnBatteries&gt;
+		&lt;AllowHardTerminate&gt;true&lt;/AllowHardTerminate&gt;
+		&lt;StartWhenAvailable&gt;false&lt;/StartWhenAvailable&gt;
+		&lt;RunOnlyIfNetworkAvailable&gt;false&lt;/RunOnlyIfNetworkAvailable&gt;
+		&lt;IdleSettings&gt;
+			&lt;StopOnIdleEnd&gt;true&lt;/StopOnIdleEnd&gt;
+			&lt;RestartOnIdle&gt;false&lt;/RestartOnIdle&gt;
+		&lt;/IdleSettings&gt;
+		&lt;AllowStartOnDemand&gt;true&lt;/AllowStartOnDemand&gt;
+		&lt;Enabled&gt;true&lt;/Enabled&gt;
+		&lt;Hidden&gt;false&lt;/Hidden&gt;
+		&lt;RunOnlyIfIdle&gt;false&lt;/RunOnlyIfIdle&gt;
+		&lt;WakeToRun&gt;false&lt;/WakeToRun&gt;
+		&lt;ExecutionTimeLimit&gt;PT72H&lt;/ExecutionTimeLimit&gt;
+		&lt;Priority&gt;7&lt;/Priority&gt;
+	&lt;/Settings&gt;
+	&lt;Actions Context="Author"&gt;
+		&lt;Exec&gt;
+			&lt;Command&gt;%windir%\System32\conhost.exe&lt;/Command&gt;
+			&lt;Arguments&gt;--headless %windir%\System32\WindowsPowerShell\v1.0\powershell.exe -WindowStyle Hidden -NoProfile -NonInteractive -Command "$p = @{ LiteralPath = 'Registry::HKLM\Software\Microsoft\WindowsUpdate\UX\Settings'; Type = 'DWord'; }; $h = [datetime]::Now.Hour; Set-ItemProperty @p -Name 'ActiveHoursStart' -Value (($h + 23) % 24); Set-ItemProperty @p -Name 'ActiveHoursEnd' -Value (($h + 11) % 24); Set-ItemProperty @p -Name 'SmartActiveHoursState' -Value 0;"&lt;/Arguments&gt;
+		&lt;/Exec&gt;
+	&lt;/Actions&gt;
+&lt;/Task&gt;
+		</File>
+		<File path="C:\Windows\Setup\Scripts\TurnOffSystemSounds.ps1">
+$excludes = Get-ChildItem -LiteralPath 'Registry::HKU\DefaultUser\AppEvents\EventLabels' |
+    Where-Object -FilterScript { ($_ | Get-ItemProperty).ExcludeFromCPL -eq 1; } |
+    Select-Object -ExpandProperty 'PSChildName';
+Get-ChildItem -Path 'Registry::HKU\DefaultUser\AppEvents\Schemes\Apps\*\*' |
+    Where-Object -Property 'PSChildName' -NotIn $excludes |
+    Get-ChildItem -Include '.Current' | Set-ItemProperty -Name '(Default)' -Value '';
+		</File>
+		<File path="C:\Windows\Setup\Scripts\SetStartPins.ps1">
+$json = '{"pinnedList":[]}';
+if( [System.Environment]::OSVersion.Version.Build -lt 20000 ) {
+	return;
+}
+$key = 'Registry::HKLM\SOFTWARE\Microsoft\PolicyManager\current\device\Start';
+New-Item -Path $key -ItemType 'Directory' -ErrorAction 'SilentlyContinue';
+Set-ItemProperty -LiteralPath $key -Name 'ConfigureStartPins' -Value $json -Type 'String';
+		</File>
+		<File path="C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\LayoutModification.xml">
+&lt;LayoutModificationTemplate Version="1" xmlns="http://schemas.microsoft.com/Start/2014/LayoutModification"&gt;
+	&lt;LayoutOptions StartTileGroupCellWidth="6" /&gt;
+	&lt;DefaultLayoutOverride&gt;
+		&lt;StartLayoutCollection&gt;
+			&lt;StartLayout GroupCellWidth="6" xmlns="http://schemas.microsoft.com/Start/2014/FullDefaultLayout" /&gt;
+		&lt;/StartLayoutCollection&gt;
+	&lt;/DefaultLayoutOverride&gt;
+&lt;/LayoutModificationTemplate&gt;
+		</File>
+		<File path="C:\Windows\Setup\Scripts\SetColorTheme.ps1">
+$lightThemeSystem = 1;
+$lightThemeApps = 1;
+$accentColorOnStart = 0;
+$enableTransparency = 1;
+$htmlAccentColor = '#0078D4';
+&amp; {
+	$params = @{
+		LiteralPath = 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize';
+		Force = $true;
+		Type = 'DWord';
+	};
+	Set-ItemProperty @params -Name 'SystemUsesLightTheme' -Value $lightThemeSystem;
+	Set-ItemProperty @params -Name 'AppsUseLightTheme' -Value $lightThemeApps;
+	Set-ItemProperty @params -Name 'ColorPrevalence' -Value $accentColorOnStart;
+	Set-ItemProperty @params -Name 'EnableTransparency' -Value $enableTransparency;
+};
+&amp; {
+	Add-Type -AssemblyName 'System.Drawing';
+	$accentColor = [System.Drawing.ColorTranslator]::FromHtml( $htmlAccentColor );
+
+	function ConvertTo-DWord {
+		param(
+			[System.Drawing.Color]
+			$Color
+		);
+						
+		[byte[]] $bytes = @(
+			$Color.R;
+			$Color.G;
+			$Color.B;
+			$Color.A;
+		);
+		return [System.BitConverter]::ToUInt32( $bytes, 0); 
+	}
+
+	$startColor = [System.Drawing.Color]::FromArgb( 0xD2, $accentColor );
+	Set-ItemProperty -LiteralPath 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Accent' -Name 'StartColorMenu' -Value( ConvertTo-DWord -Color $accentColor ) -Type 'DWord' -Force;
+	Set-ItemProperty -LiteralPath 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Accent' -Name 'AccentColorMenu' -Value( ConvertTo-DWord -Color $accentColor ) -Type 'DWord' -Force;
+	Set-ItemProperty -LiteralPath 'Registry::HKCU\Software\Microsoft\Windows\DWM' -Name 'AccentColor' -Value( ConvertTo-DWord -Color $accentColor ) -Type 'DWord' -Force;
+	$params = @{
+		LiteralPath = 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Accent';
+		Name = 'AccentPalette';
+	};
+	$palette = Get-ItemPropertyValue @params;
+	$index = 20;
+	$palette[ $index++ ] = $accentColor.R;
+	$palette[ $index++ ] = $accentColor.G;
+	$palette[ $index++ ] = $accentColor.B;
+	$palette[ $index++ ] = $accentColor.A;
+	Set-ItemProperty @params -Value $palette -Type 'Binary' -Force;
+};
+		</File>
+		<File path="C:\Windows\Setup\Scripts\SetWallpaper.ps1">
+Add-Type -TypeDefinition '
+	using System.Drawing;
+	using System.Runtime.InteropServices;
+	
+	public static class WallpaperSetter {
+		[DllImport("user32.dll")]
+		private static extern bool SetSysColors(
+			int cElements, 
+			int[] lpaElements,
+			int[] lpaRgbValues
+		);
+
+		[DllImport("user32.dll")]
+		private static extern bool SystemParametersInfo(
+			uint uiAction,
+			uint uiParam,
+			string pvParam,
+			uint fWinIni
+		);
+
+		public static void SetDesktopBackground(Color color) {
+			SystemParametersInfo(20, 0, "", 0);
+			SetSysColors(1, new int[] { 1 }, new int[] { ColorTranslator.ToWin32(color) });
+		}
+
+		public static void SetDesktopImage(string file) {
+			SystemParametersInfo(20, 0, file, 0);
+		}
+	}
+' -ReferencedAssemblies 'System.Drawing';
+
+function Set-WallpaperColor {
+	param(
+		[string]
+		$HtmlColor
+	);
+
+	$color = [System.Drawing.ColorTranslator]::FromHtml( $HtmlColor );
+	[WallpaperSetter]::SetDesktopBackground( $color );
+	Set-ItemProperty -Path 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Wallpapers' -Name 'BackgroundType' -Type 'DWord' -Value 1 -Force;
+	Set-ItemProperty -Path 'Registry::HKCU\Control Panel\Desktop' -Name 'WallPaper' -Type 'String' -Value '' -Force;
+	Set-ItemProperty -Path 'Registry::HKCU\Control Panel\Colors' -Name 'Background' -Type 'String' -Value "$($color.R) $($color.G) $($color.B)" -Force;
+}
+
+function Set-WallpaperImage {
+	param(
+		[string]
+		$LiteralPath
+	);
+
+	if( $LiteralPath | Test-Path ) {
+		[WallpaperSetter]::SetDesktopImage( $LiteralPath );
+		Set-ItemProperty -Path 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Wallpapers' -Name 'BackgroundType' -Type 'DWord' -Value 0 -Force;
+		Set-ItemProperty -Path 'Registry::HKCU\Control Panel\Desktop' -Name 'WallPaper' -Type 'String' -Value $LiteralPath -Force;
+	} else {
+		"Cannot use '$LiteralPath' as a desktop wallpaper because that file does not exist.";
+	}
+}
+Set-WallpaperColor -HtmlColor '#000000';
+		</File>
+		<File path="C:\Windows\Setup\Scripts\unattend-01.ps1">
+# Autotuning Internet Speed and making it persistent
+Set-NetTCPSetting -SettingName * -ScalingHeuristics Disabled
+Set-NetTCPSetting -SettingName * -InitialRto 3000 -Timestamps Disabled -MemoryPressureProtection Disabled -NonSackRttResiliency Disabled -MaxSynRetransmissions 2
+Set-NetIPv4Protocol -IcmpRedirects Disabled -DefaultHopLimit 64 -MultipleArpAnnouncements Disabled
+
+netsh.exe interface tcp set supplemental Internet congestionprovider=ctcp
+netsh.exe interface tcp set supplemental InternetCustom congestionprovider=ctcp
+netsh.exe interface tcp set supplemental Datacenter congestionprovider=ctcp
+netsh.exe interface tcp set supplemental Compat congestionprovider=ctcp
+netsh.exe interface tcp set supplemental DatacenterCustom congestionprovider=ctcp
+
+# OffloadGlobal Settings
+Set-NetOffloadGlobalSetting -PacketCoalescingFilter disabled -Chimney Disabled -Taskoffload Enabled -ReceiveSideScaling Enabled -ReceiveSegmentCoalescing Disabled
+
+# tweaking features from network adapters
+Disable-NetAdapterLso -Name *
+Disable-NetAdapterBinding -Name * -ComponentID ms_pacer
+Set-NetIPInterface -WeakHostSend Enabled -WeakHostReceive Enabled -ErrorAction SilentlyContinue
+
+# TCP/IP Protocole Tweaks
+netsh.exe int isatap set state disable | Out-Null
+netsh.exe int tcp set global ecncapability=enabled | Out-Null
+netsh.exe int tcp set global ecn=enabled | Out-Null
+netsh.exe interface tcp set global fastopen=enabled | Out-Null
+netsh.exe interface tcp set global fastopenfallback=enabled | Out-Null
+netsh.exe interface ip set global neighborcachelimit=4096 taskoffload=enabled | Out-Null
+netsh.exe interface tcp set global hystart=disabled | Out-Null
+
+# Function to add or update registry keys
+function Set-RegKey {
+    param (
+        [string]$path,
+        [string]$name,
+        [string]$value,
+        [string]$type = "DWord"
+    )
+
+    if ($type -eq "DWord") {
+        Set-ItemProperty -Path $path -Name $name -Value $value -Type DWord -Force
+    } else {
+        Set-ItemProperty -Path $path -Name $name -Value $value -Type String -Force
+    }
+}
+
+# Adding NetBIOS Options
+$netbtPath = "HKLM:\SYSTEM\CurrentControlSet\services\NetBT\Parameters\Interfaces"
+$interfaces = Get-ChildItem -Path $netbtPath
+
+foreach ($interface in $interfaces) {
+    Set-RegKey -path $interface.PSPath -name "NetbiosOptions" -value 1 -type "DWord"
+}
+
+# Updating registry keys for network interfaces
+$regPath = "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces"
+$networkInterfaces = Get-ChildItem -Path $regPath | Where-Object { $_.Name -match "000" }
+
+foreach ($interface in $networkInterfaces) {
+    # Disable Flow Control
+    Set-RegKey -path $interface.PSPath -name "*FlowControl" -value "0" -type "String"
+    Set-RegKey -path $interface.PSPath -name "FlowControlCap" -value "0" -type "String"
+
+    # Remove Interrupt Delays
+    Set-RegKey -path $interface.PSPath -name "TxIntDelay" -value "0" -type "String"
+    Set-RegKey -path $interface.PSPath -name "TxAbsIntDelay" -value "0" -type "String"
+    Set-RegKey -path $interface.PSPath -name "RxIntDelay" -value "0" -type "String"
+    Set-RegKey -path $interface.PSPath -name "RxAbsIntDelay" -value "0" -type "String"
+
+    # Remove Adapter Notification
+    Set-RegKey -path $interface.PSPath -name "FatChannelIntolerant" -value "0" -type "String"
+
+    # Disable Interrupt Moderation
+    Set-RegKey -path $interface.PSPath -name "*InterruptModeration" -value "0" -type "String"
+
+    # Disable - Allow the computer to turn off this device to save power
+    Set-RegKey -path $interface.PSPath -name "LogDisconnectEvent" -value "0" -type "String"
+    Set-RegKey -path $interface.PSPath -name "LogLinkStateEvent" -value 16 -type "String"
+
+    # Disable - Reduce network speed to 10/100
+    Set-RegKey -path $interface.PSPath -name "GigaLite" -value "0" -type "String"
+
+    # Disabling Green Ethernet
+    Set-RegKey -path $interface.PSPath -name "*EEE" -value "0" -type "String"
+    Set-RegKey -path $interface.PSPath -name "AdvancedEEE" -value "0" -type "String"
+    Set-RegKey -path $interface.PSPath -name "AutoPowerSaveModeEnabled" -value "0" -type "String"
+    Set-RegKey -path $interface.PSPath -name "EnableEDT" -value "0" -type "String"
+    Set-RegKey -path $interface.PSPath -name "EnableGreenEthernet" -value "0" -type "String"
+    Set-RegKey -path $interface.PSPath -name "EEELinkAdvertisement" -value "0" -type "String"
+    Set-RegKey -path $interface.PSPath -name "ENPWMode" -value "0" -type "String"
+    Set-RegKey -path $interface.PSPath -name "GPPSW" -value "0" -type "String"
+    Set-RegKey -path $interface.PSPath -name "PowerSavingMode" -value "0" -type "String"
+    Set-RegKey -path $interface.PSPath -name "ULPMode" -value "0" -type "String"
+}
+
+# Disabling Nagle's Algorithm for better Gaming Latency
+$tcpipPath = "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces"
+$tcpInterfaces = Get-ChildItem -Path $tcpipPath | Where-Object { $_.Name -match "1" }
+
+foreach ($tcpInterface in $tcpInterfaces) {
+    Set-RegKey -path $tcpInterface.PSPath -name "TCPNoDelay" -value 1 -type "DWord"
+    Set-RegKey -path $tcpInterface.PSPath -name "TcpAckFrequency" -value 1 -type "DWord"
+    Set-RegKey -path $tcpInterface.PSPath -name "TcpDelAckTicks" -value 0 -type "DWord"
+}
+
+# A string list which has listed capabilities or FoD to be disabled and removed.
+$flist = @("*Realtek*", "*Intel*", "*Broadcom*", "*Qualcomm*", "*Marvel*",
+            "*Vmware*", "*Ethernet*", "*InternetExplorer*", "*StepsRecorder*", "*WindowsMediaPlayer*",
+            "*Wallpapers*", "*Print*", "*MathRecognizer*", "*PowerShell*", 
+	    "*QuickAssist*", "*OneSync*", "*LA57*", "*Ralink*", "*Virtual*", "*TCP*", "*Hello*","*Theme*","*Edge*")
+
+foreach ($item in $flist) {
+    # Get the list of capabilities that match the current item
+    $checkCapabilities = Get-WindowsCapability -Online | Where-Object { $_.Name -like $item }
+    
+    foreach ($checkCapability in $checkCapabilities) {
+        if ($checkCapability.State -eq 'Installed') {
+            try {
+                # Remove each capability found
+                Remove-WindowsCapability -Online -Name $checkCapability.Name -ErrorAction Stop
+            } catch {
+                Write-Host "Error at $($checkCapability.Name): $($_.Exception.Message)"
+            }
+        }
+    }
+}
+
+$Host.UI.RawUI.WindowTitle = "Unsplitter"
+Set-Location -Path $PSScriptRoot
+$os = Get-WmiObject -Class Win32_OperatingSystem
+$mem = $os.TotalVisibleMemorySize
+$ram = $mem + 1024000
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control" -Name "SvcHostSplitThresholdInKB" -Value $ram -Type DWord
+		</File>
+		<File path="C:\Windows\Setup\Scripts\unattend-02.reg">
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings]
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\0e796bdb-100d-47d6-a2d5-f7d2daa51f51]
+"ACSettingIndex"=dword:00000001
+"DCSettingIndex"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\29F6C1DB-86DA-48C5-9FDB-F2B67B1F44DA]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+[-HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\309dce9b-bef4-4119-9921-a851fb12f0f4]
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\3C0BC021-C8A8-4E07-A973-6B14CBCB2B7E]
+"ACSettingIndex"=dword:0000012c
+"DCSettingIndex"=dword:0000012c
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\5CA83367-6E45-459F-A27B-476B1D01C936]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\637EA02F-BBCB-4015-8E2C-A1C7B9C0B546]
+"DCSettingIndex"=dword:00000003
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\6738E2C4-E8A5-4A42-B16A-E040E769756E]
+"DCSettingIndex"=dword:00000000
+"ACSettingIndex"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\7648EFA3-DD9C-4E3E-B566-50F929386280]
+"ACSettingIndex"=dword:00000003
+"DCSettingIndex"=dword:00000003
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\7bc4a2f9-d8fc-4469-b07b-33eb785aaca0]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\8183ba9a-e910-48da-8769-14ae6dc1170a]
+"DCSettingIndex"=dword:0000000f
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\90959D22-D6A1-49B9-AF93-BCE885AD335B]
+"ACSettingIndex"=dword:00000001
+"DCSettingIndex"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\94ac6d29-73ce-41a6-809f-6363ba21b47e]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\96996BC0-AD50-47EC-923B-6F41874DD9EB]
+"ACSettingIndex"=dword:00000001
+"DCSettingIndex"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\9A66D8D7-4FF7-4EF9-B5A2-5A326CA2A469]
+"DCSettingIndex"=dword:00000005
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\9D7815A6-7EE4-497E-8888-515A05F02364]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\A4B195F5-8225-47D8-8012-9D41369786E2]
+"ACSettingIndex"=dword:00000001
+"DCSettingIndex"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\A7066653-8D6C-40A8-910E-A1F54B84C7E5]
+"ACSettingIndex"=dword:00000002
+"DCSettingIndex"=dword:00000002
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\abfc2519-3608-4c2a-94ea-171b0ed546ab]
+"ACSettingIndex"=dword:00000001
+"DCSettingIndex"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\B7A27025-E569-46c2-A504-2B96CAD225A1]
+"ACSettingIndex"=dword:00000001
+"DCSettingIndex"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\bcded951-187b-4d05-bccc-f7e51960c258]
+"DCSettingIndex"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\d4c1d4c8-d5cc-43d3-b83e-fc51215cb04d]
+"ACSettingIndex"=dword:00000001
+"DCSettingIndex"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\d8742dcb-3e6a-4b3c-b3fe-374623cdcf06]
+"DCSettingIndex"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\E69653CA-CF7F-4F05-AA73-CB833FA90AD4]
+"DCSettingIndex"=dword:0000000f
+"ACSettingIndex"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\f15576e8-98b7-4186-b944-eafa664402d9]
+"ACSettingIndex"=dword:00000001
+"DCSettingIndex"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\f1fbfde2-a960-4165-9f88-50667911ce96]
+"ACSettingIndex"=dword:00000028
+"DCSettingIndex"=dword:00000028
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\F3C5027D-CD16-4930-AA6B-90DB844A8F00]
+"DCSettingIndex"=dword:00000002
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\be337238-0d82-4146-a960-4f3749d470c7]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+; USB selective suspend setting (GUID: 48e6b7a6-50f5-4782-a5d4-53bb8f07e226)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\48e6b7a6-50f5-4782-a5d4-53bb8f07e226]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+; Turn off hard disk after (GUID: 29f6c1db-86da-48c5-9fdb-f2b67b1f44da)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\29f6c1db-86da-48c5-9fdb-f2b67b1f44da]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+; NVMe NOPPME (GUID: d639518a-e56d-4345-8af2-b9f32fb26109)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\d639518a-e56d-4345-8af2-b9f32fb26109]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+; NVMe Primary Idle Timeout (GUID: d3d55efd-c1ff-424e-9dc3-441be7833010)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\d3d55efd-c1ff-424e-9dc3-441be7833010]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+; AHCI Link Power Management - HIPM/DIPM (GUID: 0b2d69d7-a2a1-449c-9680-f91c70521c60)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\0b2d69d7-a2a1-449c-9680-f91c70521c60]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+; AHCI Link Power Management - Adaptive (GUID: dab60367-53fe-4fbc-825e-521d069d2456)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\dab60367-53fe-4fbc-825e-521d069d2456]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\0cc5b647-c1df-4637-891a-dec35c318583]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\0cc5b647-c1df-4637-891a-dec35c318584]
+"ACSettingIndex"=dword:00000064
+"DCSettingIndex"=dword:00000064
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\12a0ab44-fe28-4fa9-b3bd-4b64f44960a6]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\12a0ab44-fe28-4fa9-b3bd-4b64f44960a7]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+; Energy performance preference policy (0% - Max Performance / EPP 0)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\36687f9e-e3a5-4dbf-b1dc-15eb381c6863]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+; Energy performance preference policy Class 1 (0% - Max Performance EPP 0)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\36687f9e-e3a5-4dbf-b1dc-15eb381c6864]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\d639518a-e56d-4345-8af2-b9f32fb26109]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\dbc9e238-6de9-49e3-92cd-8c2b4946b472]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\fc95af4d-40e7-4b6d-835a-56d131dbc80e]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\ee12f906-d277-404b-b6da-e5fa1a576df5]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+; --- CPU CORE PARKING ---
+
+; CPMinCores (100% - Dezactiveaz&#x103; Parking)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\0cc5b647-c74e-4111-92e3-3b129533f4d5]
+"ACSettingIndex"=dword:00000064
+"DCSettingIndex"=dword:00000064
+
+; CPMaxCores (100%)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\ea0653f4-9251-4ca4-99a3-324b3d2b0636]
+"ACSettingIndex"=dword:00000064
+"DCSettingIndex"=dword:00000064
+
+; CPIncreaseTime (Minim - 1)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\2430ab6f-a544-49aa-a9d7-2b7ab794b238]
+"ACSettingIndex"=dword:00000001
+"DCSettingIndex"=dword:00000001
+
+; CPDecreaseTime (Maxim - 100)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\df142941-20f3-4edf-9a4a-9c8398d99316]
+"ACSettingIndex"=dword:00000064
+"DCSettingIndex"=dword:00000064
+
+; CPConcurrency (100)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\24331756-9f37-4a91-8aa2-cd24f05145b1]
+"ACSettingIndex"=dword:00000064
+"DCSettingIndex"=dword:00000064
+
+; CPDistribution (0)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\a55612aa-f62a-4414-bdc9-1157d0d01477]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+; CPHeadroom (0)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\7354e7bc-61d6-4765-b384-839981369279]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+; CpLatencyHintUnpark (1)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\6161914b-2401-4061-a4a0-76169c08044b]
+"ACSettingIndex"=dword:00000001
+"DCSettingIndex"=dword:00000001
+
+; --- IDLE THRESHOLDS ---
+
+; IdleDemoteThreshold (100)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\4b92d772-746b-4dc8-bc01-e63086603a11]
+"ACSettingIndex"=dword:00000064
+"DCSettingIndex"=dword:00000064
+
+; IdlePromoteThreshold (100)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\7b224883-ad29-4c39-ad36-f310058e3393]
+"ACSettingIndex"=dword:00000064
+"DCSettingIndex"=dword:00000064
+
+; --- PERFORMANCE STATES ---
+
+; MinPerformance (100%)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\893dee03-5242-4113-8214-4362fe445d4d]
+"ACSettingIndex"=dword:00000064
+"DCSettingIndex"=dword:00000064
+
+; MaxPerformance (100%)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\bc5038f7-23e0-4960-96da-33abaf5935ec]
+"ACSettingIndex"=dword:00000064
+"DCSettingIndex"=dword:00000064
+
+; PerfIncreasePolicy (Ideal - 0)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\45bcc044-d885-43e2-8605-ee0ec6e96b59]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+; PerfIncreaseThreshold (10%)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\06cadf0e-64ed-447a-ad35-13f31347019a]
+"ACSettingIndex"=dword:0000000a
+"DCSettingIndex"=dword:0000000a
+
+; PerfIncreaseTime (1)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\984c071e-2352-4220-8044-03cf06c03b2f]
+"ACSettingIndex"=dword:00000001
+"DCSettingIndex"=dword:00000001
+
+; PerfDecreasePolicy (Single - 1)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\40fb19d1-5c9a-4c1d-8c41-2ca4ca564e05]
+"ACSettingIndex"=dword:00000001
+"DCSettingIndex"=dword:00000001
+
+; PerfDecreaseThreshold (0)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\12a0abc1-4b95-46f3-80f3-c7a035c34a4c]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+; PerfDecreaseTime (100)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\d806336b-ee4a-4a9d-9f1c-596c463b322a]
+"ACSettingIndex"=dword:00000064
+"DCSettingIndex"=dword:00000064
+
+; PerfLatencyHint (100)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\03310071-7006-4444-88f6-ec61386127e2]
+"ACSettingIndex"=dword:00000064
+"DCSettingIndex"=dword:00000064
+
+; --- AUTONOMOUS &amp; EPP ---
+
+; PerfAutonomousMode (Enabled - 1)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\8baa4a8a-3315-4420-b301-3e6601b0f0a4]
+"ACSettingIndex"=dword:00000001
+"DCSettingIndex"=dword:00000001
+
+; PerfEnergyPreference (Performance - 0)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\36687e9e-e3a5-4dbf-b1dc-15eb31c7448b]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+; LatencyHintEpp (Performance - 0)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\461a3406-018d-4f10-9118-8f53a479a95f]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+; --- UNPARK POLICIES ---
+
+; ModuleUnparkPolicy (All cores - 1)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\c4581d15-9658-4ac2-8953-2d10f285aa5b]
+"ACSettingIndex"=dword:00000001
+"DCSettingIndex"=dword:00000001
+
+; ComplexUnparkPolicy (1)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\d6138075-8025-467f-8592-349818804975]
+"ACSettingIndex"=dword:00000001
+"DCSettingIndex"=dword:00000001
+
+; SmtUnparkPolicy (1)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\30169123-d349-4184-9134-8c8713fca3b3]
+"ACSettingIndex"=dword:00000001
+"DCSettingIndex"=dword:00000001
+
+; --- HETERO / HYBRID CORE SETTINGS ---
+
+; CPMinCores1 (100% - Toate nucleele de clasa 1 active)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\75e83fb4-118d-4f18-a648-4321040c4e13]
+"ACSettingIndex"=dword:00000064
+"DCSettingIndex"=dword:00000064
+
+; CPMaxCores1 (100%)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\230c3d33-3d02-4bf1-8935-779836371f4b]
+"ACSettingIndex"=dword:00000064
+"DCSettingIndex"=dword:00000064
+
+; HeteroIncreaseTime (Minim - 1)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\7f2492b6-6011-457a-85c0-514a510ed951]
+"ACSettingIndex"=dword:00000001
+"DCSettingIndex"=dword:00000001
+
+; HeteroDecreaseTime (Maxim - 100)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\c7499445-3172-46aa-9d41-39994c9657f8]
+"ACSettingIndex"=dword:00000064
+"DCSettingIndex"=dword:00000064
+
+; HeteroIncreaseThreshold (Prag mic pentru mutare pe nuclee rapide)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\b000397d-9d0d-4dfd-9afd-be5045091a13]
+"ACSettingIndex"=dword:0000000a
+"DCSettingIndex"=dword:0000000a
+
+; HeteroDecreaseThreshold (Prag mare pentru a r&#x103;m&#xE2;ne pe nuclee rapide)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\6317c06e-8260-47b2-8789-532669e46950]
+"ACSettingIndex"=dword:0000005a
+"DCSettingIndex"=dword:0000005a
+
+; CpLatencyHintUnpark1 (1)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\10a28bdc-3834-4bc1-9034-45300305a414]
+"ACSettingIndex"=dword:00000001
+"DCSettingIndex"=dword:00000001
+
+; --- PERFORMANCE CLASS 1 (E-CORES / SECONDARY) ---
+
+; MinPerformance1 (100%)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\893dee03-5242-4113-8214-4362fe445d4e]
+"ACSettingIndex"=dword:00000064
+"DCSettingIndex"=dword:00000064
+
+; MaxPerformance1 (100%)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\bc5038f7-23e0-4960-96da-33abaf5935ed]
+"ACSettingIndex"=dword:00000064
+"DCSettingIndex"=dword:00000064
+
+; PerfIncreasePolicy1 (Ideal - 0)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\45bcc044-d885-43e2-8605-ee0ec6e96b5a]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+; PerfIncreaseThreshold1 (10%)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\06cadf0e-64ed-447a-ad35-13f31347019b]
+"ACSettingIndex"=dword:0000000a
+"DCSettingIndex"=dword:0000000a
+
+; PerfIncreaseTime1 (1)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\984c071e-2352-4220-8044-03cf06c03b30]
+"ACSettingIndex"=dword:00000001
+"DCSettingIndex"=dword:00000001
+
+; PerfDecreasePolicy1 (Single - 1)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\40fb19d1-5c9a-4c1d-8c41-2ca4ca564e06]
+"ACSettingIndex"=dword:00000001
+"DCSettingIndex"=dword:00000001
+
+; PerfDecreaseThreshold1 (0)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\12a0abc1-4b95-46f3-80f3-c7a035c34a4d]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+; PerfDecreaseTime1 (100)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\d806336b-ee4a-4a9d-9f1c-596c463b322b]
+"ACSettingIndex"=dword:00000064
+"DCSettingIndex"=dword:00000064
+
+; PerfLatencyHint1 (100)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\03310071-7006-4444-88f6-ec61386127e3]
+"ACSettingIndex"=dword:00000064
+"DCSettingIndex"=dword:00000064
+
+; LatencyHintEpp1 (0)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\461a3406-018d-4f10-9118-8f53a479a960]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+; --- HETERO CLASS PERFORMANCE ---
+
+; HeteroClass1InitialPerf (100% la activare)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\6737e22e-7d14-4acb-a3fa-a69006900405]
+"ACSettingIndex"=dword:00000064
+"DCSettingIndex"=dword:00000064
+
+; HeteroClass0FloorPerf (100% minim pentru clasa 0)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\f7358ef9-bb6e-473d-b4f0-466548777771]
+"ACSettingIndex"=dword:00000064
+"DCSettingIndex"=dword:00000064
+
+; HeteroIncreaseThreshold1 (Prag pentru clasa 1)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\b000397d-9d0d-4dfd-9afd-be5045091a14]
+"ACSettingIndex"=dword:0000000a
+"DCSettingIndex"=dword:0000000a
+
+; HeteroDecreaseThreshold1 (Prag pentru clasa 1)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\6317c06e-8260-47b2-8789-532669e46951]
+"ACSettingIndex"=dword:0000005a
+"DCSettingIndex"=dword:0000005a
+
+; --- FREQUENCY &amp; BOOST ---
+
+; MaxFrequency (0 = Nelimitat/Frecven&#x21B;a maxim&#x103; a procesorului)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\75b0ae3f-bce0-45a7-8c89-c9611c251100]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+; MaxFrequency1 (E-Cores)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\75b0ae3f-bce0-45a7-8c89-c9611c251101]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+; PerfBoostMode (Aggressive - 2)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\be337238-0d82-4146-a960-4f3749d470c2]
+"ACSettingIndex"=dword:00000002
+"DCSettingIndex"=dword:00000002
+
+; --- SCHEDULING POLICIES (DISTRIBUIRE SARCINI) ---
+
+; SchedulingPolicy (High Performance - 2)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\93b22d1d-9513-4bc7-ad42-1e967313f2e4]
+"ACSettingIndex"=dword:00000002
+"DCSettingIndex"=dword:00000002
+
+; ShortSchedulingPolicy (High Performance - 2)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\bae08b81-2d5e-4688-ad6a-13243356654b]
+"ACSettingIndex"=dword:00000002
+"DCSettingIndex"=dword:00000002
+
+; --- ARCH CLASS THRESHOLDS (HIBRID P/E CORES) ---
+
+; LongThreadArchClassLowerThreshold (Prag nuclee clasa inferioar&#x103;)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\82643a6d-9610-4493-9c86-13da7601d006]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+; LongThreadArchClassUpperThreshold
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\a2283733-1492-49d6-b516-724e335f9923]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+; ShortThreadArchClassLowerThreshold
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\05658661-f09c-48c9-9407-743a60b73cf2]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+; ShortThreadArchClassUpperThreshold
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\0762957b-7b3b-4876-9694-8840da70877a]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+; --- AUTONOMOUS &amp; WINDOWS ---
+
+; PerfAutonomousWindow (Minim - 0 pentru reac&#x21B;ie instant)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\cfeda3d0-7697-4566-a922-a9086cd3632a]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+; --- THERMAL ---
+
+; THERMALTHROTTLING (Dezactivat/Passiv - 0)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\5702737c-659f-4491-b4d0-4061a9954a20]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+; --- REPETATE / CLASA 1 (PENTRU SIGURAN&#x21A;&#x102;) ---
+
+; PerfEnergyPreference (0 = Max Performance)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\36687e9e-e3a5-4dbf-b1dc-15eb31c7448b]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+; PerfEnergyPreference1 (E-Cores - 0 = Max Perf)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\36687e9e-e3a5-4dbf-b1dc-15eb31c7448c]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\d4e98f31-5ffe-4ce1-be31-1b38b384c009]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel]
+"ThreadDpcEnable"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\10778347-1370-4ee0-8bbd-33bdacaade49]
+"ACSettingIndex"=dword:00000001
+"DCSettingIndex"=dword:00000001
+
+; --- IDLE RESILIENCY (SUB_IR) ---
+
+; Execution Required power request timeout (0 = Dezactivat / Reac&#x21B;ie imediat&#x103; la cereri)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\3166bc41-7e98-4e03-b34e-ec0f5f2b218e]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+; IO coalescing timeout (0 = Dezactivat / F&#x103;r&#x103; &#xEE;nt&#xE2;rziere pentru opera&#x21B;iunile I/O)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\c36f0eb4-2988-4a70-8eee-0884fc2c2433]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+; Processor Idle Resiliency Timer Resolution (0 = Rezolu&#x21B;ie maxim&#x103; / F&#x103;r&#x103; coalescing de timere)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\c42b79aa-aa3a-484b-a98f-2cf32aa90a28]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+; Interrupt Steering Mode (3 = Any unparked processor / Cel mai rapid r&#x103;spuns)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\2bfc24f9-5ea2-4801-8213-3dbae01aa39d]
+"ACSettingIndex"=dword:00000003
+"DCSettingIndex"=dword:00000003
+
+; Target Load (100% = 10000 &#xEE;n zecimi de procent / Evit&#x103; mutarea inutil&#x103; a &#xEE;ntreruperilor)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\73cde64d-d720-4bb2-a860-c755afe77ef2]
+"ACSettingIndex"=dword:00002710
+"DCSettingIndex"=dword:00002710
+
+; Unparked time trigger (0 = Reac&#x21B;ie instantanee)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\d6ba4903-386f-4c2c-8adb-5c21b3328d25]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\3b04d4fd-1cc7-4f23-ab1c-d1337819c4bb]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+; Processor performance decrease policy (1 = Single / Scade frecven&#x21B;a c&#xE2;t mai lent)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\40fbefc7-2e9d-4d25-a185-0cfd8574bac6]
+"ACSettingIndex"=dword:00000001
+"DCSettingIndex"=dword:00000001
+
+; Processor performance decrease policy Class 1 (1 = Single)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\40fbefc7-2e9d-4d25-a185-0cfd8574bac7]
+"ACSettingIndex"=dword:00000001
+"DCSettingIndex"=dword:00000001
+
+; CP Concurrency Threshold (100% - Evit&#x103; mutarea firelor de execu&#x21B;ie &#xEE;ntre nuclee)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\2430ab6f-a520-44a2-9601-f7f23b5134b1]
+"ACSettingIndex"=dword:00000064
+"DCSettingIndex"=dword:00000064
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\97cfac41-2217-47eb-992d-618b1977c907]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+; CPINCREASETIME (1 = Reac&#x21B;ie instantanee la nevoie de putere)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\2ddd5a84-5a71-437e-912a-db0b8c788732]
+"ACSettingIndex"=dword:00000001
+"DCSettingIndex"=dword:00000001
+
+; CPDISTRIBUTION (0 = Dezactivat / Nu &#xEE;mpr&#x103;&#x219;tia sarcina inutil pentru a men&#x21B;ine cache-ul cald)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\4bdaf4e9-d103-46d7-a5f0-6280121616ef]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+; CPOVERUTIL (5% = Prag minim pentru a considera un nucleu supra&#xEE;nc&#x103;rcat &#x219;i a muta sarcina rapid)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\943c8cb6-6f93-4227-ad87-e9a3feec08d1]
+"ACSettingIndex"=dword:00000005
+"DCSettingIndex"=dword:00000005
+
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\b0deaf6b-59c0-4523-8a45-ca7f40244114]
+"ACSettingIndex"=dword:00000002
+"DCSettingIndex"=dword:00000002
+
+; SMT threads unpark policy (1 = Core per Thread / Performan&#x21B;&#x103; maxim&#x103; per nucleu fizic)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\b28a6829-c5f7-444e-8f61-10e24e85c532]
+"ACSettingIndex"=dword:00000001
+"DCSettingIndex"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\b669a5e9-7b1d-4132-baaa-49190abcfeb6]
+"ACSettingIndex"=dword:00000002
+"DCSettingIndex"=dword:00000002
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\c7be0679-2817-4d69-9d02-519a537ed0c6]
+"ACSettingIndex"=dword:00000002
+"DCSettingIndex"=dword:00000002
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\d8edeb9b-95cf-4f95-a73c-b061973693c8]
+"ACSettingIndex"=dword:00000064
+"DCSettingIndex"=dword:00000064
+
+; PerfDecreaseTime1 (100 = Maxim pentru E-Cores)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\d8edeb9b-95cf-4f95-a73c-b061973693c9]
+"ACSettingIndex"=dword:00000064
+"DCSettingIndex"=dword:00000064
+
+; Short vs. long running thread threshold (0 = Toate firele sunt tratate ca prioritate de execu&#x21B;ie)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\d92998c2-6a48-49ca-85d4-8cceec294570]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+; CPDecreaseTime (100 = Maxim / &#xCE;nt&#xE2;rzie parcarea nucleelor)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\dfd10d17-d5eb-45dd-877a-9a34ddd15c82]
+"ACSettingIndex"=dword:00000064
+"DCSettingIndex"=dword:00000064
+
+; CPHeadroom (0 = Dezactiveaz&#x103; marja de siguran&#x21B;&#x103; pentru parking)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\f735a673-2066-4f80-a0c5-ddee0cf1bf5d]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+; HeteroDecreaseThreshold (10% = P&#x103;streaz&#x103; sarcinile pe nuclee performante)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\f8861c27-95e7-475c-865b-13c0cb3f9d6b]
+"ACSettingIndex"=dword:0000000a
+"DCSettingIndex"=dword:0000000a
+
+; HeteroDecreaseThreshold1 (10%)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\f8861c27-95e7-475c-865b-13c0cb3f9d6c]
+"ACSettingIndex"=dword:0000000a
+"DCSettingIndex"=dword:0000000a
+
+; --- LIMITS &amp; FLOOR PERF ---
+
+; LongThreadArchClassUpperLimit (0 = For&#x21B;eaz&#x103; firele lungi pe P-Cores)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\bf903d33-9d24-49d3-a468-e65e0325046a]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+; Heterogeneous policy in effect (0 = Policy 0 / Max Performance P-Core priority)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\7f2f5cfa-f10c-4823-b5e1-e93ae85f46b5]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+; Latency Hint EPP (0 = Max Performance c&#xE2;nd laten&#x21B;a e critic&#x103;)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\4b70f900-cdd9-4e66-aa26-ae8417f98173]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+; Latency Hint EPP Class 1 (E-Cores)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\4b70f900-cdd9-4e66-aa26-ae8417f98174]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+; Latency Hint EPP Class 2
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\4b70f900-cdd9-4e66-aa26-ae8417f98175]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+; Latency Hint Processor Performance Class 2 (100%)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\619b7505-003b-4e82-b7a6-4dd29c300973]
+"ACSettingIndex"=dword:00000064
+"DCSettingIndex"=dword:00000064
+
+; Short Thread Arch Class Upper Limit (0 = For&#x21B;eaz&#x103; firele scurte s&#x103; NU plece de pe P-Cores)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\828423eb-8662-4344-90f7-52bf15870f5a]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\fddc842b-8364-4edc-94cf-c17f60de1c80]
+"ACSettingIndex"=dword:00000064
+"DCSettingIndex"=dword:00000064
+
+; DistributeUtil (0 = Disabled / Evit&#x103; &#xEE;mpr&#x103;&#x219;tierea inutil&#x103; a sarcinii pentru a men&#x21B;ine cache-ul cald)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\e0007330-f589-42ed-a401-5ddb10e785d3]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+; CPMaxCores / CPMaxCores1 (100% = Toate nucleele pot fi folosite)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\ea062031-0e34-4ff1-9b6d-eb1059334028]
+"ACSettingIndex"=dword:00000064
+"DCSettingIndex"=dword:00000064
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\ea062031-0e34-4ff1-9b6d-eb1059334029]
+"ACSettingIndex"=dword:00000064
+"DCSettingIndex"=dword:00000064
+
+; HETEROCLASS1INITIALPERF (100% = E-Cores pornesc direct la frecven&#x21B;&#x103; maxim&#x103;)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\1facfc65-a930-4bc5-9f38-504ec097bbc0]
+"ACSettingIndex"=dword:00000064
+"DCSettingIndex"=dword:00000064
+
+; CPPERF / CPPERF1 (2 = Lightest Performance State / R&#x103;m&#xE2;ne &#xEE;n cea mai rapid&#x103; stare c&#xE2;nd e parcat)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\447235c7-6a8d-4cc0-8e24-9eaf70b96e2b]
+"ACSettingIndex"=dword:00000002
+"DCSettingIndex"=dword:00000002
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\447235c7-6a8d-4cc0-8e24-9eaf70b96e2c]
+"ACSettingIndex"=dword:00000002
+"DCSettingIndex"=dword:00000002
+
+; CPDECREASEPOL (1 = Single Core / Scade num&#x103;rul de nuclee active unul c&#xE2;te unul, nu toate odat&#x103;)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\71021b41-c749-4d21-be74-a00f335d582b]
+"ACSettingIndex"=dword:00000001
+"DCSettingIndex"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\68afb2d9-ee95-47a8-8f50-4115088073b1]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+; Heterogeneous thread scheduling policy (1 = Performant processors / For&#x21B;eaz&#x103; P-Cores)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\93b8b6dc-0698-4d1c-9ee4-0644e900c85d]
+"ACSettingIndex"=dword:00000001
+"DCSettingIndex"=dword:00000001
+
+; Minimum processor state (100% - P-Cores)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\893dee8e-2bef-41e0-89c6-b55d0929964c]
+"ACSettingIndex"=dword:00000064
+"DCSettingIndex"=dword:00000064
+
+; Minimum processor state Class 1 (100% - E-Cores / For&#x21B;eaz&#x103; frecven&#x21B;a maxim&#x103; &#x219;i aici)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\893dee8e-2bef-41e0-89c6-b55d0929964d]
+"ACSettingIndex"=dword:00000064
+"DCSettingIndex"=dword:00000064
+
+; Minimum processor state Class 2 (100%)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\893dee8e-2bef-41e0-89c6-b55d0929964e]
+"ACSettingIndex"=dword:00000064
+"DCSettingIndex"=dword:00000064
+
+; --- TIMING &amp; HISTORY ---
+
+; Hetero Decrease Time (100 = Maxim / Men&#x21B;ine sarcinile pe nuclee rapide c&#xE2;t mai mult)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\7f2492b6-60b1-45e5-ae55-773f8cd5caec]
+"ACSettingIndex"=dword:00000064
+"DCSettingIndex"=dword:00000064
+
+; Processor performance history count (1 = Minim / Reac&#x21B;ie instant&#x103;, f&#x103;r&#x103; a analiza istoricul mediu)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\7d24baa7-0b84-480f-840c-1b0743c00f5f]
+"ACSettingIndex"=dword:00000001
+"DCSettingIndex"=dword:00000001
+
+; Processor performance history count Class 1 (1)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\7d24baa7-0b84-480f-840c-1b0743c00f60]
+"ACSettingIndex"=dword:00000001
+"DCSettingIndex"=dword:00000001
+
+; --- IDLE &amp; LATENCY ---
+
+; Processor idle state maximum (0 = F&#x103;r&#x103; st&#x103;ri de somn profund / Reac&#x21B;ie instant&#x103;)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\9943e905-9a30-4ec1-9b99-44dd3b76f7a2]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+; Processor performance increase time (1)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\984cf492-3bed-4488-a8f9-4286c97bf5aa]
+"ACSettingIndex"=dword:00000001
+"DCSettingIndex"=dword:00000001
+
+; Processor performance increase time Class 1 (1)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\984cf492-3bed-4488-a8f9-4286c97bf5ab]
+"ACSettingIndex"=dword:00000001
+"DCSettingIndex"=dword:00000001
+
+; --- HETERO CONTAINMENT &amp; IDLE ---
+
+; HETEROCONTAINMENTINCREASETIME (1 = Reac&#x21B;ie instantanee &#xEE;n zonele de izolare)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\64fcee6b-5b1f-45a4-a76a-19b2c36ee290]
+"ACSettingIndex"=dword:00000001
+"DCSettingIndex"=dword:00000001
+
+; HETEROCONTAINMENTDECREASETIME (100 = Men&#x21B;ine performan&#x21B;a maxim&#x103; &#xEE;n zonele de izolare c&#xE2;t mai mult)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\6ff13aeb-7897-4356-9999-dd9930af065f]
+"ACSettingIndex"=dword:00000064
+"DCSettingIndex"=dword:00000064
+
+; IDLEPROMOTE (100% = Face mult mai dificil&#x103; intrarea nucleului &#xEE;n stare de Idle/Sleep)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\7b224883-b3cc-4d79-819f-8374152cbe7c]
+"ACSettingIndex"=dword:00000064
+"DCSettingIndex"=dword:00000064
+
+; --- SET&#x102;RI DEJA OPTIMIZATE (PENTRU POLICIES) ---
+
+; HETEROHYBRIDCONTAINMENTTHRESHOLD (0)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\6788488b-1b90-4d11-8fa7-973e470dff47]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+; HETEROEFFICIENCYCONTAINMENTTHRESHOLD (0)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\69439b22-221b-4830-bd34-f7bcece24583]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+; IDLESCALING (0 = Disabled / Previne scalarea pragului de idle pentru laten&#x21B;&#x103; constant&#x103;)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\6c2993b0-8f48-481f-bcc6-00dd2742aa06]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+; HETEROCONTAINMENTEFFICIENCYIMPUTILTHRESHOLD (0)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\6ece9e1f-b6dd-42bf-b1b7-5a512b10c092]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+
+; Processor idle demote threshold (0% = Trece instantaneu la o stare de performan&#x21B;&#x103; mai mare la cea mai mic&#x103; activitate)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\4b92d758-5a24-4851-a470-815d78aee119]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+; Processor performance time check interval (1ms = Verific&#x103; &#x219;i ajusteaz&#x103; frecven&#x21B;a la fiecare milisecund&#x103;)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\4d2b0152-7d5c-498b-88e2-34345392a2c5]
+"ACSettingIndex"=dword:00000001
+"DCSettingIndex"=dword:00000001
+
+; --- RESOURCE PRIORITY &amp; DUTY CYCLING ---
+
+; Processor duty cycling (0 = Disabled / Previne oprirea for&#x21B;at&#x103; a procesorului pentru r&#x103;cire)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\4e4450b3-6179-4e91-b8f1-5bb9938f81a1]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+; Processor resource priority (100% / Max)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\603fe9ce-8d01-4b48-a968-1d706c28fd5c]
+"ACSettingIndex"=dword:00000064
+"DCSettingIndex"=dword:00000064
+
+; Processor resource priority Class 1 (100% / Max)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\603fe9ce-8d01-4b48-a968-1d706c28fd5d]
+"ACSettingIndex"=dword:00000064
+"DCSettingIndex"=dword:00000064
+
+; --- HETERO POLICY DEFAULTS (FOR&#x21A;ARE) ---
+
+; Hetero containment policy (0 = Disabled / Previne izolarea restrictiv&#x103; a proceselor)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\60fbe21b-efd9-49f2-b066-8674d8e9f423]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+; --- PROCESSOR PERFORMANCE INCREASE SETTINGS ---
+
+; Processor performance increase threshold (10% - Reac&#x21B;ie rapid&#x103; pentru P-Cores)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\06cadf0e-64ed-448a-8927-ce7bf90eb35d]
+"ACSettingIndex"=dword:0000000a
+"DCSettingIndex"=dword:0000000a
+
+; Processor performance increase threshold Class 1 (10% - Reac&#x21B;ie rapid&#x103; pentru E-Cores)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\06cadf0e-64ed-448a-8927-ce7bf90eb35e]
+"ACSettingIndex"=dword:0000000a
+"DCSettingIndex"=dword:0000000a
+
+; Processor performance increase policy (2 = Rocket / Sare direct la frecven&#x21B;a maxim&#x103;)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\465e1f50-b610-473a-ab58-00d1077dc418]
+"ACSettingIndex"=dword:00000002
+"DCSettingIndex"=dword:00000002
+
+; Processor performance increase policy Class 1 (2 = Rocket / IdealAggressive era 3, Rocket e mai direct)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\465e1f50-b610-473a-ab58-00d1077dc419]
+"ACSettingIndex"=dword:00000002
+"DCSettingIndex"=dword:00000002
+
+; --- HETERO &amp; RESTRICTIONS ---
+
+; HETEROINCREASETIME (1 = Reac&#x21B;ie instantanee pentru clasa hibrid&#x103;)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowferSettings\4009efa7-e72d-4cba-9edf-91084ea8cbc3]
+"ACSettingIndex"=dword:00000001
+"DCSettingIndex"=dword:00000001
+
+; Hybrid containment important utility threshold (0 = Toate sarcinile sunt importante)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\12fd031f-53d2-4bf4-ac6d-c699fc9538c7]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+; Processor Restriction Count (0 = F&#x103;r&#x103; restric&#x21B;ii pe num&#x103;rul de nuclee utilizabile)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Power\PowerSettings\1a98ad09-af22-42ca-8e61-f0a5802c270a]
+"ACSettingIndex"=dword:00000000
+"DCSettingIndex"=dword:00000000
+
+Windows Registry Editor Version 5.00
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\PowerShell\1\ShellIds\Microsoft.PowerShell]
+"ExecutionPolicy"="Bypass"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PowerShell\1\ShellIds\Microsoft.PowerShell]
+"ExecutionPolicy"="Bypass"
+
+[HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\PowerShell]
+"ExecutionPolicy"="Bypass"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Explorer]
+"ShowRunAsDifferentUserInStart"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\PowerShell]
+"EnableScripts"=dword:00000001
+"ExecutionPolicy"="Bypass"
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\PowerShell\ModuleLogging]
+"EnableModuleLogging"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\PowerShell\ScriptBlockLogging]
+"EnableScriptBlockLogging"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\PowerShell\Transcription]
+"EnableTranscripting"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Power]
+"ExitLatency"=dword:00000001
+"DisableSensorWatchdog"=dword:00000001
+"Latency"=dword:00000001
+"LatencyToleranceDefault"=dword:00000001
+"LatencyToleranceFSVP"=dword:00000001
+"LatencyTolerancePerfOverride"=dword:00000001
+"LatencyToleranceVSyncEnabled"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\Power]
+"RmGpsPsEnablePerCpuCoreDpc"=dword:00000001
+"DisableWriteCombining"=dword:00000001
+"Node3DLowLatency"=dword:00000001
+"RmDisableRegistryCaching"=dword:00000001
+"RMDisablePostL2Compression"=dword:00000001
+"DefaultMemoryRefreshLatencyToleranceActivelyUsed"=dword:00000001
+"DefaultD3TransitionLatencyIdleShortTime"=dword:00000001
+"TransitionLatency"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Video\{DEB039CC-B704-4F53-B43E-9DD4432FA2E9}\0000]
+"PerfLevelSrc"=dword:00003322
+"PowerMizerEnable"=dword:00000001
+"PowermizerLevel"=dword:00000001
+"PowermizerLevelAC"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Windows]
+"DesktopHeapLogging"=dword:00000000
+"DwmInputUsesIoCompletionPort"=dword:00000000
+"EnableDwmInputProcessing"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\LLTD]
+"EnableLLTDIO"=dword:00000001
+"AllowLLTDIOOnDomain"=dword:00000001
+"ProhibitLLTDIOOnPrivateNet"=dword:00000000
+"AllowLLTDIOOnPublicNet"=dword:00000000
+"EnableRspndr"=dword:00000001
+"AllowRspndrOnDomain"=dword:00000001
+"AllowRspndrOnPublicNet"=dword:00000000
+"ProhibitRspndrOnPrivateNet"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\TCPIP\v6Transition]
+"Teredo_ClientPort"=dword:00000000
+"Teredo_DefaultQualified"="Enabled"
+"Teredo_RefreshRate"=dword:0000001e
+"Teredo_ServerName"="win10.ipv6.microsoft.com"
+"Teredo_State"="Enterprise Client"
+
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters]
+"DisabledComponents"=dword:00000000
+		</File>
+		<File path="C:\Windows\Setup\Scripts\unattend-03.reg">
+Windows Registry Editor Version 5.00
+
+[HKEY_USERS\DefaultUser\Software\Microsoft\Windows\CurrentVersion\Explorer]
+"ExcludedFromStableAnaheimDownloadPromotionSL"=dword:00000001
+"IrisClientRefresh"=dword:00000000
+"ExplorerStartupTraceRecorded"=dword:00000000
+"TelemetrySalt"=dword:00000000
+"SIDUpdatedOnLibraries"=dword:00000000
+
+[HKEY_USERS\DefaultUser\Software\Policies\Microsoft\Windows\Explorer]
+"ExcludedFromStableAnaheimDownloadPromotionSL"=dword:00000001
+"IrisClientRefresh"=dword:00000000
+"ExplorerStartupTraceRecorded"=dword:00000000
+"TelemetrySalt"=dword:00000000
+"SIDUpdatedOnLibraries"=dword:00000000
+
+[HKEY_USERS\DefaultUser\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"SeparateProcess"=dword:00000001
+		</File>
 		<File path="C:\Windows\Setup\Scripts\Specialize.ps1">
 $scripts = @(
 	{
-		reg.exe add "HKLM\SYSTEM\Setup\MoSetup" /v AllowUpgradesWithUnsupportedTPMOrCPU /t REG_DWORD /d 1 /f;
+		reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\OOBE" /v BypassNRO /t REG_DWORD /d 1 /f;
 	};
 	{
-		reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\OOBE" /v BypassNRO /t REG_DWORD /d 1 /f;
+		net.exe accounts /lockoutthreshold:0;
 	};
 	{
 		net.exe accounts /maxpwage:UNLIMITED;
@@ -263,7 +1580,71 @@ $scripts = @(
 		reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Systray" /v HideSystray /t REG_DWORD /d 1 /f;
 	};
 	{
+		reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v EnableLUA /t REG_DWORD /d 0 /f
+	};
+	{
+		reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\FileSystem" /v LongPathsEnabled /t REG_DWORD /d 1 /f
+	};
+	{
+		Set-ExecutionPolicy -Scope 'LocalMachine' -ExecutionPolicy 'RemoteSigned' -Force;
+	};
+	{
+		fsutil.exe behavior set disableLastAccess 1;
+	};
+	{
+		reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" /v AUOptions /t REG_DWORD /d 4 /f;
+		reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" /v NoAutoRebootWithLoggedOnUsers /t REG_DWORD /d 1 /f;
+	};
+	{
+		Register-ScheduledTask -TaskName 'MoveActiveHours' -Xml $( Get-Content -LiteralPath 'C:\Windows\Setup\Scripts\MoveActiveHours.xml' -Raw );
+	};
+	{
+		reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power" /v HiberbootEnabled /t REG_DWORD /d 0 /f;
+	};
+	{
+		reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Dsh" /v AllowNewsAndInterests /t REG_DWORD /d 0 /f;
+	};
+	{
+		reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\BootAnimation" /v DisableStartupSound /t REG_DWORD /d 1 /f;
+		reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\EditionOverrides" /v UserSetting_DisableStartupSound /t REG_DWORD /d 1 /f;
+	};
+	{
+		reg.exe add "HKLM\Software\Policies\Microsoft\Windows\CloudContent" /v "DisableWindowsConsumerFeatures" /t REG_DWORD /d 1 /f;
+	};
+	{
 		reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\BitLocker" /v "PreventDeviceEncryption" /t REG_DWORD /d 1 /f;
+	};
+	{
+		reg.exe add "HKLM\Software\Policies\Microsoft\Edge" /v HideFirstRunExperience /t REG_DWORD /d 1 /f;
+	};
+	{
+		reg.exe add "HKLM\Software\Policies\Microsoft\Edge\Recommended" /v BackgroundModeEnabled /t REG_DWORD /d 0 /f;
+		reg.exe add "HKLM\Software\Policies\Microsoft\Edge\Recommended" /v StartupBoostEnabled /t REG_DWORD /d 0 /f;
+	};
+	{
+		&amp; 'C:\Windows\Setup\Scripts\SetStartPins.ps1';
+	};
+	{
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\ControlAnimations" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\AnimateMinMax" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\TaskbarAnimations" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\DWMAeroPeekEnabled" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\MenuAnimation" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\TooltipAnimation" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\SelectionFade" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\DWMSaveThumbnailEnabled" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\CursorShadow" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\ListviewShadow" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\ThumbnailsOrIcon" -Name 'DefaultValue' -Value 1 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\ListviewAlphaSelect" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\DragFullWindows" -Name 'DefaultValue' -Value 1 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\ComboBoxAnimation" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\FontSmoothing" -Name 'DefaultValue' -Value 1 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\ListBoxSmoothScrolling" -Name 'DefaultValue' -Value 1 -Type 'DWord' -Force;
+		Set-ItemProperty -LiteralPath "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\DropShadow" -Name 'DefaultValue' -Value 0 -Type 'DWord' -Force;
+	};
+	{
+		reg.exe add "HKU\.DEFAULT\Control Panel\Accessibility\StickyKeys" /v Flags /t REG_SZ /d 10 /f;
 	};
 	{
 		  reg.exe add "HKLM\System\CurrentControlSet\Control\DeviceGuard" /v "EnableVirtualizationBasedSecurity" /t REG_DWORD /d 0 /f;
@@ -271,21 +1652,27 @@ $scripts = @(
 		  reg.exe add "HKLM\System\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity" /v "EnabledBootId" /t REG_DWORD /d 0 /f;
 		  reg.exe add "HKLM\System\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity" /v "WasEnabledBy" /t REG_DWORD /d 0 /f;
 	};
+	{
+		  reg.exe add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v "DisableAutomaticRestartSignOn" /t REG_DWORD /d 1 /f;
+	};
+	{
+		reg.exe add "HKLM\System\CurrentControlSet\Control\Session Manager" /v "DisableWpbtExecution" /t REG_DWORD /d 1 /f;
+	};
+	{
+		&amp; 'C:\Windows\Setup\Scripts\unattend-01.ps1';
+	};
+	{
+		reg.exe import "C:\Windows\Setup\Scripts\unattend-02.reg";
+	};
 );
 
 &amp; {
   [float] $complete = 0;
   [float] $increment = 100 / $scripts.Count;
   foreach( $script in $scripts ) {
-    Write-Progress -Activity 'Running scripts to customize your Windows installation. Do not close this window.' -PercentComplete $complete;
+    Write-Progress -Id 0 -Activity 'Running scripts to customize your Windows installation. Do not close this window.' -PercentComplete $complete;
     '*** Will now execute command &#xAB;{0}&#xBB;.' -f $(
-      $str = $script.ToString().Trim() -replace '\s+', ' ';
-      $max = 100;
-      if( $str.Length -le $max ) {
-        $str;
-      } else {
-        $str.Substring( 0, $max - 1 ) + '&#x2026;';
-      }
+      $script.ToString().Trim() -replace '\s+', ' ' -replace '^(.{99})(.+)$', '$1&#x2026;';
     );
     $start = [datetime]::Now;
     &amp; $script;
@@ -295,13 +1682,73 @@ $scripts = @(
   }
 } *&gt;&amp;1 | Out-String -Width 1KB -Stream &gt;&gt; "C:\Windows\Setup\Scripts\Specialize.log";
 		</File>
-		<File path="C:\Windows\Setup\Scripts\DefaultUser.ps1">
+		<File path="C:\Windows\Setup\Scripts\UserOnce.ps1">
 $scripts = @(
 	{
-		reg.exe add "HKU\DefaultUser\Software\Microsoft\Edge\SmartScreenEnabled" /ve /t REG_DWORD /d 0 /f;
-		reg.exe add "HKU\DefaultUser\Software\Microsoft\Edge\SmartScreenPuaEnabled" /ve /t REG_DWORD /d 0 /f;
-		reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\AppHost" /v EnableWebContentEvaluation /t REG_DWORD /d 0 /f;
-		reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\AppHost" /v PreventOverride /t REG_DWORD /d 0 /f;
+		@(
+		  Get-ChildItem -LiteralPath $env:USERPROFILE -Force -Recurse -Depth 2;
+		) | Where-Object -FilterScript {
+			$_.Attributes.HasFlag( [System.IO.FileAttributes]::ReparsePoint );
+		} | Remove-Item -Force -Recurse -Verbose;
+	};
+	{
+		Set-ItemProperty -LiteralPath 'Registry::HKCU\AppEvents\Schemes' -Name '(Default)' -Type 'String' -Value '.None';
+	};
+	{
+		reg.exe add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /ve /f;
+	};
+	{
+		Set-ItemProperty -LiteralPath 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced' -Name 'LaunchTo' -Type 'DWord' -Value 1;
+	};
+	{
+		Set-ItemProperty -LiteralPath 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Search' -Name 'SearchboxTaskbarMode' -Type 'DWord' -Value 0;
+	};
+	{
+		Set-ItemProperty -LiteralPath 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects' -Name 'VisualFXSetting' -Type 'DWord' -Value 3 -Force;
+	};
+	{
+		New-Item -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu' -Force;
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu' -Name '{5399e694-6ce5-4d6c-8fce-1d8870fdcba0}' -Value 1 -Type 'DWord';
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu' -Name '{b4bfcc3a-db2c-424c-b029-7fe99a87c641}' -Value 1 -Type 'DWord';
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu' -Name '{a8cdff1c-4878-43be-b5fd-f8091c1c60d0}' -Value 1 -Type 'DWord';
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu' -Name '{374de290-123f-4565-9164-39c4925e467b}' -Value 1 -Type 'DWord';
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu' -Name '{e88865ea-0e1c-4e20-9aa6-edcd0212c87c}' -Value 1 -Type 'DWord';
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu' -Name '{f874310e-b6b7-47dc-bc84-b9e6b38f5903}' -Value 1 -Type 'DWord';
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu' -Name '{1cf1260c-4dd0-4ebb-811f-33c572699fde}' -Value 1 -Type 'DWord';
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu' -Name '{f02c1a0d-be21-4350-88b0-7367fc96ef3c}' -Value 1 -Type 'DWord';
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu' -Name '{3add1653-eb32-4cb0-bbd7-dfa0abb5acca}' -Value 1 -Type 'DWord';
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu' -Name '{645ff040-5081-101b-9f08-00aa002f954e}' -Value 0 -Type 'DWord';
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu' -Name '{20d04fe0-3aea-1069-a2d8-08002b30309d}' -Value 0 -Type 'DWord';
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu' -Name '{59031a47-3f72-44a7-89c5-5595fe6b30ee}' -Value 1 -Type 'DWord';
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu' -Name '{a0953c92-50dc-43bf-be83-3742fed03c9c}' -Value 1 -Type 'DWord';
+		New-Item -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel' -Force;
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel' -Name '{5399e694-6ce5-4d6c-8fce-1d8870fdcba0}' -Value 1 -Type 'DWord';
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel' -Name '{b4bfcc3a-db2c-424c-b029-7fe99a87c641}' -Value 1 -Type 'DWord';
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel' -Name '{a8cdff1c-4878-43be-b5fd-f8091c1c60d0}' -Value 1 -Type 'DWord';
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel' -Name '{374de290-123f-4565-9164-39c4925e467b}' -Value 1 -Type 'DWord';
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel' -Name '{e88865ea-0e1c-4e20-9aa6-edcd0212c87c}' -Value 1 -Type 'DWord';
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel' -Name '{f874310e-b6b7-47dc-bc84-b9e6b38f5903}' -Value 1 -Type 'DWord';
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel' -Name '{1cf1260c-4dd0-4ebb-811f-33c572699fde}' -Value 1 -Type 'DWord';
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel' -Name '{f02c1a0d-be21-4350-88b0-7367fc96ef3c}' -Value 1 -Type 'DWord';
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel' -Name '{3add1653-eb32-4cb0-bbd7-dfa0abb5acca}' -Value 1 -Type 'DWord';
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel' -Name '{645ff040-5081-101b-9f08-00aa002f954e}' -Value 0 -Type 'DWord';
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel' -Name '{20d04fe0-3aea-1069-a2d8-08002b30309d}' -Value 0 -Type 'DWord';
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel' -Name '{59031a47-3f72-44a7-89c5-5595fe6b30ee}' -Value 1 -Type 'DWord';
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel' -Name '{a0953c92-50dc-43bf-be83-3742fed03c9c}' -Value 1 -Type 'DWord';
+	};
+	{
+		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Start' -Name 'VisiblePlaces' -Value $( [convert]::FromBase64String('ztU0LVr6Q0WC8iLm6vd3PC+zZ+PeiVVDv85h83sYqTcgBguwUX8yTKoeNMxUf3MVRIF1/g0IrkKL2jTtl7ZjlKAHPzgK6IBMsFqG24RdvE3FpbNChn30QoCkk/rKeoi1') ) -Type 'Binary';
+	};
+	{
+		&amp; 'C:\Windows\Setup\Scripts\SetColorTheme.ps1';
+	};
+	{
+		&amp; 'C:\Windows\Setup\Scripts\SetWallpaper.ps1';
+	};
+	{
+		Get-Process -Name 'explorer' -ErrorAction 'SilentlyContinue' | Where-Object -FilterScript {
+			$_.SessionId -eq ( Get-Process -Id $PID ).SessionId;
+		} | Stop-Process -Force;
 	};
 );
 
@@ -309,15 +1756,104 @@ $scripts = @(
   [float] $complete = 0;
   [float] $increment = 100 / $scripts.Count;
   foreach( $script in $scripts ) {
-    Write-Progress -Activity 'Running scripts to modify the default user&#x2019;&#x2019;s registry hive. Do not close this window.' -PercentComplete $complete;
+    Write-Progress -Id 0 -Activity 'Running scripts to configure this user account. Do not close this window.' -PercentComplete $complete;
     '*** Will now execute command &#xAB;{0}&#xBB;.' -f $(
-      $str = $script.ToString().Trim() -replace '\s+', ' ';
-      $max = 100;
-      if( $str.Length -le $max ) {
-        $str;
-      } else {
-        $str.Substring( 0, $max - 1 ) + '&#x2026;';
-      }
+      $script.ToString().Trim() -replace '\s+', ' ' -replace '^(.{99})(.+)$', '$1&#x2026;';
+    );
+    $start = [datetime]::Now;
+    &amp; $script;
+    '*** Finished executing command after {0:0} ms.' -f [datetime]::Now.Subtract( $start ).TotalMilliseconds;
+    "`r`n" * 3;
+    $complete += $increment;
+  }
+} *&gt;&amp;1 | Out-String -Width 1KB -Stream &gt;&gt; "$env:TEMP\UserOnce.log";
+		</File>
+		<File path="C:\Windows\Setup\Scripts\DefaultUser.ps1">
+$scripts = @(
+	{
+		reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "HideFileExt" /t REG_DWORD /d 0 /f;
+	};
+	{
+		reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Hidden" /t REG_DWORD /d 1 /f;
+	};
+	{
+		reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v ShowTaskViewButton /t REG_DWORD /d 0 /f;
+	};
+	{
+		reg.exe add "HKU\DefaultUser\Software\Microsoft\Edge\SmartScreenEnabled" /ve /t REG_DWORD /d 0 /f;
+		reg.exe add "HKU\DefaultUser\Software\Microsoft\Edge\SmartScreenPuaEnabled" /ve /t REG_DWORD /d 0 /f;
+		reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\AppHost" /v EnableWebContentEvaluation /t REG_DWORD /d 0 /f;
+		reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\AppHost" /v PreventOverride /t REG_DWORD /d 0 /f;
+	};
+	{
+		&amp; 'C:\Windows\Setup\Scripts\TurnOffSystemSounds.ps1';
+	};
+	{
+		$names = @(
+		  'ContentDeliveryAllowed';
+		  'FeatureManagementEnabled';
+		  'OEMPreInstalledAppsEnabled';
+		  'PreInstalledAppsEnabled';
+		  'PreInstalledAppsEverEnabled';
+		  'SilentInstalledAppsEnabled';
+		  'SoftLandingEnabled';
+		  'SubscribedContentEnabled';
+		  'SubscribedContent-310093Enabled';
+		  'SubscribedContent-338387Enabled';
+		  'SubscribedContent-338388Enabled';
+		  'SubscribedContent-338389Enabled';
+		  'SubscribedContent-338393Enabled';
+		  'SubscribedContent-353694Enabled';
+		  'SubscribedContent-353696Enabled';
+		  'SubscribedContent-353698Enabled';
+		  'SystemPaneSuggestionsEnabled';
+		);
+		
+		foreach( $name in $names ) {
+		  reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v $name /t REG_DWORD /d 0 /f;
+		}
+	};
+	{
+		reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v TaskbarAl /t REG_DWORD /d 0 /f;
+	};
+	{
+		$params = @{
+		  LiteralPath = 'Registry::HKU\DefaultUser\Control Panel\Mouse';
+		  Type = 'String';
+		  Value = 0;
+		  Force = $true;
+		};
+		Set-ItemProperty @params -Name 'MouseSpeed';
+		Set-ItemProperty @params -Name 'MouseThreshold1';
+		Set-ItemProperty @params -Name 'MouseThreshold2';
+	};
+	{
+		reg.exe add "HKU\DefaultUser\Software\Policies\Microsoft\Windows\Explorer" /v DisableSearchBoxSuggestions /t REG_DWORD /d 1 /f;
+	};
+	{
+		reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarDeveloperSettings" /v TaskbarEndTask /t REG_DWORD /d 1 /f;
+	};
+	{
+		reg.exe add "HKU\DefaultUser\Control Panel\Accessibility\StickyKeys" /v Flags /t REG_SZ /d 10 /f;
+	};
+	{
+		reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\DWM" /v ColorPrevalence /t REG_DWORD /d 0 /f;
+	};
+	{
+		reg.exe import "C:\Windows\Setup\Scripts\unattend-03.reg";
+	};
+	{
+		reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\RunOnce" /v "UnattendedSetup" /t REG_SZ /d "powershell.exe -WindowStyle \""Hidden\"" -ExecutionPolicy \""Unrestricted\"" -NoProfile -File \""C:\Windows\Setup\Scripts\UserOnce.ps1\""" /f;
+	};
+);
+
+&amp; {
+  [float] $complete = 0;
+  [float] $increment = 100 / $scripts.Count;
+  foreach( $script in $scripts ) {
+    Write-Progress -Id 0 -Activity 'Running scripts to modify the default user&#x2019;&#x2019;s registry hive. Do not close this window.' -PercentComplete $complete;
+    '*** Will now execute command &#xAB;{0}&#xBB;.' -f $(
+      $script.ToString().Trim() -replace '\s+', ' ' -replace '^(.{99})(.+)$', '$1&#x2026;';
     );
     $start = [datetime]::Now;
     &amp; $script;
@@ -330,14 +1866,21 @@ $scripts = @(
 		<File path="C:\Windows\Setup\Scripts\FirstLogon.ps1">
 $scripts = @(
 	{
-		Set-ItemProperty -LiteralPath 'Registry::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon' -Name 'AutoLogonCount' -Type 'DWord' -Force -Value 0;
+		@(
+			Get-ChildItem -LiteralPath 'C:\' -Force;
+			Get-ChildItem -LiteralPath 'C:\Users' -Force;
+			Get-ChildItem -LiteralPath 'C:\Users\Default' -Force -Recurse -Depth 2;
+			Get-ChildItem -LiteralPath 'C:\Users\Public' -Force -Recurse -Depth 2;
+			Get-ChildItem -LiteralPath 'C:\ProgramData' -Force;
+		) | Where-Object -FilterScript {
+			$_.Attributes.HasFlag( [System.IO.FileAttributes]::ReparsePoint );
+		} | Remove-Item -Force -Recurse -Verbose;
 	};
 	{
-		Remove-Item -LiteralPath @(
-		  'C:\Windows\Panther\unattend.xml';
-		  'C:\Windows\Panther\unattend-original.xml';
-		  'C:\Windows\Setup\Scripts\Wifi.xml';
-		) -Force -ErrorAction 'SilentlyContinue' -Verbose;
+		Disable-ComputerRestore -Drive 'C:\';
+	};
+	{
+		cmd.exe /c "rmdir C:\Windows.old";
 	};
 );
 
@@ -345,15 +1888,9 @@ $scripts = @(
   [float] $complete = 0;
   [float] $increment = 100 / $scripts.Count;
   foreach( $script in $scripts ) {
-    Write-Progress -Activity 'Running scripts to finalize your Windows installation. Do not close this window.' -PercentComplete $complete;
+    Write-Progress -Id 0 -Activity 'Running scripts to finalize your Windows installation. Do not close this window.' -PercentComplete $complete;
     '*** Will now execute command &#xAB;{0}&#xBB;.' -f $(
-      $str = $script.ToString().Trim() -replace '\s+', ' ';
-      $max = 100;
-      if( $str.Length -le $max ) {
-        $str;
-      } else {
-        $str.Substring( 0, $max - 1 ) + '&#x2026;';
-      }
+      $script.ToString().Trim() -replace '\s+', ' ' -replace '^(.{99})(.+)$', '$1&#x2026;';
     );
     $start = [datetime]::Now;
     &amp; $script;
