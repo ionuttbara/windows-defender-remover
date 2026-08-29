@@ -42,7 +42,7 @@ This application removes / disables Windows Defender, including the Windows Secu
         - Windows Security Section from Settings App.
 
 ### Removing Antivirus Components
-    This script forcily removes following antivirus components:
+    This script forcibly removes following antivirus components:
       - Windows Defender Definition Update List (this will disable updating definitions of Defender because its removed)
       - Windows Defender SpyNet Telemetry
       - Antivirus Service
