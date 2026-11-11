@@ -13,13 +13,16 @@ if (-not (Get-Module -ListAvailable PS2EXE)) {
 Import-Module PS2EXE
 
 $Launcher = Join-Path $Root "_Launcher.ps1"
-$OutputExe = Join-Path $Root "Defender Remover 13.exe"
+$OutputExe = Join-Path $Root "Defender Remover 13.1.exe"
 
 # Fisiere care NU trebuie incluse
 $Exclude = @(
     "Build.ps1",
+    "Build.cmd",
     "_Launcher.ps1",
     "Script_Run.exe",
+    "Defender Remover 13.exe",
+    "Defender Remover 13.1.exe",
     "app_icon.ico"
 )
 
@@ -64,8 +67,11 @@ foreach($item in $Files.GetEnumerator()){
 
 Set-Location $WorkDir
 
-# Porneste scriptul principal
-& "$WorkDir\Script_Run.ps1"
+# Start a fresh Windows PowerShell process with a process-scoped bypass.
+# This works with the default Restricted policy without changing machine policy.
+$PowerShellExe = Join-Path $env:SystemRoot "System32\WindowsPowerShell\v1.0\powershell.exe"
+if(!(Test-Path $PowerShellExe)) { $PowerShellExe = "powershell.exe" }
+& $PowerShellExe -NoProfile -ExecutionPolicy Bypass -File "$WorkDir\Script_Run.ps1"
 
 exit $LASTEXITCODE
 '@
@@ -81,7 +87,7 @@ Invoke-ps2exe `
     -Copyright "Gallery Inc" `
     -Description "Defender Remover" `
     -Product "Defender Remover" `
-    -Version "13.0.0.0" `
+    -Version "13.1.0.0" `
     -IconFile "$Root\app_icon.ico" `
     -ConHost
 

@@ -1,5 +1,5 @@
 # Windows Defender Remover - PowerShell version
-$defenderremoverver = "13.0"
+$defenderremoverver = "13.1"
 
 # -----------------------------------------------------------------------------
 # Admin rights check and elevation
@@ -7,7 +7,7 @@ $defenderremoverver = "13.0"
 $isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 if (-not $isAdmin) {
     Write-Host "Requesting Administrator privileges..." -ForegroundColor Yellow
-    Start-Process powershell -Verb RunAs -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`" $($args -join ' ')"
+    Start-Process powershell.exe -Verb RunAs -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`" $($args -join ' ')"
     exit
 }
 
@@ -15,7 +15,65 @@ Set-Location $PSScriptRoot
 
 # Kill processes that may interfere
 Stop-Process -Name smartscreen -Force -ErrorAction SilentlyContinue
-Stop-Process -Name SecHealthUI -Force -ErrorAction SilentlyContinue
+
+# -----------------------------------------------------------------------------
+# Persistent Start Menu shortcuts and backup/restore engine
+# -----------------------------------------------------------------------------
+. (Join-Path $PSScriptRoot 'DefenderBackupRestore.ps1')
+
+function Install-DefenderStartMenuShortcuts {
+    $programDataRoot = Join-Path $env:ProgramData 'Gallery Inc\Defender Remover'
+    $vbsInstallDir = Join-Path $programDataRoot 'VBS'
+    $programsDir = [Environment]::GetFolderPath('CommonPrograms')
+    if ([string]::IsNullOrWhiteSpace($programsDir)) {
+        $programsDir = Join-Path $env:ProgramData 'Microsoft\Windows\Start Menu\Programs'
+    }
+    $shortcutDir = Join-Path $programsDir 'Defender Remover'
+
+    $requiredFiles = @(
+        @{ Source = (Join-Path $PSScriptRoot 'VBS\Enable VBS.bat'); Destination = (Join-Path $vbsInstallDir 'Enable VBS.bat') },
+        @{ Source = (Join-Path $PSScriptRoot 'VBS\Disable VBS.bat'); Destination = (Join-Path $vbsInstallDir 'Disable VBS.bat') },
+        @{ Source = (Join-Path $PSScriptRoot 'VBS\Run-VBSAction.ps1'); Destination = (Join-Path $vbsInstallDir 'Run-VBSAction.ps1') },
+        @{ Source = (Join-Path $PSScriptRoot 'DefenderBackupRestore.ps1'); Destination = (Join-Path $programDataRoot 'DefenderBackupRestore.ps1') },
+        @{ Source = (Join-Path $PSScriptRoot 'Restore-Defender.ps1'); Destination = (Join-Path $programDataRoot 'Restore-Defender.ps1') },
+        @{ Source = (Join-Path $PSScriptRoot 'PowerRun.exe'); Destination = (Join-Path $programDataRoot 'PowerRun.exe') }
+    )
+
+    foreach ($item in $requiredFiles) {
+        if (-not (Test-Path -LiteralPath $item.Source -PathType Leaf)) {
+            throw "Required support file is missing: $($item.Source)"
+        }
+    }
+
+    New-Item -ItemType Directory -Path $vbsInstallDir -Force | Out-Null
+    New-Item -ItemType Directory -Path $shortcutDir -Force | Out-Null
+    foreach ($item in $requiredFiles) {
+        Copy-Item -LiteralPath $item.Source -Destination $item.Destination -Force
+    }
+
+    $powershellExe = Join-Path $env:SystemRoot 'System32\WindowsPowerShell\v1.0\powershell.exe'
+    if (-not (Test-Path -LiteralPath $powershellExe)) { $powershellExe = 'powershell.exe' }
+    $vbsLauncherPath = Join-Path $vbsInstallDir 'Run-VBSAction.ps1'
+    $restoreLauncherPath = Join-Path $programDataRoot 'Restore-Defender.ps1'
+    $shell = New-Object -ComObject WScript.Shell
+
+    $shortcuts = @(
+        @{ Name = 'Enable VBS'; Arguments = "-NoProfile -ExecutionPolicy Bypass -File `"$vbsLauncherPath`" -Action Enable"; Description = 'Enable Virtualization-Based Security and Credential Guard'; Icon = "$env:SystemRoot\System32\shell32.dll,44" },
+        @{ Name = 'Disable VBS'; Arguments = "-NoProfile -ExecutionPolicy Bypass -File `"$vbsLauncherPath`" -Action Disable"; Description = 'Disable Virtualization-Based Security and Credential Guard'; Icon = "$env:SystemRoot\System32\shell32.dll,44" },
+        @{ Name = 'Restore Defender'; Arguments = "-NoProfile -ExecutionPolicy Bypass -File `"$restoreLauncherPath`""; Description = 'Restore Defender files and registry data from saved schemas; Windows Security App may be non-restorable'; Icon = "$env:SystemRoot\System32\imageres.dll,73" }
+    )
+
+    foreach ($item in $shortcuts) {
+        $shortcutPath = Join-Path $shortcutDir ($item.Name + '.lnk')
+        $shortcut = $shell.CreateShortcut($shortcutPath)
+        $shortcut.TargetPath = $powershellExe
+        $shortcut.Arguments = $item.Arguments
+        $shortcut.WorkingDirectory = $programDataRoot
+        $shortcut.Description = $item.Description
+        $shortcut.IconLocation = $item.Icon
+        $shortcut.Save()
+    }
+}
 
 # -----------------------------------------------------------------------------
 # Function definitions
@@ -224,68 +282,143 @@ exit /b
 }
 
 function Remove-Files {
-    Write-Host "Removing Defender files..." -ForegroundColor Cyan
-    Start-Process -FilePath "$PSScriptRoot\PowerRun.exe" -ArgumentList "cmd.exe /k files_removal.bat" -Wait
-    Read-Host "Press Enter to continue"
+    Write-Host 'Removing Defender files...' -ForegroundColor Cyan
+    $session = New-DefenderBackupSession -RemovalMode 'FilesOnly'
+    $folders = @(
+        'C:\ProgramData\Microsoft\Windows Defender',
+        'C:\Program Files\Windows Defender',
+        'C:\Program Files (x86)\Windows Defender',
+        'C:\Program Files\Windows Defender Advanced Threat Protection'
+    )
+
+    foreach ($folder in $folders) {
+        Backup-AndRemoveDefenderDirectory -Session $session -SourcePath $folder | Out-Null
+    }
+
+    Complete-DefenderBackupSession -Session $session -RebootRecommended $true
+    Write-Host "Backup schema: $($session.Root)" -ForegroundColor Green
+    Write-Host 'A restart is recommended after the file operation.' -ForegroundColor Yellow
+    Read-Host 'Press Enter to close'
     exit
 }
 
+function Test-WindowsSecurityAppPresent {
+    try {
+        $installed = @(Get-AppxPackage -AllUsers -ErrorAction SilentlyContinue | Where-Object { $_.Name -like '*SecHealthUI*' -or $_.PackageFullName -like '*SecHealthUI*' })
+        $provisioned = @(Get-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue | Where-Object { $_.PackageName -like '*SecHealthUI*' })
+        return (($installed.Count -gt 0) -or ($provisioned.Count -gt 0))
+    } catch {
+        return $true
+    }
+}
+
+function Confirm-IrreversibleSecurityAppRemoval {
+    Write-Host ''
+    Write-Host '!!! IRREVERSIBLE ACTION !!!' -ForegroundColor Red
+    Write-Host 'The Windows Security App (SecHealthUI) package will be removed for all users and deprovisioned.' -ForegroundColor Yellow
+    Write-Host 'Restore Defender can restore saved files and registry data, but it cannot reinstall this app package.' -ForegroundColor Yellow
+    Write-Host 'The package will be explicitly marked as NOT RESTORABLE in the backup schema.' -ForegroundColor Yellow
+    Write-Host ''
+    $confirmation = Read-Host 'Type REMOVE SECURITY APP to continue'
+    return ($confirmation -ceq 'REMOVE SECURITY APP')
+}
+
 function Remove-Defender {
-    Write-Host "Removing Windows Security UWP App..." -ForegroundColor Cyan
-    Start-Process -FilePath "$PSScriptRoot\PowerRun.exe" -ArgumentList "powershell.exe -noprofile -executionpolicy bypass -file `"$PSScriptRoot\RemoveSecHealthApp.ps1`"" -Wait
-
-    Write-Host "Unregister Windows Defender Security Components..." -ForegroundColor Cyan
-    # Import all .reg files from Remove_defender and Remove_SecurityComp
-    Get-ChildItem -Path "$PSScriptRoot\Remove_defender\*.reg" -Recurse | ForEach-Object {
-        Start-Process -FilePath "$PSScriptRoot\PowerRun.exe" -ArgumentList "regedit.exe /s `"$($_.FullName)`"" -Wait
-    }
-    Get-ChildItem -Path "$PSScriptRoot\Remove_SecurityComp\*.reg" -Recurse | ForEach-Object {
-        Start-Process -FilePath "$PSScriptRoot\PowerRun.exe" -ArgumentList "regedit.exe /s `"$($_.FullName)`"" -Wait
+    if (-not (Confirm-IrreversibleSecurityAppRemoval)) {
+        Write-Host 'Removal cancelled. No Defender components were changed.' -ForegroundColor Yellow
+        return
     }
 
-    # Remove SmartScreen files
-    Write-Host "Removing SmartScreen files..." -ForegroundColor Cyan
+    $session = New-DefenderBackupSession -RemovalMode 'DefenderAndWindowsSecurityApp' -WindowsSecurityAppRequested
+
+    Write-Host 'Removing Windows Security UWP App (this part is not restorable by this tool)...' -ForegroundColor Cyan
+    try {
+        $appWasPresentBeforeRemoval = Test-WindowsSecurityAppPresent
+        $session.Manifest.WindowsSecurityApp.DetectedBefore = [bool]$appWasPresentBeforeRemoval
+        Write-DefenderManifest -Session $session
+        $appRemovalScript = Join-Path $PSScriptRoot 'RemoveSecHealthApp.ps1'
+        $powerRun = Join-Path $PSScriptRoot 'PowerRun.exe'
+        $appPowerShell = if ([Environment]::Is64BitOperatingSystem -and -not [Environment]::Is64BitProcess) { Join-Path $env:windir 'Sysnative\WindowsPowerShell\v1.0\powershell.exe' } else { Join-Path $env:windir 'System32\WindowsPowerShell\v1.0\powershell.exe' }
+        if (-not (Test-Path -LiteralPath $appPowerShell)) { $appPowerShell = 'powershell.exe' }
+        if (Test-Path -LiteralPath $powerRun -PathType Leaf) {
+            $arguments = '"{0}" -NoProfile -ExecutionPolicy Bypass -File "{1}"' -f $appPowerShell, $appRemovalScript
+            Start-Process -FilePath $powerRun -ArgumentList $arguments -Wait -PassThru -ErrorAction Stop | Out-Null
+        } else {
+            Start-Process -FilePath 'powershell.exe' -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$appRemovalScript`"" -Verb RunAs -Wait -PassThru -ErrorAction Stop | Out-Null
+        }
+        if (Test-WindowsSecurityAppPresent) {
+            $session.Manifest.WindowsSecurityApp.Status = 'RemovalFailedOrStillPresent'
+            $session.Manifest.WindowsSecurityApp.Reason = 'Removal was requested, but the AppX package or provisioned package is still detected.'
+            Add-DefenderManifestWarning -Session $session -Message 'Windows Security App removal could not be confirmed.'
+            Write-Host 'WARNING: Windows Security App is still detected; review the AppX removal output.' -ForegroundColor Yellow
+        } elseif ($appWasPresentBeforeRemoval) {
+            $session.Manifest.WindowsSecurityApp.Status = 'RemovedNotRestorable'
+            $session.Manifest.WindowsSecurityApp.Reason = 'SecHealthUI was present before removal and is now absent. Restore Defender will not attempt to reinstall this package.'
+            Write-Host 'Windows Security App removal confirmed. This component is not restorable by Restore Defender.' -ForegroundColor Yellow
+        } else {
+            $session.Manifest.WindowsSecurityApp.Status = 'AlreadyAbsent'
+            $session.Manifest.WindowsSecurityApp.Reason = 'SecHealthUI was not detected before removal. No AppX package was available to back up or restore.'
+            Write-Host 'Windows Security App was already absent; no AppX package removal was required.' -ForegroundColor Yellow
+        }
+        Write-DefenderManifest -Session $session
+    } catch {
+        $session.Manifest.WindowsSecurityApp.Status = 'RemovalFailed'
+        $session.Manifest.WindowsSecurityApp.Reason = $_.Exception.Message
+        Add-DefenderManifestWarning -Session $session -Message "Windows Security App removal failed: $($_.Exception.Message)"
+        Write-Host "ERROR removing Windows Security App: $_" -ForegroundColor Red
+    }
+
+    Write-Host 'Backing up and unregistering Windows Defender registry components...' -ForegroundColor Cyan
+    $powerRunPath = Join-Path $PSScriptRoot 'PowerRun.exe'
+    $regFiles = @(
+        Get-ChildItem -Path (Join-Path $PSScriptRoot 'Remove_Defender') -Filter '*.reg' -File -Recurse -ErrorAction SilentlyContinue
+        Get-ChildItem -Path (Join-Path $PSScriptRoot 'Remove_SecurityComp') -Filter '*.reg' -File -Recurse -ErrorAction SilentlyContinue
+    )
+    foreach ($regFile in $regFiles) {
+        Invoke-DefenderRegistryFileWithBackup -Session $session -RegFile $regFile.FullName -PowerRunPath $powerRunPath | Out-Null
+    }
+
+    Write-Host 'Backing up and removing SmartScreen files...' -ForegroundColor Cyan
     $smartscreenFiles = @(
         "$env:windir\System32\smartscreen.exe",
         "$env:windir\System32\smartscreen.dll",
         "$env:windir\System32\smartscreenps.dll"
     )
     foreach ($file in $smartscreenFiles) {
-        if (Test-Path $file) {
-            try {
-                # Use cmd /c to run takeown and icacls (more reliable in compiled environment)
-                $null = cmd /c "takeown /f `"$file`" /a 2>&1"
-                if ($LASTEXITCODE -ne 0) { 
-                    Write-Host "WARNING: takeown failed for $file (exit code: $LASTEXITCODE)" -ForegroundColor Yellow 
-                }
-                $null = cmd /c "icacls `"$file`" /grant administrators:F 2>&1"
-                if ($LASTEXITCODE -ne 0) { 
-                    Write-Host "WARNING: icacls failed for $file (exit code: $LASTEXITCODE)" -ForegroundColor Yellow 
-                }
-                Remove-Item -Path $file -Force -ErrorAction Stop
-                Write-Host "Removed: $file" -ForegroundColor Green
-            } catch {
-                Write-Host "ERROR removing $file : $_" -ForegroundColor Red
-            }
-        } else {
-            Write-Host "File not found: $file (skipping)" -ForegroundColor Yellow
-        }
+        Backup-AndRemoveDefenderFile -Session $session -SourcePath $file | Out-Null
     }
+
+    Complete-DefenderBackupSession -Session $session -RebootRecommended $true
+    Write-Host "Backup schema saved: $($session.Root)" -ForegroundColor Green
     Setup-Verification
+    Write-Host 'Restarting Windows in 10 seconds...' -ForegroundColor Yellow
     shutdown /r /f /t 10
     exit
 }
 
 function Remove-Antivirus {
-    Write-Host "Removing Windows Defender Antivirus Components..." -ForegroundColor Cyan
-    Get-ChildItem -Path "$PSScriptRoot\Remove_defender\*.reg" -Recurse | ForEach-Object {
-        Start-Process -FilePath "$PSScriptRoot\PowerRun.exe" -ArgumentList "regedit.exe /s `"$($_.FullName)`"" -Wait
+    Write-Host 'Removing Windows Defender Antivirus components...' -ForegroundColor Cyan
+    $session = New-DefenderBackupSession -RemovalMode 'AntivirusOnly'
+    $powerRunPath = Join-Path $PSScriptRoot 'PowerRun.exe'
+    $regFiles = @(Get-ChildItem -Path (Join-Path $PSScriptRoot 'Remove_Defender') -Filter '*.reg' -File -Recurse -ErrorAction SilentlyContinue)
+    foreach ($regFile in $regFiles) {
+        Invoke-DefenderRegistryFileWithBackup -Session $session -RegFile $regFile.FullName -PowerRunPath $powerRunPath | Out-Null
     }
 
+    Complete-DefenderBackupSession -Session $session -RebootRecommended $true
+    Write-Host "Backup schema saved: $($session.Root)" -ForegroundColor Green
     Setup-Verification
+    Write-Host 'Restarting Windows in 5 minutes...' -ForegroundColor Yellow
     Start-Sleep -Seconds 300
     shutdown /r /f /t 10
     exit
+}
+
+# Install/update the Defender Remover shortcuts in the all-users Start Menu.
+try {
+    Install-DefenderStartMenuShortcuts
+} catch {
+    Write-Warning "Could not create Defender Remover Start Menu shortcuts: $_"
 }
 
 # -----------------------------------------------------------------------------
@@ -299,19 +432,36 @@ if ($arg -eq 'y') {
 } elseif ($arg -eq 's') {
     Remove-Files
 } else {
-    # Display menu
+    # Display menu. Use Console I/O for the final prompt because Read-Host can
+    # render out of order in some PS2EXE -ConHost builds.
     Clear-Host
+    $runtimeProcesses = @(Get-DefenderRuntimeProcessSnapshot)
+    if ($runtimeProcesses.Count -gt 0) {
+        Write-Host '[NOTICE] Defender-related processes detected:' -ForegroundColor Yellow
+        foreach ($runtimeProcess in $runtimeProcesses) {
+            Write-Host ("  {0}.exe (PID {1})" -f $runtimeProcess.Name, $runtimeProcess.Pid) -ForegroundColor Yellow
+        }
+        Write-Host 'No Defender process will be terminated or have its security token modified.' -ForegroundColor Yellow
+        Write-Host ''
+    } else {
+        Write-Host 'Defender process check: no core Defender process detected at startup.' -ForegroundColor DarkGray
+        Write-Host ''
+    }
     Write-Host "------ Defender Remover Script , version $defenderremoverver ------" -ForegroundColor Green
     Write-Host ""
     Write-Host "Do you want to remove Windows Defender and alongside components? After this you'll need to reboot."
-    Write-Host "A backup and/or System Restore point is recommended."
+    Write-Host "A backup schema is created for files and registry changes. Windows Security App is NOT restorable if removed." -ForegroundColor Yellow
     Write-Host ""
-    Write-Host "[Y] Remove Windows Defender Antivirus + Windows Security App"
-    Write-Host "[A] Remove Windows Defender Antivirus App (keeps Windows Security App, it will be back if you update)"
+    Write-Host "[Y] Remove Windows Defender Antivirus + Windows Security App (IRREVERSIBLE APP REMOVAL)" -ForegroundColor Yellow
+    Write-Host "[A] Remove Windows Defender Antivirus components (keeps Windows Security App)"
     Write-Host "[S] Remove Defender Files (if you removed antivirus first)"
     Write-Host ""
-    $choice = Read-Host "Enter choice (Y/A/S)"
-    switch ($choice.ToUpper()) {
+    [Console]::Out.Flush()
+    [Console]::Write('Enter choice (Y/A/S): ')
+    [Console]::Out.Flush()
+    $choice = [Console]::ReadLine()
+    if ($null -eq $choice) { $choice = '' }
+    switch ($choice.Trim().ToUpperInvariant()) {
         'Y' { Remove-Defender }
         'A' { Remove-Antivirus }
         'S' { Remove-Files }
