@@ -1,3 +1,7 @@
+<p align="center">
+  <a href="./README.md">English</a> | <a href="./README.zh-CN.md">简体中文</a>
+</p>
+
 # ❌️ Defender Remover / Defender Disabler
 
 <a href="https://github.com/ionuttbara/windows-defender-remover">
